@@ -471,7 +471,7 @@ Splitting fetching from normalizing means you can test `normalize` with saved fi
 **Create:** `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`, `.gitignore`, `.env.example`, `db/package.json`, `pipeline/package.json`, `pipeline/tsconfig.json`, `pipeline/vitest.config.ts`, `pipeline/test/smoke.test.ts`.
 
 - Use `tsx` to run TypeScript directly (no build step for the pipeline).
-- Root scripts: `pnpm test`, `pnpm typecheck`, `pnpm pipeline` (runs `pipeline/src/index.ts`).
+- Root scripts: `pnpm test`, `pnpm typecheck`, `pnpm pipeline:run` (runs `pipeline/src/index.ts`).
 - `.gitignore`: `.env`, `profile.md`, `node_modules`, `.next`.
 
 **Test:** `pnpm install && pnpm test` passes the smoke test (`expect(1+1).toBe(2)`). `pnpm typecheck` passes. Push to GitHub.
@@ -519,6 +519,7 @@ Splitting fetching from normalizing means you can test `normalize` with saved fi
 - Save fixtures with `curl -A "<your UA>" https://careers.example.com/jobs.rss > fixture.rss`.
 - Parse with `fast-xml-parser` using `isArray: (name) => name === "item"`. **Why:** by default, a feed with one item gives you an object instead of an array, and `.map()` crashes. This is a classic XML-to-JSON bug, and that's why the single-item fixture exists.
 - Open your fixtures and note what Teamtailor puts in each item. You'll find standard RSS fields (`title`, `link`, `guid`, `pubDate`, `description`) plus Teamtailor-specific ones (locations, department, remote status). Map only what you actually see.
+- **What real feeds looked like (checked 2026-11-13):** each `<item>` has `title`, `description` (HTML, escaped), `pubDate`, `link`, `guid` (a UUID, so use it as `externalId`), `remoteStatus` (`none` | `onsite` | `hybrid` | `fully` | `temporary`), `company_name` (often empty), `tt:department`, `tt:role`, and `tt:locations` → one or more `tt:location` with `tt:city` and `tt:country`. The `tt:` prefix is an XML namespace (`xmlns:tt="https://teamtailor.com/locations"`). Cities appear as both `København` and `Copenhagen`, and suburbs like `Herlev` occur, so the Phase 2 location filter must handle all of these. Big companies (Flatpay, DFDS) return exactly 100 items, so the feed may be capped at 100.
 
 **Test:** each fixture parses to the expected number of raw items. The zero-item feed gives `[]`, not a crash.
 
@@ -575,7 +576,7 @@ Split it into a **pure** part and a **DB** part:
 4. Finish the `Run`: counts plus `SUCCESS` / `PARTIAL` / `FAILED`. Wrap everything in a top-level try/catch so a crash still writes `FAILED` with the error message.
 5. Exit with code 1 if the run `FAILED`, so GitHub marks the workflow red and emails you.
 
-**Test:** `DRY_RUN=true pnpm pipeline` against `dev` → see log lines and check `Run`/`FetchLog` rows in Studio. Point one company at a bad URL → the run is `PARTIAL`, the other companies still get saved.
+**Test:** `DRY_RUN=true pnpm pipeline:run` against `dev` → see log lines and check `Run`/`FetchLog` rows in Studio. Point one company at a bad URL → the run is `PARTIAL`, the other companies still get saved.
 
 ### Task 1.11: Email notification via Resend (~1.5 h)
 
@@ -596,7 +597,7 @@ Split it into a **pure** part and a **DB** part:
 `pipeline.yml`:
 - Triggers: `schedule: cron "0 */3 * * *"` (UTC) and `workflow_dispatch` (the manual "Run workflow" button).
 - `concurrency: { group: pipeline, cancel-in-progress: false }`. **Why:** two runs can never overlap, so they can't both email the same job.
-- Steps: checkout → pnpm setup (with cache) → `pnpm install --frozen-lockfile` → `prisma migrate deploy` (applies any new migrations and does nothing if there are none) → `pnpm pipeline`.
+- Steps: checkout → pnpm setup (with cache) → `pnpm install --frozen-lockfile` → `prisma migrate deploy` (applies any new migrations and does nothing if there are none) → `pnpm pipeline:run`.
 - Secrets passed as env: `DATABASE_URL`, `DIRECT_URL`, `RESEND_API_KEY`, `EMAIL_TO`, etc.
 - `timeout-minutes: 15`, so a hang can't burn minutes forever.
 

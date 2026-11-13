@@ -55,8 +55,8 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: `pnpm install` runs without errors.
   - Commit: `chore: set up pnpm workspace`
 
-- [ ] **1.2 Pipeline package + TypeScript**: `tsconfig.base.json`, `pipeline/package.json`, `pipeline/tsconfig.json`, and `pipeline/src/index.ts` that prints "hello". Add `tsx` and a root script `pnpm pipeline`.
-  - Check: `pnpm pipeline` prints "hello". `pnpm typecheck` passes.
+- [ ] **1.2 Pipeline package + TypeScript**: `tsconfig.base.json`, `pipeline/package.json`, `pipeline/tsconfig.json`, and `pipeline/src/index.ts` that prints "hello". Add `tsx` and a root script `pipeline:run`.
+  - Check: `pnpm pipeline:run` prints "hello". `pnpm typecheck` passes.
   - Commit: `chore: add pipeline package with TypeScript`
 
 - [ ] **1.3 Vitest**: add Vitest, `pipeline/vitest.config.ts`, and one smoke test.
@@ -150,7 +150,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Commit: `feat(pipeline): record runs and fetch logs`
 
 - [ ] **1.23 Dry-run mode**: with `DRY_RUN=true`, the pipeline sends no emails and prints what it would send.
-  - Check: `DRY_RUN=true pnpm pipeline` prints, and no email arrives.
+  - Check: `DRY_RUN=true pnpm pipeline:run` prints, and no email arrives.
   - Commit: `feat(pipeline): add dry-run mode`
 
 ### 1G. Email
@@ -173,7 +173,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: a green tick on GitHub.
   - Commit: `ci: run typecheck and tests on push`
 
-- [ ] **1.28 Cron workflow**: `.github/workflows/pipeline.yml` runs every 3 hours and has a manual button. It uses a `concurrency` group so runs never overlap, runs `prisma migrate deploy`, then `pnpm pipeline`. Add the secrets in GitHub.
+- [ ] **1.28 Cron workflow**: `.github/workflows/pipeline.yml` runs every 3 hours and has a manual button. It uses a `concurrency` group so runs never overlap, runs `prisma migrate deploy`, then `pnpm pipeline:run`. Add the secrets in GitHub.
   - Check: the manual "Run workflow" goes green, and the logs show companies fetched.
   - Commit: `ci: run pipeline every 3 hours`
 
