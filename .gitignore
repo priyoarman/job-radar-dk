@@ -1,5 +1,17 @@
-node_modules, 
-.env, 
-profile.md, 
-.next, 
-dist
+# dependencies
+node_modules/
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+
+# my real profile (the fake one, profile.example.md, IS committed)
+profile.md
+
+# build output
+.next/
+dist/
+
+# OS / editor
+.DS_Store
