@@ -1,0 +1,145 @@
+[
+  {
+    "slug": "lunar",
+    "name": "Lunar",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://lunar.teamtailor.com",
+    "careersUrl": "https://lunar.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["fintech", "banking"],
+    "active": true,
+    "notes": "Jobs in København and Aarhus. Many backend/platform engineer roles."
+  },
+  {
+    "slug": "templafy",
+    "name": "Templafy",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://templafy.teamtailor.com",
+    "careersUrl": "https://templafy.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["saas", "ai"],
+    "active": true,
+    "notes": "AI document generation. Small feed, mix of DK and US roles."
+  },
+  {
+    "slug": "flatpay",
+    "name": "Flatpay",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://flatpay.teamtailor.com",
+    "careersUrl": "https://flatpay.teamtailor.com/jobs",
+    "city": "Herlev",
+    "tags": ["fintech", "payments"],
+    "active": true,
+    "notes": "Big feed (100 jobs, mostly sales in other countries). DK tech jobs are in Herlev."
+  },
+  {
+    "slug": "visma-economic",
+    "name": "Visma e-conomic",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://vismaeconomic.teamtailor.com",
+    "careersUrl": "https://vismaeconomic.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["saas", "accounting"],
+    "active": true,
+    "notes": "All jobs in Denmark. Has had Full Stack Engineer roles."
+  },
+  {
+    "slug": "formalize",
+    "name": "Formalize",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://formalize.teamtailor.com",
+    "careersUrl": "https://formalize.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["saas", "compliance", "legaltech"],
+    "active": true,
+    "notes": "Copenhagen + Aarhus. Posts student assistant roles."
+  },
+  {
+    "slug": "bankdata",
+    "name": "Bankdata",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://bankdata.teamtailor.com",
+    "careersUrl": "https://bankdata.teamtailor.com/jobs",
+    "city": "Aarhus",
+    "tags": ["banking-it", "ai"],
+    "active": true,
+    "notes": "Many dev roles, but in Aarhus/Fredericia/Silkeborg, not Copenhagen. Good test data for the location filter."
+  },
+  {
+    "slug": "atp",
+    "name": "ATP",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://atp.teamtailor.com",
+    "careersUrl": "https://atp.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["pension", "public-sector"],
+    "active": true,
+    "notes": "Copenhagen + Hillerød. Has had backend developer roles."
+  },
+  {
+    "slug": "dfds",
+    "name": "DFDS",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://dfds.teamtailor.com",
+    "careersUrl": "https://dfds.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["shipping", "logistics"],
+    "active": true,
+    "notes": "Big feed (100 jobs, many countries, few dev roles). Runs graduate programmes."
+  },
+  {
+    "slug": "podimo",
+    "name": "Podimo",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://podimo.teamtailor.com",
+    "careersUrl": "https://careers.podimo.com",
+    "city": "Copenhagen",
+    "tags": ["media", "audio", "consumer"],
+    "active": true,
+    "notes": "Copenhagen HQ, but most current jobs are in other countries."
+  },
+  {
+    "slug": "goodiebox",
+    "name": "Goodiebox",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://goodiebox.teamtailor.com",
+    "careersUrl": "https://goodiebox.teamtailor.com/jobs",
+    "city": "Copenhagen",
+    "tags": ["ecommerce", "consumer"],
+    "active": true,
+    "notes": "Small feed, rarely dev roles."
+  },
+  {
+    "slug": "lenus",
+    "name": "Lenus",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://lenus.teamtailor.com",
+    "careersUrl": "https://careers.lenus.io",
+    "city": "Copenhagen",
+    "tags": ["healthtech"],
+    "active": true,
+    "notes": "Lenus eHealth. No DK jobs at the time of checking."
+  },
+  {
+    "slug": "vivino",
+    "name": "Vivino",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://vivino.teamtailor.com",
+    "careersUrl": "https://careers.vivino.com",
+    "city": "Copenhagen",
+    "tags": ["marketplace", "consumer"],
+    "active": true,
+    "notes": "Feed works but had 0 jobs at the time of checking. Normal EMPTY test case."
+  },
+  {
+    "slug": "labster",
+    "name": "Labster",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://labster.teamtailor.com",
+    "careersUrl": "https://careers.labster.com",
+    "city": "Copenhagen",
+    "tags": ["edtech"],
+    "active": true,
+    "notes": "Feed works but had 0 jobs at the time of checking."
+  }
+]
