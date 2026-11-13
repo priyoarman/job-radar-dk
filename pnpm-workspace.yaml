@@ -1,0 +1,8 @@
+# Tells pnpm which folders are packages in this monorepo.
+# Folders that don't exist yet are simply skipped.
+packages:
+  - db
+  - pipeline
+  - web
+allowBuilds:
+  esbuild: true

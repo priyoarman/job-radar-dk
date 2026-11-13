@@ -1,0 +1,15 @@
+{
+  "name": "job-radar-dk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Watches Danish tech companies' career pages, scores new jobs with an LLM, and emails strong matches.",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "pipeline:run": "pnpm --filter @jobradar/pipeline start",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

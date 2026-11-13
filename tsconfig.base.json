@@ -1,0 +1,31 @@
+{
+  // Shared TypeScript settings. Each package's tsconfig.json "extends" this file.
+  "compilerOptions": {
+    // Modern JavaScript output; Node 24 supports all of it.
+    "target": "ES2023",
+    "lib": ["ES2023"],
+
+    // ES modules (import/export). "Bundler" resolution lets us write
+    // `import { x } from "./file"` without adding ".js" to every import.
+    // tsx (pipeline) and Next.js (web) both understand this style.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+
+    // We never compile to .js files: tsx runs TypeScript directly,
+    // so tsc is only used to CHECK types.
+    "noEmit": true,
+
+    // Safety: catch as many bugs as possible at compile time.
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Don't type-check other people's library code (faster, fewer false alarms).
+    "skipLibCheck": true
+  }
+}
