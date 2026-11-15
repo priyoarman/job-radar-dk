@@ -189,6 +189,53 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ---
 
+## Phase S: More sources (added after go-live)
+
+**Goal:** cover the portals Danish companies actually use, not only Teamtailor. These portals have no global search, so each one needs an adapter, and each company needs an entry in `config/companies.json`.
+**Time:** about 30–40 hours (3–5 weeks). Comes before Phase 2's LLM scoring.
+**Defaults chosen:** cheapest portals first; location and Danish rules pulled forward; custom portals start with JSON-LD only.
+
+### S1. Groundwork
+
+- [x] **S1.1 New source types**: add `WORKDAY`, `SUCCESSFACTORS`, `WORKABLE`, `TALENTECH`, `CUSTOM` to the `SourceType` enum (migration). The company sync still rejects any source without an adapter.
+  - Check: `prisma migrate status` is up to date, and syncing a `WORKDAY` company fails with `no adapter for source "WORKDAY" yet`.
+  - Commit: `feat(db): add more source types`
+
+- [ ] **S1.2 JSON fetch helper**: `fetchJson()` in `lib/http.ts` with the same User-Agent, timeout and retry rules, plus POST support (Workday and Workable need it).
+  - Commit: `feat(pipeline): add fetchJson helper`
+
+- [ ] **S1.3 Location + Danish rules** (pulled forward from 2.1 and 2.2): keep Denmark / Copenhagen / remote-DK / unknown locations, drop abroad-only jobs and jobs that require Danish. Table tests.
+  - Commit: `feat(pipeline): filter by location and language`
+
+### S2. Easy JSON portals (~2 h each)
+
+- [ ] **S2.1 Greenhouse** adapter (`boards-api.greenhouse.io`), fixtures, tests, registry.
+- [ ] **S2.2 Lever** adapter (`api.lever.co/v0/postings`).
+- [ ] **S2.3 Ashby** adapter (`api.ashbyhq.com/posting-api/job-board`). Then move the ready companies from `companies-later.json`.
+- [ ] **S2.4 Recruitee** adapter (`{company}.recruitee.com/api/offers/`).
+- [ ] **S2.5 Workable** adapter.
+
+### S3. Big-company portals (~3–4 h each, research first)
+
+- [ ] **S3.1 Workday**: research the career-site endpoint, then the adapter with a page limit per run.
+- [ ] **S3.2 SAP SuccessFactors**: research the job feed per site, then the adapter.
+
+### S4. Nordic portals (~3 h each, research first)
+
+- [ ] **S4.1 Emply** (look for hidden JSON before parsing HTML).
+- [ ] **S4.2 HR Manager**.
+- [ ] **S4.3 Talentech / ReachMee**.
+
+### S5. Custom portals and coverage
+
+- [ ] **S5.1 robots.txt checker**, cached per domain for 24 h; HTML sources skip and log `robots-disallowed` when blocked.
+- [ ] **S5.2 Generic JSON-LD adapter** (`CUSTOM`): reads `schema.org/JobPosting` data that many career pages embed.
+- [ ] **S5.3 "Detect portal" script**: careers URL → suggested `companies.json` entry.
+- [ ] **S5.4 Grow the company list** to about 100–150 (by hand, with the script's help).
+- [ ] **S5.5 Email grouped by company**, plus a per-source health overview.
+
+---
+
 ## Phase 2: Smart filtering + LLM scoring
 
 **Goal:** only good matches reach you, each with a score and a reason.

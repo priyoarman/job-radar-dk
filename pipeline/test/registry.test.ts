@@ -8,7 +8,13 @@ describe("getAdapter", () => {
     expect(getAdapter("TEAMTAILOR")).toBe(teamtailorAdapter);
   });
 
-  it.each(["RECRUITEE", "GREENHOUSE", "LEVER", "ASHBY", "EMPLY", "HRMANAGER"] as const)(
+  const withoutAdapter = Object.values(SourceType).filter((source) => !(source in adapters));
+
+  it("has at least one source type still waiting for an adapter", () => {
+    expect(withoutAdapter).toContain("WORKDAY");
+  });
+
+  it.each(withoutAdapter)(
     "throws a clear error for %s, which has no adapter yet",
     (source) => {
       expect(() => getAdapter(source)).toThrow(`No adapter for source "${source}" yet`);

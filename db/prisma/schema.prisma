@@ -15,6 +15,11 @@ enum SourceType {
   ASHBY
   EMPLY
   HRMANAGER
+  WORKDAY
+  SUCCESSFACTORS
+  WORKABLE
+  TALENTECH
+  CUSTOM
 }
 
 enum FilterStatus {

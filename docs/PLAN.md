@@ -127,7 +127,7 @@ job-radar-dk/
 ```
 
 - `slug`: your own short unique ID (lowercase, dashes). The sync script uses it to match rows, so never change it after the first sync.
-- `source`: one of `TEAMTAILOR`, `RECRUITEE`, `GREENHOUSE`, `LEVER`, `ASHBY`, `EMPLY`, `HRMANAGER`.
+- `source`: one of `TEAMTAILOR`, `RECRUITEE`, `GREENHOUSE`, `LEVER`, `ASHBY`, `EMPLY`, `HRMANAGER`, `WORKDAY`, `SUCCESSFACTORS`, `WORKABLE`, `TALENTECH`, `CUSTOM` (the last five were added in step S1.1).
 - `sourceKey`: what the adapter needs, and its meaning depends on the source:
   - Teamtailor: the career-site base URL (the adapter appends `/jobs.rss`)
   - Recruitee: the subdomain (`example` → `example.recruitee.com`)
