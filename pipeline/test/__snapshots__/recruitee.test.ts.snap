@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recruiteeAdapter.normalize > maps a real offer to a NormalizedJob 1`] = `
+{
+  "company": "Signifly",
+  "description": "We are looking for a creative Developer, inspired by innovation and creative thinking.
+Signifly is an award-winning agency, behind some of the Danes’ favourite apps and digital experiences.
+We are loo",
+  "externalId": "2783683",
+  "location": "Copenhagen V, Denmark",
+  "postedAt": 2026-10-14T13:00:15.000Z,
+  "remoteType": "onsite",
+  "title": "Creative Developer",
+  "url": "https://jobs.signifly.com/o/creative-developer",
+}
+`;
