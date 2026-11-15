@@ -193,7 +193,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 **Goal:** cover the portals Danish companies actually use, not only Teamtailor. These portals have no global search, so each one needs an adapter, and each company needs an entry in `config/companies.json`.
 **Time:** about 30–40 hours (3–5 weeks). Comes before Phase 2's LLM scoring.
-**Defaults chosen:** cheapest portals first; location and Danish rules pulled forward; custom portals start with JSON-LD only.
+**Defaults chosen:** cheapest portals first; location rule pulled forward; no language rules (decided 2026-11-15: ads in Danish or any language are fine, only the location must be in Denmark); custom portals start with JSON-LD only.
 
 ### S1. Groundwork
 
@@ -204,8 +204,8 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 - [x] **S1.2 JSON fetch helper**: `fetchJson()` in `lib/http.ts` with the same User-Agent, timeout and retry rules, plus POST support (Workday and Workable need it).
   - Commit: `feat(pipeline): add fetchJson helper`
 
-- [ ] **S1.3 Location + Danish rules** (pulled forward from 2.1 and 2.2): keep Denmark / Copenhagen / remote-DK / unknown locations, drop abroad-only jobs and jobs that require Danish. Table tests.
-  - Commit: `feat(pipeline): filter by location and language`
+- [x] **S1.3 Location rule** (pulled forward from 2.1): keep jobs anywhere in Denmark (on-site, hybrid or remote), plus remote/Europe/Nordic and unknown locations; drop jobs whose every listed place is abroad (`location:abroad`). No language rule. Table tests.
+  - Commit: `feat(pipeline): filter jobs by location`
 
 ### S2. Easy JSON portals (~2 h each)
 
@@ -243,10 +243,10 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 2A. Better filter
 
-- [ ] **2.1 Location rule**: keep Copenhagen/København, remote-DK and hybrid jobs. Unknown location stays in. Table tests.
+- [x] ~~**2.1 Location rule**~~: done earlier as step S1.3 (whole of Denmark; on-site, hybrid or remote).
   - Commit: `feat(filter): keep Copenhagen, remote-DK and hybrid jobs`
 
-- [ ] **2.2 Danish rule**: drop jobs with phrases like "flydende dansk" or "Danish is a must". Table tests.
+- [x] ~~**2.2 Danish rule**~~: dropped on 2026-11-15. Ads in Danish or any language are fine; only the location matters.
   - Commit: `feat(filter): drop jobs that require Danish`
 
 ### 2B. LLM scoring

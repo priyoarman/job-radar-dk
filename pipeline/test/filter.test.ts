@@ -129,3 +129,34 @@ describe("normalizeTitle", () => {
     expect(normalizeTitle(input)).toBe(expected);
   });
 });
+
+describe("filterJob with location", () => {
+  it("keeps a dev job anywhere in Denmark, whatever the work mode", () => {
+    for (const location of ["København, Denmark", "Aarhus, Denmark", "Remote - Denmark", "Herlev, Denmark; Berlin, Germany"]) {
+      expect(filterJob({ title: "Backend Engineer", location })).toEqual({ pass: true });
+    }
+  });
+
+  it("drops a dev job that is only abroad", () => {
+    expect(filterJob({ title: "Backend Engineer", location: "Berlin, Germany" })).toEqual({
+      pass: false,
+      reason: "location:abroad",
+    });
+  });
+
+  it("checks the title first, so the reason stays the most useful one", () => {
+    expect(filterJob({ title: "Senior Backend Engineer", location: "Berlin, Germany" })).toEqual({
+      pass: false,
+      reason: "title:senior",
+    });
+  });
+
+  it("keeps a job with no location", () => {
+    expect(filterJob({ title: "Backend Engineer", location: null })).toEqual({ pass: true });
+  });
+
+  it("ignores the language of the ad", () => {
+    const danish = { title: "Backend Developer", location: "Fredericia, Denmark", description: "Vil du være med til at udvikle løsninger? Flydende dansk er et krav." };
+    expect(filterJob(danish)).toEqual({ pass: true });
+  });
+});

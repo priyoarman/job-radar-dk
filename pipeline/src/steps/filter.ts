@@ -1,4 +1,8 @@
+import { isAbroadOnly } from "./location";
+
 export type FilterResult = { pass: true } | { pass: false; reason: string };
+
+export type FilterInput = { title: string; location?: string | null };
 
 type Match = "word" | "prefix" | "suffix";
 type Rule = { label: string; regex: RegExp };
@@ -74,8 +78,8 @@ export function normalizeTitle(title: string): string {
     .replace(/\bback[\s-]+end\b/gi, "backend");
 }
 
-export function filterJob(job: { title: string }): FilterResult {
-  const title = normalizeTitle(job.title);
+function checkTitle(rawTitle: string): FilterResult {
+  const title = normalizeTitle(rawTitle);
   const seniority = SENIORITY_RULES.find((r) => r.regex.test(title));
   if (seniority) return { pass: false, reason: `title:${seniority.label}` };
   if (matches(DEV_RULES, title)) return { pass: true };
@@ -83,4 +87,11 @@ export function filterJob(job: { title: string }): FilterResult {
     return matches(TECH_RULES, title) ? { pass: true } : { pass: false, reason: "title:entry-without-tech" };
   }
   return { pass: false, reason: "title:no-dev-keyword" };
+}
+
+export function filterJob(job: FilterInput): FilterResult {
+  const title = checkTitle(job.title);
+  if (!title.pass) return title;
+  if (isAbroadOnly(job.location ?? null)) return { pass: false, reason: "location:abroad" };
+  return { pass: true };
 }
