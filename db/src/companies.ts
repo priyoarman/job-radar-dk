@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { SourceType } from "../generated/prisma/enums";
 
-export const SUPPORTED_SOURCES: readonly SourceType[] = [SourceType.TEAMTAILOR, SourceType.GREENHOUSE, SourceType.LEVER];
+export const SUPPORTED_SOURCES: readonly SourceType[] = [SourceType.TEAMTAILOR, SourceType.GREENHOUSE, SourceType.LEVER, SourceType.ASHBY];
 
 const companySchema = z.object({
   slug: z

@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ashbyAdapter.normalize > maps a real job to a NormalizedJob 1`] = `
+{
+  "company": "Corti",
+  "description": "Overview
+Corti is the frontier lab for clinical-grade AI, building world-leading models and infrastructure for the realities of healthcare.
+Our technology powers healthcare’s most ambitious software, ",
+  "externalId": "542068bd-b25c-440f-ab3f-11b2adcfe5d1",
+  "location": "Copenhagen, Denmark",
+  "postedAt": 2026-10-02T09:13:21.931Z,
+  "remoteType": null,
+  "title": "GTM Engineer",
+  "url": "https://jobs.ashbyhq.com/corti/542068bd-b25c-440f-ab3f-11b2adcfe5d1",
+}
+`;

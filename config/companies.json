@@ -171,5 +171,35 @@
     "tags": ["sports-tech", "ai", "video"],
     "active": true,
     "notes": "Verified 2026-11-13: Lever board, ~26 jobs, mostly Copenhagen. NOT veo.teamtailor.com (that's a Finnish company)."
+  },
+  {
+    "slug": "pleo",
+    "name": "Pleo",
+    "source": "ASHBY",
+    "sourceKey": "pleo",
+    "city": "Copenhagen",
+    "tags": ["fintech"],
+    "active": true,
+    "notes": "Verified 2026-11-13: Ashby board, ~35 jobs, many mention Copenhagen."
+  },
+  {
+    "slug": "too-good-to-go",
+    "name": "Too Good To Go",
+    "source": "ASHBY",
+    "sourceKey": "toogoodtogo",
+    "city": "Copenhagen",
+    "tags": ["marketplace", "sustainability"],
+    "active": true,
+    "notes": "Verified 2026-11-13: Ashby board, ~50 jobs."
+  },
+  {
+    "slug": "corti",
+    "name": "Corti",
+    "source": "ASHBY",
+    "sourceKey": "corti",
+    "city": "Copenhagen",
+    "tags": ["ai", "healthtech"],
+    "active": true,
+    "notes": "Verified 2026-11-13: Ashby board, few jobs. AI company, strong fit."
   }
 ]
