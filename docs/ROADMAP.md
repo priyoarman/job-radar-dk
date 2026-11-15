@@ -123,7 +123,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1E. Saving and dedupe
 
-- [ ] **1.17 Find new jobs (pure function)**: `diffJobs(existingIds, incoming)` returns `{ newJobs, seenIds, goneIds }`. Table tests in the same commit.
+- [x] **1.17 Find new jobs (pure function)**: `diffJobs(existingIds, incoming)` returns `{ newJobs, seenIds, goneIds }`. Table tests in the same commit.
   - Check: tests pass.
   - Commit: `feat(pipeline): add diffJobs to find new, seen and gone jobs`
 
