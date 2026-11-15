@@ -223,5 +223,16 @@
     "tags": ["saas", "b2b"],
     "active": true,
     "notes": "Verified 2026-11-15: Workable board, 4 jobs (DK + US)."
+  },
+  {
+    "slug": "maersk",
+    "name": "Maersk",
+    "source": "WORKDAY",
+    "sourceKey": "https://maersk.wd3.myworkdayjobs.com/en-US/Maersk_Careers",
+    "careersUrl": "https://maersk.wd3.myworkdayjobs.com/en-US/Maersk_Careers",
+    "city": "Copenhagen",
+    "tags": ["logistics", "enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-15: Workday site, 41 Danish jobs. Rate-limits bursts (429)."
   }
 ]

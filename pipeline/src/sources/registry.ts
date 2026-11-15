@@ -5,6 +5,7 @@ import { leverAdapter } from "./lever";
 import { recruiteeAdapter } from "./recruitee";
 import { teamtailorAdapter } from "./teamtailor";
 import { workableAdapter } from "./workable";
+import { workdayAdapter } from "./workday";
 import type { SourceAdapter } from "./types";
 
 export const adapters: Partial<Record<SourceType, SourceAdapter<unknown>>> = {
@@ -14,6 +15,7 @@ export const adapters: Partial<Record<SourceType, SourceAdapter<unknown>>> = {
   ASHBY: ashbyAdapter,
   RECRUITEE: recruiteeAdapter,
   WORKABLE: workableAdapter,
+  WORKDAY: workdayAdapter,
 };
 
 export function getAdapter(source: SourceType): SourceAdapter<unknown> {

@@ -664,6 +664,19 @@ Same recipe each time: save a fixture → write the adapter + `normalize` → sn
 
 ---
 
+## 5b. Workday research (step S3.1, 2026-11-15)
+
+Workday has no official public jobs API. Its career sites (`{tenant}.{wdN}.myworkdayjobs.com/{site}`) load jobs from an internal JSON endpoint:
+
+- **List:** `POST https://{host}/wday/cxs/{tenant}/{site}/jobs` with body `{"appliedFacets":{},"limit":20,"offset":0,"searchText":""}`. Returns `total`, `jobPostings[]` (`title`, `externalPath`, `locationsText`, `postedOn` like "Posted 3 Days Ago", `bulletFields[0]` = requisition ID, sometimes `remoteType`) and `facets[]`. 20 jobs per page at most. **No description in the list.**
+- **Detail:** `GET https://{host}/wday/cxs/{tenant}/{site}{externalPath}` returns `jobPostingInfo` with `jobDescription` (HTML), `location`, `country`, `remoteType`, `startDate`, `externalUrl`. One request per job.
+- **Filtering to Denmark works server-side** via `appliedFacets`, but every company sets up its filters differently: Workday itself has a `Location_Country` facet; Maersk has no country facet, only ~440 free-text office locations under `locationMainGroup → locations` ("Denmark, Copenhagen, 1098", "DK - Aarhus", "DKCPH55 - Copenhagen - Esplanaden 50"). Facet IDs differ per company, and a country only appears when it has open jobs.
+- **Real numbers:** Maersk has 1,185 jobs worldwide but only 41 in Denmark, so filtering cuts ~60 list requests to 3. Workday currently has 0 jobs in Denmark (no Denmark facet at all).
+- **Rate limits:** after ~6 research requests in an hour, Maersk answered `429 Too Many Requests` to the very first request of a run. The adapter therefore pauses 1.5 s between its requests and fetches at most 10 pages; a 429 is never retried (it becomes a failed fetch, and 3 in a row trigger the email warning).
+- **Checked tenants:** `workday.wd5/workday/Workday`, `maersk.wd3/maersk/Maersk_Careers`, `motorolasolutions.wd5/motorolasolutions/Careers`, `autodesk.wd1/autodesk/Ext`.
+
+---
+
 ## 6. Risks and how the design handles them
 
 ### Adapter breaks (a company changes ATS or the feed format changes)
