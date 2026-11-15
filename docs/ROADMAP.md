@@ -109,7 +109,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: `pnpm typecheck` passes.
   - Commit: `feat(sources): add SourceAdapter interface and Job schema`
 
-- [ ] **1.14 HTML to text**: `pipeline/src/lib/html.ts` strips HTML with Cheerio and collapses whitespace. Include a test.
+- [x] **1.14 HTML to text**: `pipeline/src/lib/html.ts` strips HTML with Cheerio and collapses whitespace. Include a test.
   - Check: `"<p>Hi&nbsp;<b>there</b></p>"` becomes `"Hi there"`.
   - Commit: `feat(pipeline): add HTML-to-text helper`
 
