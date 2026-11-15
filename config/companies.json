@@ -234,5 +234,49 @@
     "tags": ["logistics", "enterprise"],
     "active": true,
     "notes": "Verified 2026-11-15: Workday site, 41 Danish jobs. Rate-limits bursts (429)."
+  },
+  {
+    "slug": "novo-nordisk",
+    "name": "Novo Nordisk",
+    "source": "SUCCESSFACTORS",
+    "sourceKey": "https://careers.novonordisk.com",
+    "careersUrl": "https://careers.novonordisk.com",
+    "city": "Bagsværd",
+    "tags": ["pharma", "enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-15: SuccessFactors classic search, 79 Danish jobs."
+  },
+  {
+    "slug": "vestas",
+    "name": "Vestas",
+    "source": "SUCCESSFACTORS",
+    "sourceKey": "https://careers.vestas.com",
+    "careersUrl": "https://careers.vestas.com",
+    "city": "Aarhus",
+    "tags": ["energy", "enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-15: SuccessFactors classic search, 65 Danish jobs (10 per page)."
+  },
+  {
+    "slug": "dsv",
+    "name": "DSV",
+    "source": "SUCCESSFACTORS",
+    "sourceKey": "https://jobs.dsv.com",
+    "careersUrl": "https://jobs.dsv.com",
+    "city": "Hedehusene",
+    "tags": ["logistics", "enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-15: SuccessFactors classic search, 17 Danish jobs (live-tested)."
+  },
+  {
+    "slug": "workday-peakon",
+    "name": "Workday (Peakon)",
+    "source": "WORKDAY",
+    "sourceKey": "https://workday.wd5.myworkdayjobs.com/Workday",
+    "careersUrl": "https://workday.wd5.myworkdayjobs.com/Workday",
+    "city": "Copenhagen",
+    "tags": ["saas", "hr-tech"],
+    "active": true,
+    "notes": "Verified 2026-11-15: Workday site, 0 Danish jobs at the time of checking (expect EMPTY)."
   }
 ]
