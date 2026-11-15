@@ -149,7 +149,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: "Junior Accountant" and "Internship: Direct Procurement" are dropped as `title:entry-without-tech`, while "Junior Developer" and "Studentermedhjælper til IT-afdelingen" pass.
   - Commit: `fix(pipeline): require a tech word for entry-level titles`
 
-- [ ] **1.22 Record runs**: `index.ts` creates a `Run` row and one `FetchLog` row per company, and tracks `consecutiveFailures`. If the whole run crashes, it records `FAILED` and exits with code 1.
+- [x] **1.22 Record runs**: `index.ts` creates a `Run` row and one `FetchLog` row per company, and tracks `consecutiveFailures`. If the whole run crashes, it records `FAILED` and exits with code 1.
   - Check: after a run, Studio shows a Run with counts and its FetchLogs.
   - Commit: `feat(pipeline): record runs and fetch logs`
 

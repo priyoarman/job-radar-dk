@@ -1,4 +1,5 @@
 import type { Company, FetchStatus, PrismaClient } from "@jobradar/db";
+import { errorMessage } from "../lib/errors";
 import { HttpError } from "../lib/http";
 import { log } from "../lib/logger";
 import { normalizeJobs } from "../sources/normalize";
@@ -15,6 +16,7 @@ export type ProcessResult = {
   status: Extract<FetchStatus, "OK" | "EMPTY" | "SUSPICIOUS_EMPTY">;
   jobsFound: number;
   jobsNew: number;
+  jobsPassed: number;
   jobsClosed: number;
 };
 
@@ -25,6 +27,7 @@ export type CompanyOutcome = {
   httpStatus: number | null;
   jobsFound: number;
   jobsNew: number;
+  jobsPassed: number;
   jobsClosed: number;
   error: string | null;
   durationMs: number | null;
@@ -59,7 +62,7 @@ export async function fetchCompanies(
 
     if (!isFetchDue(company.lastFetchedAt, startedAt, options.minIntervalHours)) {
       log.info("fetch.skipped", { company: company.slug, lastFetchedAt: company.lastFetchedAt });
-      outcomes.push({ ...base, status: "SKIPPED_RECENT", jobsFound: 0, jobsNew: 0, jobsClosed: 0, durationMs: null });
+      outcomes.push({ ...base, status: "SKIPPED_RECENT", jobsFound: 0, jobsNew: 0, jobsPassed: 0, jobsClosed: 0, durationMs: null });
       continue;
     }
 
@@ -75,7 +78,7 @@ export async function fetchCompanies(
     } catch (error) {
       const durationMs = options.now().getTime() - startedAt.getTime();
       const httpStatus = error instanceof HttpError ? error.status : null;
-      const message = error instanceof Error ? error.message : String(error);
+      const message = errorMessage(error);
       log.error("fetch.error", { company: company.slug, httpStatus, error: message, durationMs });
       outcomes.push({
         ...base,
@@ -83,6 +86,7 @@ export async function fetchCompanies(
         httpStatus,
         jobsFound: 0,
         jobsNew: 0,
+        jobsPassed: 0,
         jobsClosed: 0,
         error: message,
         durationMs,
@@ -104,7 +108,13 @@ export function createProcessCompany(prisma: PrismaClient, fetchText: FetchTextF
         where: { id: company.id },
         data: { lastSuccessAt: now, lastJobCount: jobs.length },
       });
-      return { status: saved.fetchStatus, jobsFound: raws.length, jobsNew: saved.inserted, jobsClosed: saved.closed };
+      return {
+        status: saved.fetchStatus,
+        jobsFound: raws.length,
+        jobsNew: saved.inserted,
+        jobsPassed: saved.passed,
+        jobsClosed: saved.closed,
+      };
     } finally {
       await prisma.company.update({ where: { id: company.id }, data: { lastFetchedAt: now } });
     }

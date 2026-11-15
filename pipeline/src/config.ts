@@ -13,6 +13,8 @@ const envSchema = z
     USER_AGENT: z.string().default("JobRadarDK/1.0 (personal job alert bot)"),
     MIN_FETCH_INTERVAL_HOURS: z.coerce.number().positive().default(2.5),
     APP_BASE_URL: z.url().default("http://localhost:3000"),
+    GITHUB_EVENT_NAME: z.string().optional(),
+    GITHUB_SHA: z.string().optional(),
   })
   .superRefine(
     (env, ctx) => {

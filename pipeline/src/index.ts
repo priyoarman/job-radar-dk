@@ -3,37 +3,38 @@ import { loadConfig } from "./config";
 import { fetchText } from "./lib/http";
 import { log } from "./lib/logger";
 import { createProcessCompany, fetchCompanies, sleep } from "./steps/fetchCompanies";
+import { runTriggerFor } from "./steps/recordRun";
+import { runPipeline } from "./steps/runPipeline";
 
 async function main(): Promise<void> {
   const config = loadConfig();
   const prisma = createPrismaClient(config.DATABASE_URL);
   try {
-    log.info("run.start", { dryRun: config.DRY_RUN });
-    const companies = await prisma.company.findMany({ where: { active: true }, orderBy: { slug: "asc" } });
-
-    const outcomes = await fetchCompanies(companies, {
-      minIntervalHours: config.MIN_FETCH_INTERVAL_HOURS,
-      pauseMs: 1_000,
+    log.info("config.loaded", { dryRun: config.DRY_RUN });
+    const processCompany = createProcessCompany(prisma, (url) =>
+      fetchText(url, { userAgent: config.USER_AGENT }),
+    );
+    const status = await runPipeline({
+      prisma,
+      trigger: runTriggerFor(config.GITHUB_EVENT_NAME),
+      gitSha: config.GITHUB_SHA ?? null,
       now: () => new Date(),
-      sleep,
-      processCompany: createProcessCompany(prisma, (url) => fetchText(url, { userAgent: config.USER_AGENT })),
+      fetchAll: (companies) =>
+        fetchCompanies(companies, {
+          minIntervalHours: config.MIN_FETCH_INTERVAL_HOURS,
+          pauseMs: 1_000,
+          now: () => new Date(),
+          sleep,
+          processCompany,
+        }),
     });
-
-    const byStatus: Record<string, number> = {};
-    for (const o of outcomes) byStatus[o.status] = (byStatus[o.status] ?? 0) + 1;
-    log.info("run.done", {
-      companies: outcomes.length,
-      ...byStatus,
-      jobsFound: outcomes.reduce((n, o) => n + o.jobsFound, 0),
-      jobsNew: outcomes.reduce((n, o) => n + o.jobsNew, 0),
-      jobsClosed: outcomes.reduce((n, o) => n + o.jobsClosed, 0),
-    });
+    if (status === "FAILED") process.exitCode = 1;
   } finally {
     await prisma.$disconnect();
   }
 }
 
 main().catch((error: unknown) => {
-  log.error("run.failed", { error });
+  log.error("run.crashed", { error });
   process.exitCode = 1;
 });

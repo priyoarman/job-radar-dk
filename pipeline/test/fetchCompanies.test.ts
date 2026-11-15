@@ -21,7 +21,7 @@ const company = (slug: string, lastFetchedAt: Date | null = null): FetchableComp
   lastFetchedAt,
 });
 
-const ok: ProcessResult = { status: "OK", jobsFound: 5, jobsNew: 1, jobsClosed: 0 };
+const ok: ProcessResult = { status: "OK", jobsFound: 5, jobsNew: 1, jobsPassed: 1, jobsClosed: 0 };
 
 function options(overrides: Partial<FetchCompaniesOptions> = {}): FetchCompaniesOptions {
   return {
@@ -103,6 +103,12 @@ describe("fetchCompanies", () => {
     const outcomes = await fetchCompanies([company("a"), company("broken"), company("c")], options({ processCompany }));
     expect(outcomes.map((o) => o.status)).toEqual(["OK", "ERROR", "OK"]);
     expect(outcomes[1]).toMatchObject({ slug: "broken", error: "feed exploded", httpStatus: null, jobsFound: 0 });
+  });
+
+  it("includes the hidden cause of a network error", async () => {
+    const processCompany = vi.fn().mockRejectedValue(new TypeError("fetch failed", { cause: new Error("getaddrinfo ENOTFOUND x") }));
+    const [outcome] = await fetchCompanies([company("dns")], options({ processCompany }));
+    expect(outcome?.error).toBe("fetch failed: getaddrinfo ENOTFOUND x");
   });
 
   it("records the HTTP status of a failed fetch", async () => {

@@ -12,6 +12,7 @@ export type SaveResult = JobDiff & {
   fetchStatus: SaveFetchStatus;
   isBaseline: boolean;
   inserted: number;
+  passed: number;
   reopened: number;
   closed: number;
 };
@@ -90,6 +91,7 @@ export async function saveJobs(
     fetchStatus,
     isBaseline,
     inserted: inserted.count,
+    passed: rows.filter((row) => row.filterStatus === "PASSED").length,
     reopened,
     closed: closed.count,
   };
