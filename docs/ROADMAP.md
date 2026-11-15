@@ -105,7 +105,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: tests show each fixture gives the right item count, and the zero-item feed gives `[]`.
   - Commit: `feat(sources): parse Teamtailor RSS feed`
 
-- [ ] **1.13 Adapter interface + Job schema**: `pipeline/src/sources/types.ts` with `SourceAdapter` and the `NormalizedJob` Zod schema.
+- [x] **1.13 Adapter interface + Job schema**: `pipeline/src/sources/types.ts` with `SourceAdapter` and the `NormalizedJob` Zod schema.
   - Check: `pnpm typecheck` passes.
   - Commit: `feat(sources): add SourceAdapter interface and Job schema`
 
