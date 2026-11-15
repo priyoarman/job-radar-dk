@@ -14,14 +14,17 @@ const envSchema = z
     MIN_FETCH_INTERVAL_HOURS: z.coerce.number().positive().default(2.5),
     APP_BASE_URL: z.url().default("http://localhost:3000"),
   })
-  .superRefine((env, ctx) => {
-    if (env.DRY_RUN) return;
-    for (const key of ["RESEND_API_KEY", "EMAIL_TO"] as const) {
-      if (!env[key]) {
-        ctx.addIssue({ code: "custom", path: [key], message: "required unless DRY_RUN=true" });
+  .superRefine(
+    (env, ctx) => {
+      if (env.DRY_RUN === true) return;
+      for (const key of ["RESEND_API_KEY", "EMAIL_TO"] as const) {
+        if (env[key] === undefined) {
+          ctx.addIssue({ code: "custom", path: [key], message: "required unless DRY_RUN=true" });
+        }
       }
-    }
-  });
+    },
+    { when: () => true },
+  );
 
 export type Config = z.infer<typeof envSchema>;
 

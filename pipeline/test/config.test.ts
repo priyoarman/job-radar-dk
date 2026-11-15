@@ -64,6 +64,17 @@ describe("loadConfig", () => {
     expect(loadConfig({ DATABASE_URL, DRY_RUN: "true" }).DRY_RUN).toBe(true);
   });
 
+  it("reports missing email settings together with other problems", () => {
+    expect(() => loadConfig({})).toThrow(
+      /DATABASE_URL: required[\s\S]*RESEND_API_KEY: required unless DRY_RUN=true[\s\S]*EMAIL_TO: required unless DRY_RUN=true/,
+    );
+  });
+
+  it("does not guess about email settings when DRY_RUN itself is invalid", () => {
+    expect(() => loadConfig({ DATABASE_URL, DRY_RUN: "yes please" })).toThrow(/DRY_RUN/);
+    expect(() => loadConfig({ DATABASE_URL, DRY_RUN: "yes please" })).not.toThrow(/RESEND_API_KEY/);
+  });
+
   it("lists every problem at once", () => {
     expect(() => loadConfig({ EMAIL_TO: "not-an-email", DRY_RUN: "true" })).toThrow(
       /DATABASE_URL[\s\S]*EMAIL_TO/,
