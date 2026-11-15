@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { createResendSender } from "../src/email/send";
-import { type EmailJob, escapeHtml, renderJobsEmail, subjectFor } from "../src/email/templates";
+import { type EmailJob, type SourceWarning, escapeHtml, renderJobsEmail, subjectFor } from "../src/email/templates";
 
 const job = (title: string, company = "Lunar", location: string | null = "København, Denmark"): EmailJob => ({
   title,
@@ -51,6 +51,30 @@ describe("renderJobsEmail", () => {
 
   it("uses singular wording for one job", () => {
     expect(renderJobsEmail([job("A")]).text.startsWith("1 new job matches your title filter")).toBe(true);
+  });
+});
+
+describe("renderJobsEmail with warnings", () => {
+  const failing: SourceWarning = { slug: "lunar", name: "Lunar", reason: "failing", consecutiveFailures: 3, lastError: "HTTP 404 <gone>" };
+  const empty: SourceWarning = { slug: "atp", name: "ATP", reason: "suspicious-empty", consecutiveFailures: 0, lastError: null };
+
+  it("adds a footer listing each source and why it needs attention", () => {
+    const { html, text } = renderJobsEmail([job("Backend Engineer")], [failing, empty]);
+    expect(html).toContain("⚠️ Sources needing attention");
+    expect(html).toContain("<strong>Lunar</strong> failed 3 runs in a row. Last error: HTTP 404 &lt;gone&gt;");
+    expect(html).toContain("<strong>ATP</strong> returned 0 jobs but had jobs before.");
+    expect(text).toContain("⚠️ Sources needing attention\n- Lunar: failed 3 runs in a row. Last error: HTTP 404 <gone>\n- ATP: returned 0 jobs");
+  });
+
+  it("has no footer when every source is healthy", () => {
+    expect(renderJobsEmail([job("A")], []).html).not.toContain("Sources needing attention");
+  });
+
+  it("builds a warning-only email when there are no jobs", () => {
+    const { subject, html } = renderJobsEmail([], [empty]);
+    expect(subject).toBe("Job Radar: ⚠️ 1 source needs attention");
+    expect(html).toContain("No new jobs this time, but some sources need attention");
+    expect(html).not.toContain('<ul style="list-style:none');
   });
 });
 

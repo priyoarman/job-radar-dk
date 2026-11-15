@@ -167,7 +167,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: delete one Job row in `dev`, run, and one email arrives. Run again and no email arrives.
   - Commit: `feat(pipeline): email new jobs once per run`
 
-- [ ] **1.26 Broken-source warning**: the email footer lists companies with `consecutiveFailures >= 3` or `SUSPICIOUS_EMPTY`. If there are no jobs, a warning-only email is sent at most once a day.
+- [x] **1.26 Broken-source warning**: the email footer lists companies with `consecutiveFailures >= 3` or `SUSPICIOUS_EMPTY`. If there are no jobs, a warning-only email is sent at most once a day.
   - Check: with a bad URL and 3 runs, the warning appears.
   - Commit: `feat(email): warn about broken sources`
 

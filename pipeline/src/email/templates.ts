@@ -42,15 +42,60 @@ function jobText(job: EmailJob): string {
   return `- ${job.title}\n  ${job.company.name}${location}\n  ${job.url}`;
 }
 
-export function renderJobsEmail(jobs: readonly EmailJob[]): EmailMessage {
-  const heading = `${jobs.length} new ${jobs.length === 1 ? "job matches" : "jobs match"} your title filter`;
+export type SourceWarning = {
+  slug: string;
+  name: string;
+  reason: "failing" | "suspicious-empty";
+  consecutiveFailures: number;
+  lastError: string | null;
+};
+
+function warningLine(warning: SourceWarning): string {
+  if (warning.reason === "suspicious-empty") {
+    return "returned 0 jobs but had jobs before. The feed or adapter may have changed.";
+  }
+  const error = warning.lastError ? ` Last error: ${warning.lastError}` : "";
+  return `failed ${warning.consecutiveFailures} runs in a row.${error}`;
+}
+
+export function warningsSubject(warnings: readonly SourceWarning[]): string {
+  const count = `${warnings.length} ${warnings.length === 1 ? "source needs" : "sources need"} attention`;
+  return `Job Radar: ⚠️ ${count}`;
+}
+
+function warningsHtml(warnings: readonly SourceWarning[]): string {
+  if (warnings.length === 0) return "";
+  const items = warnings
+    .map((w) => `<li style="margin:0 0 8px"><strong>${escapeHtml(w.name)}</strong> ${escapeHtml(warningLine(w))}</li>`)
+    .join("");
+  return [
+    '<div style="margin-top:24px;padding:12px 16px;background:#fff8e1;border-left:4px solid #f5a623">',
+    '<h3 style="font-size:15px;margin:0 0 8px">⚠️ Sources needing attention</h3>',
+    `<ul style="padding-left:18px;margin:0">${items}</ul>`,
+    "</div>",
+  ].join("");
+}
+
+function warningsText(warnings: readonly SourceWarning[]): string[] {
+  if (warnings.length === 0) return [];
+  return ["", "⚠️ Sources needing attention", ...warnings.map((w) => `- ${w.name}: ${warningLine(w)}`)];
+}
+
+export function renderJobsEmail(jobs: readonly EmailJob[], warnings: readonly SourceWarning[] = []): EmailMessage {
+  const heading =
+    jobs.length > 0
+      ? `${jobs.length} new ${jobs.length === 1 ? "job matches" : "jobs match"} your title filter`
+      : "No new jobs this time, but some sources need attention";
+  const list = jobs.length > 0 ? `<ul style="list-style:none;padding:0">${jobs.map(jobHtml).join("")}</ul>` : "";
   const html = [
     '<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:600px;color:#111">',
     `<h2 style="font-size:18px">${heading}</h2>`,
-    `<ul style="list-style:none;padding:0">${jobs.map(jobHtml).join("")}</ul>`,
+    list,
+    warningsHtml(warnings),
     '<p style="color:#888;font-size:12px">Sent by Job Radar DK. You review and apply to every job yourself.</p>',
     "</div>",
   ].join("");
-  const text = [heading, "", ...jobs.map(jobText), "", "Sent by Job Radar DK."].join("\n");
-  return { subject: subjectFor(jobs), html, text };
+  const text = [heading, "", ...jobs.map(jobText), ...warningsText(warnings), "", "Sent by Job Radar DK."].join("\n");
+  const subject = jobs.length > 0 ? subjectFor(jobs) : warningsSubject(warnings);
+  return { subject, html, text };
 }
