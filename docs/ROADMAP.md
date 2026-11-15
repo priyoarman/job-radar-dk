@@ -181,7 +181,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: the manual "Run workflow" goes green, and the logs show companies fetched.
   - Commit: `ci: run pipeline every 3 hours`
 
-- [ ] **1.29 Go live**: point the secrets at the Neon `main` branch, run the sync script against it, and trigger one manual run. That run is the baseline, so expect zero emails.
+- [x] **1.29 Go live**: point the secrets at the Neon `main` branch, run the sync script against it, and trigger one manual run. That run is the baseline, so expect zero emails.
   - Check: the baseline run sends no email, and over the next days new jobs arrive exactly once.
   - Commit: `docs: add setup notes to README` (a short "how to run" section)
 
