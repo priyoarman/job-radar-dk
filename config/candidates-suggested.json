@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "zapier",
+    "name": "Zapier",
+    "source": "ASHBY",
+    "sourceKey": "zapier",
+    "tags": [
+      "saas"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 10 jobs, 6 in Denmark, 0 matching."
+  },
+  {
+    "slug": "sitecore",
+    "name": "Sitecore",
+    "source": "ASHBY",
+    "sourceKey": "sitecore",
+    "tags": [
+      "saas"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 24 jobs, 13 in Denmark, 3 matching."
+  },
+  {
+    "slug": "butter",
+    "name": "Butter.us",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://butter.teamtailor.com",
+    "tags": [
+      "saas"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 17 jobs, 7 in Denmark, 1 matching."
+  },
+  {
+    "slug": "databricks",
+    "name": "Databricks",
+    "source": "GREENHOUSE",
+    "sourceKey": "databricks",
+    "tags": [
+      "enterprise"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 895 jobs, 307 in Denmark, 25 matching."
+  },
+  {
+    "slug": "valtech",
+    "name": "Valtech",
+    "source": "GREENHOUSE",
+    "sourceKey": "valtech",
+    "tags": [
+      "consultancy"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 130 jobs, 29 in Denmark, 7 matching."
+  },
+  {
+    "slug": "wolt",
+    "name": "Wolt",
+    "source": "GREENHOUSE",
+    "sourceKey": "wolt",
+    "tags": [
+      "logistics"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 191 jobs, 46 in Denmark, 0 matching."
+  },
+  {
+    "slug": "tactilegames",
+    "name": "Tactile Games",
+    "source": "GREENHOUSE",
+    "sourceKey": "tactilegames",
+    "tags": [
+      "media"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 2 jobs, 2 in Denmark, 0 matching."
+  },
+  {
+    "slug": "kahoot",
+    "name": "Kahoot!",
+    "source": "WORKABLE",
+    "sourceKey": "kahoot",
+    "tags": [
+      "media"
+    ],
+    "active": true,
+    "notes": "Verified 2026-11-15 by candidates:verify: 12 jobs, 3 in Denmark, 0 matching."
+  }
+]

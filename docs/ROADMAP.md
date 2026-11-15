@@ -228,6 +228,13 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### S5. Custom portals and coverage
 
+- [x] **S5.0 Verify the candidate list** (added 2026-11-15): `config/candidates.json` holds the user's 150 companies; `pnpm candidates:verify` checks each claimed board with the real adapters and tries the company name on Teamtailor, Greenhouse, Lever (+EU), Ashby, Workable and Recruitee, 1 request/second. Writes `docs/candidates-report.md` and `config/candidates-suggested.json`; adds nothing by itself.
+  - Result: only 6 of 39 checkable claims were right; 13 confirmed boards with jobs, 26 unused (empty) accounts, 31 claim systems we can't check yet (20 Emply), 19 need a manual look (Workday/SuccessFactors), 46 not found under their name.
+  - Commit: `feat(tools): verify candidate companies against real job boards`
+
+- [ ] **S5.0b Location rule for global boards**: recognise US states, every country name (via `Intl.DisplayNames`) and codes like `USCA`, so "Mountain View, California" or "Seoul, South Korea" no longer count as unknown. Found by S5.0: only 3 of Databricks' 25 "matches" were really in Denmark.
+  - Commit: `fix(pipeline): recognise US states and all countries in the location rule`
+
 - [ ] **S5.1 robots.txt checker**, cached per domain for 24 h; HTML sources skip and log `robots-disallowed` when blocked.
 - [ ] **S5.2 Generic JSON-LD adapter** (`CUSTOM`): reads `schema.org/JobPosting` data that many career pages embed.
 - [ ] **S5.3 "Detect portal" script**: careers URL → suggested `companies.json` entry.
