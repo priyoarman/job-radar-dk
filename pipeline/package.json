@@ -8,7 +8,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "email:test": "tsx --env-file-if-exists=../.env scripts/send-test-email.ts"
+    "email:test": "tsx --env-file-if-exists=../.env scripts/send-test-email.ts",
+    "candidates:verify": "tsx --env-file-if-exists=../.env scripts/verify-candidates.ts"
   },
   "dependencies": {
     "@jobradar/db": "workspace:*",
