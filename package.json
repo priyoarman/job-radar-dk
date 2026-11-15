@@ -15,6 +15,7 @@
     "db:migrate": "pnpm --filter @jobradar/db migrate",
     "db:studio": "pnpm --filter @jobradar/db studio",
     "db:sync": "pnpm --filter @jobradar/db sync",
-    "email:test": "pnpm --filter @jobradar/pipeline email:test"
+    "email:test": "pnpm --filter @jobradar/pipeline email:test",
+    "db:deploy": "pnpm --filter @jobradar/db migrate:deploy"
   }
 }

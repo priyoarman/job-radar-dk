@@ -177,7 +177,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: a green tick on GitHub.
   - Commit: `ci: run typecheck and tests on push`
 
-- [ ] **1.28 Cron workflow**: `.github/workflows/pipeline.yml` runs every 3 hours and has a manual button. It uses a `concurrency` group so runs never overlap, runs `prisma migrate deploy`, then `pnpm pipeline:run`. Add the secrets in GitHub.
+- [x] **1.28 Cron workflow**: `.github/workflows/pipeline.yml` runs every 3 hours and has a manual button. It uses a `concurrency` group so runs never overlap, runs `prisma migrate deploy`, then `pnpm pipeline:run`. Add the secrets in GitHub.
   - Check: the manual "Run workflow" goes green, and the logs show companies fetched.
   - Commit: `ci: run pipeline every 3 hours`
 
