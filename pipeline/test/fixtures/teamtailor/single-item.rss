@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:tt="https://teamtailor.com/locations">
+  <channel>
+    <title>Lunar</title>
+    <description>Open positions.</description>
+    <link>https://lunar.teamtailor.com/jobs</link>
+    <item>
+      <title>Senior Regulatory Data Engineer</title>
+      <description>&lt;p&gt;&lt;span&gt;Banking hasn’t changed much in decades. We’re changing that. One product at a time.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;Lunar is a Nordic challenger bank building the future of banking, with AI at the core. Our engineers, designers, and product people work on problems that actually matter. Making money simpler, smarter, and more rewarding for millions of people across the Nordics. Fully licensed and founded in 2015, with offices in Copenhagen, Aarhus, and Stockholm. We move fast, we build with purpose, and we’re just getting started.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;As our new Senior Regulatory Data Engineer, you’ll join the Capital &amp;amp; Regulatory Reporting (CRR) team, reporting to the Head of CRR, working to turn regulatory requirements into the governed, tested data logic our reporting runs on. We’re open to you being based in Copenhagen, Aarhus, or Stockholm. You’ll build directly on our data warehouse and add build capacity to CRR, working alongside the regulatory specialists who own the rules. CRR is a small team, so we cover for each other, and when a submission deadline hits, everyone pulls together to produce the reports, you included.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;strong id="docs-internal-guid-2f13f790-7fff-7875-661e-ef3488b6f3a9"&gt;What will you do?&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Build and maintain the data models and calculation logic behind our COREP, Danmarks Nationalbank MFI and AnaCredit/Kreditregistret, KRGS, and other DFSA submissions&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Turn regulatory rules into tested, version-controlled pipelines together with the specialists who own them&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Build validation checks and reconciliations that catch data issues before they reach a submission&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Replace spreadsheet-based steps with reproducible workflows across the reporting cycle&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Partner with product, tech, Treasury, and Accounting on source data, and assess the data impact of new products before they launch&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span&gt;&lt;strong id="docs-internal-guid-2f13f790-7fff-7875-661e-ef3488b6f3a9"&gt;What are we looking for in you?&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Solid experience building production data models and pipelines, with strong SQL and hands-on Python, dbt, or similar tools&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Experience with financial or regulatory data, whether in a bank, fintech, regtech vendor, or advisory setting&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Working knowledge of regulatory reporting concepts like own funds, liquidity, or the EBA taxonomy. Experience with OneSumX, Regnology, or Adenza is a plus&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Good engineering habits: version control, testing, and documentation others can maintain&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;The ability to explain a data model to a finance stakeholder, and a regulatory question to an engineer&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span&gt;&lt;strong id="docs-internal-guid-2f13f790-7fff-7875-661e-ef3488b6f3a9"&gt;What you get (aka. Benefits and perks)&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;4 days in the office. We’re a team that builds together, thinks together, and moves together. Showing up is part of how we work.&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;A well-equipped workspace. You’ll have a modern computer and a comfortable desk setup. We want you to have the tools you need to do your best work.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;span&gt;Pension, health insurance, and enhanced parental leave. From your financial future to your family moments. We’ve got you covered.&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;span&gt;&lt;strong id="docs-internal-guid-2f13f790-7fff-7875-661e-ef3488b6f3a9"&gt;Are you ready to join the journey? Apply now and let’s find out more!&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;em&gt;While you hold on tight for us to get back to you, curious to see what we’re up to? Follow us on&lt;/em&gt;&lt;/span&gt;&lt;a target="_blank" href="https://www.linkedin.com/company/lunarbank/mycompany/?viewAsMember=true"&gt;&lt;span&gt;&lt;em&gt; LinkedIn&lt;/em&gt;&lt;/span&gt;&lt;/a&gt;&lt;span&gt;&lt;em&gt; for business announcements and releases 📢, check out our&lt;/em&gt;&lt;/span&gt;&lt;a target="_blank" href="https://www.instagram.com/lifeatlunar/"&gt;&lt;span&gt;&lt;em&gt; Instagram&lt;/em&gt;&lt;/span&gt;&lt;/a&gt;&lt;span&gt;&lt;em&gt; for an inside scoop on what it’s like to work here.&lt;/em&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;em&gt;Depending on the regulations in the country where you will be employed, we will ask to see or obtain information about your criminal record. Please note that our employment is conditional upon you not being registered in RKI (Ribers Kredit Information).&lt;/em&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;&lt;em&gt;We welcome applications from candidates of all backgrounds. If you need any adjustments during the recruitment process, please let us know.&lt;/em&gt;&lt;/span&gt;&lt;/p&gt;</description>
+      <pubDate>Thu, 05 Nov 2026 12:45:22 +0100</pubDate>
+      <link>https://jobs.lunar.app/jobs/8671990-senior-regulatory-data-engineer</link>
+      <remoteStatus>none</remoteStatus>
+      <guid>b1df10ef-b0dd-45e6-99b6-6b07da9fd819</guid>
+      <tt:locations>
+        <tt:location>
+          <tt:name>Copenhagen, Denmark</tt:name>
+          <tt:address>Bredgade 43</tt:address>
+          <tt:zip>1260</tt:zip>
+          <tt:city>København</tt:city>
+          <tt:country>Denmark</tt:country>
+        </tt:location>
+        <tt:location>
+          <tt:name>Aarhus, Denmark</tt:name>
+          <tt:address>Hack Kampmanns Pl. 10</tt:address>
+          <tt:zip>8000</tt:zip>
+          <tt:city>Aarhus</tt:city>
+          <tt:country>Denmark</tt:country>
+        </tt:location>
+        <tt:location>
+          <tt:name>Stockholm, Sweden</tt:name>
+          <tt:address>Malmskillnadsgatan 44a</tt:address>
+          <tt:zip>111 57</tt:zip>
+          <tt:city>Stockholm</tt:city>
+          <tt:country>Sweden</tt:country>
+        </tt:location>
+      </tt:locations>
+      <tt:department>Finance</tt:department>
+      <tt:role/>
+    </item>
+  </channel>
+</rss>

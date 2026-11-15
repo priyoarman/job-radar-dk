@@ -97,7 +97,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1D. Teamtailor adapter
 
-- [ ] **1.11 Save fixtures**: 2–3 real feeds via `curl` into `pipeline/test/fixtures/teamtailor/`, plus one hand-edited feed with **one** item and one with **zero** items.
+- [x] **1.11 Save fixtures**: 2–3 real feeds via `curl` into `pipeline/test/fixtures/teamtailor/`, plus one hand-edited feed with **one** item and one with **zero** items.
   - Check: the files open and look like valid XML.
   - Commit: `test: add Teamtailor RSS fixtures`
 
