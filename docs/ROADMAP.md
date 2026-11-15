@@ -131,7 +131,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: on the `dev` DB, the first run saves jobs as baseline and the second run saves 0 new jobs.
   - Commit: `feat(pipeline): save new jobs with per-company baseline`
 
-- [ ] **1.19 Seen and closed jobs**: update `lastSeenAt`, and set `closedAt` for jobs that disappeared. Skip closing when the fetch returned 0 jobs but the company had jobs last time (mark the fetch `SUSPICIOUS_EMPTY`).
+- [x] **1.19 Seen and closed jobs**: update `lastSeenAt`, and set `closedAt` for jobs that disappeared. Skip closing when the fetch returned 0 jobs but the company had jobs last time (mark the fetch `SUSPICIOUS_EMPTY`).
   - Check: delete an item from a fixture and that job gets closed. With an empty fixture, nothing gets closed.
   - Commit: `feat(pipeline): track seen and closed jobs safely`
 
