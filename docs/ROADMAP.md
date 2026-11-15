@@ -69,7 +69,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: `prisma validate` passes.
   - Commit: `feat(db): add Prisma schema for Phase 1`
 
-- [ ] **1.5 First migration**: put the Neon `dev` branch URLs in `.env`, then run `prisma migrate dev --name init`.
+- [x] **1.5 First migration**: put the Neon `dev` branch URLs in `.env`, then run `prisma migrate dev --name init`.
   - Check: `prisma studio` shows the empty tables.
   - Commit: `feat(db): add initial migration`
 
