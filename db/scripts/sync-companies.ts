@@ -1,7 +1,14 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { prisma } from "../src/index";
+import { createPrismaClient } from "../src/index";
 import { parseCompanies } from "../src/companies";
+
+const databaseUrl = process.env["DATABASE_URL"];
+if (!databaseUrl) {
+  console.error("DATABASE_URL is not set. Add it to .env.");
+  process.exit(1);
+}
+const prisma = createPrismaClient(databaseUrl);
 
 const DEFAULT_FILE = resolve(import.meta.dirname, "../../config/companies.json");
 

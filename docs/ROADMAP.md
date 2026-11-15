@@ -83,7 +83,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1C. Pipeline basics
 
-- [ ] **1.8 Env config**: `.env.example` and `pipeline/src/config.ts` (Zod-validated env), with a test.
+- [x] **1.8 Env config**: `.env.example` and `pipeline/src/config.ts` (Zod-validated env), with a test.
   - Check: test passes. Removing `DATABASE_URL` gives an error that names the variable.
   - Commit: `feat(pipeline): validate env vars with Zod`
 
