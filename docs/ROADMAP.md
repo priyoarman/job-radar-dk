@@ -141,7 +141,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1F. The run
 
-- [ ] **1.21 Loop over companies**: `fetchCompanies.ts` fetches companies one at a time with a 1-second pause, skips any fetched within `MIN_FETCH_INTERVAL_HOURS`, and wraps each company in try/catch so one failure doesn't stop the run.
+- [x] **1.21 Loop over companies**: `fetchCompanies.ts` fetches companies one at a time with a 1-second pause, skips any fetched within `MIN_FETCH_INTERVAL_HOURS`, and wraps each company in try/catch so one failure doesn't stop the run.
   - Check: give one company a bad URL and the others still save.
   - Commit: `feat(pipeline): fetch all active companies politely`
 
