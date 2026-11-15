@@ -201,5 +201,16 @@
     "tags": ["ai", "healthtech"],
     "active": true,
     "notes": "Verified 2026-11-13: Ashby board, few jobs. AI company, strong fit."
+  },
+  {
+    "slug": "signifly",
+    "name": "Signifly",
+    "source": "RECRUITEE",
+    "sourceKey": "signifly",
+    "careersUrl": "https://jobs.signifly.com",
+    "city": "Copenhagen",
+    "tags": ["agency", "digital"],
+    "active": true,
+    "notes": "Verified 2026-11-15: Recruitee board, 9 jobs (DK + Canada)."
   }
 ]
