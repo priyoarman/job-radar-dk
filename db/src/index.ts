@@ -6,3 +6,4 @@ export function createPrismaClient(connectionString: string): PrismaClient {
 }
 
 export * from "../generated/prisma/client";
+export { SUPPORTED_SOURCES } from "./companies";

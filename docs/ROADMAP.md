@@ -117,7 +117,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: snapshot test of the first job passes, and a job with no title is skipped without a crash.
   - Commit: `feat(sources): normalize Teamtailor jobs`
 
-- [ ] **1.16 Adapter registry**: `registry.ts` maps `TEAMTAILOR` to the adapter.
+- [x] **1.16 Adapter registry**: `registry.ts` maps `TEAMTAILOR` to the adapter.
   - Check: `getAdapter("TEAMTAILOR")` works, and an unknown source throws.
   - Commit: `feat(sources): add adapter registry`
 
