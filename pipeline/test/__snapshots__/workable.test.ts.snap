@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`workableAdapter.normalize > maps a real job to a NormalizedJob 1`] = `
+{
+  "company": "Dreamdata",
+  "description": "About Dreamdata
+Dreamdata is the industry leader in B2B marketing attribution and activation. We're on a mission to help B2B marketing leaders finally connect their efforts directly to real revenue - ",
+  "externalId": "F6E15A2C50",
+  "location": "Copenhagen, Denmark",
+  "postedAt": 2026-11-09T00:00:00.000Z,
+  "remoteType": null,
+  "title": "Deployment Strategist - Forward Deployed Engineering",
+  "url": "https://apply.workable.com/j/F6E15A2C50",
+}
+`;
