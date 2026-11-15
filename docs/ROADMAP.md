@@ -91,7 +91,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: calling it from `index.ts` prints a readable line.
   - Commit: `feat(pipeline): add simple structured logger`
 
-- [ ] **1.10 Polite fetch helper**: `pipeline/src/lib/http.ts` sets the User-Agent, uses a 15-second timeout, and retries once on 5xx (never on 4xx). Tests go in the same commit.
+- [x] **1.10 Polite fetch helper**: `pipeline/src/lib/http.ts` sets the User-Agent, uses a 15-second timeout, and retries once on 5xx (never on 4xx). Tests go in the same commit.
   - Check: tests cover the 200, 500→200, 404 and header cases, and all pass.
   - Commit: `feat(pipeline): add polite fetch helper`
 
