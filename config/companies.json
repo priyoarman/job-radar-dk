@@ -212,5 +212,16 @@
     "tags": ["agency", "digital"],
     "active": true,
     "notes": "Verified 2026-11-15: Recruitee board, 9 jobs (DK + Canada)."
+  },
+  {
+    "slug": "dreamdata",
+    "name": "Dreamdata",
+    "source": "WORKABLE",
+    "sourceKey": "dreamdata",
+    "careersUrl": "https://apply.workable.com/dreamdata/",
+    "city": "Copenhagen",
+    "tags": ["saas", "b2b"],
+    "active": true,
+    "notes": "Verified 2026-11-15: Workable board, 4 jobs (DK + US)."
   }
 ]
