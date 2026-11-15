@@ -101,7 +101,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: the files open and look like valid XML.
   - Commit: `test: add Teamtailor RSS fixtures`
 
-- [ ] **1.12 Parse the RSS**: in `teamtailor.ts`, turn XML into a list of raw items with `fast-xml-parser` (`isArray` for `item`).
+- [x] **1.12 Parse the RSS**: in `teamtailor.ts`, turn XML into a list of raw items with `fast-xml-parser` (`isArray` for `item`).
   - Check: tests show each fixture gives the right item count, and the zero-item feed gives `[]`.
   - Commit: `feat(sources): parse Teamtailor RSS feed`
 
