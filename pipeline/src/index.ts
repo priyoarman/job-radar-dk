@@ -1,9 +1,10 @@
 import { createPrismaClient } from "@jobradar/db";
 import { loadConfig } from "./config";
 import { fetchText } from "./lib/http";
+import { createResendSender } from "./email/send";
 import { log } from "./lib/logger";
 import { createProcessCompany, fetchCompanies, sleep } from "./steps/fetchCompanies";
-import { findJobsToNotify, notify } from "./steps/notify";
+import { createMarkNotified, findJobsToNotify, notify } from "./steps/notify";
 import { runTriggerFor } from "./steps/recordRun";
 import { runPipeline } from "./steps/runPipeline";
 
@@ -12,6 +13,11 @@ async function main(): Promise<void> {
   const prisma = createPrismaClient(config.DATABASE_URL);
   try {
     log.info("config.loaded", { dryRun: config.DRY_RUN });
+    const send =
+      config.DRY_RUN || !config.RESEND_API_KEY || !config.EMAIL_TO
+        ? null
+        : createResendSender({ apiKey: config.RESEND_API_KEY, from: config.EMAIL_FROM, to: config.EMAIL_TO });
+    const markNotified = createMarkNotified(prisma, () => new Date());
     const processCompany = createProcessCompany(prisma, (url) =>
       fetchText(url, { userAgent: config.USER_AGENT }),
     );
@@ -28,7 +34,7 @@ async function main(): Promise<void> {
           sleep,
           processCompany,
         }),
-      notify: async () => notify(await findJobsToNotify(prisma), { dryRun: config.DRY_RUN }),
+      notify: async () => notify(await findJobsToNotify(prisma), { dryRun: config.DRY_RUN, send, markNotified }),
     });
     if (status === "FAILED") process.exitCode = 1;
   } finally {

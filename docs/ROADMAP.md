@@ -163,7 +163,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: a test script sends one test email to yourself and it arrives.
   - Commit: `feat(email): add Resend sender and summary template`
 
-- [ ] **1.25 Email new jobs once**: `notify.ts` sends **one** email per run listing unsent, non-baseline jobs that passed the filter. After the email is sent, it creates the Notification and sets `notificationId` in one transaction.
+- [x] **1.25 Email new jobs once**: `notify.ts` sends **one** email per run listing unsent, non-baseline jobs that passed the filter. After the email is sent, it creates the Notification and sets `notificationId` in one transaction.
   - Check: delete one Job row in `dev`, run, and one email arrives. Run again and no email arrives.
   - Commit: `feat(pipeline): email new jobs once per run`
 
