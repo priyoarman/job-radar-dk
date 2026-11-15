@@ -3,6 +3,7 @@ import { loadConfig } from "./config";
 import { fetchText } from "./lib/http";
 import { log } from "./lib/logger";
 import { createProcessCompany, fetchCompanies, sleep } from "./steps/fetchCompanies";
+import { findJobsToNotify, notify } from "./steps/notify";
 import { runTriggerFor } from "./steps/recordRun";
 import { runPipeline } from "./steps/runPipeline";
 
@@ -27,6 +28,7 @@ async function main(): Promise<void> {
           sleep,
           processCompany,
         }),
+      notify: async () => notify(await findJobsToNotify(prisma), { dryRun: config.DRY_RUN }),
     });
     if (status === "FAILED") process.exitCode = 1;
   } finally {

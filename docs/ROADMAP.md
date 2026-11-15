@@ -153,7 +153,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: after a run, Studio shows a Run with counts and its FetchLogs.
   - Commit: `feat(pipeline): record runs and fetch logs`
 
-- [ ] **1.23 Dry-run mode**: with `DRY_RUN=true`, the pipeline sends no emails and prints what it would send.
+- [x] **1.23 Dry-run mode**: with `DRY_RUN=true`, the pipeline sends no emails and prints what it would send.
   - Check: `DRY_RUN=true pnpm pipeline:run` prints, and no email arrives.
   - Commit: `feat(pipeline): add dry-run mode`
 
