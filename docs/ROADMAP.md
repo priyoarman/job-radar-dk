@@ -22,23 +22,23 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 **Goal:** accounts ready, repo clean, company list written.
 
-- [ ] **0.1 Create accounts**: GitHub (public repo `job-radar-dk`), Neon, Resend. Groq can wait until Phase 2.
+- [x] **0.1 Create accounts**: GitHub (public repo `job-radar-dk`), Neon, Resend. Groq can wait until Phase 2.
   - Check: you can log in to all three and you've copied the Resend API key somewhere safe.
   - Commit: *none (no files changed)*
 
-- [ ] **0.2 Add .gitignore**: ignore `node_modules`, `.env`, `profile.md`, `.next`, `dist`.
+- [x] **0.2 Add .gitignore**: ignore `node_modules`, `.env`, `profile.md`, `.next`, `dist`.
   - Check: `git status` shows only `.gitignore` and `docs/`.
   - Commit: `chore: add gitignore`
 
-- [ ] **0.3 Commit the plan docs**: `docs/PLAN.md` and `docs/ROADMAP.md`.
+- [x] **0.3 Commit the plan docs**: `docs/PLAN.md` and `docs/ROADMAP.md`.
   - Check: both files appear on GitHub after pushing.
   - Commit: `docs: add implementation plan and roadmap`
 
-- [ ] **0.4 Write the company list**: `config/companies.json` with 10–15 Teamtailor companies (format in PLAN.md §1). Open each `.../jobs.rss` in the browser first to check it works.
+- [x] **0.4 Write the company list**: `config/companies.json` with 10–15 Teamtailor companies (format in PLAN.md §1). Open each `.../jobs.rss` in the browser first to check it works.
   - Check: every URL returned XML in the browser.
   - Commit: `chore: add Teamtailor company seed list`
 
-- [ ] **0.5 Write the fake profile**: `profile.example.md` (an invented person with a similar stack). Write your **real** `profile.md` too, but it stays uncommitted because it's in `.gitignore`.
+- [x] **0.5 Write the fake profile**: `profile.example.md` (an invented person with a similar stack). Write your **real** `profile.md` too, but it stays uncommitted because it's in `.gitignore`.
   - Check: `git status` shows `profile.example.md` and **not** `profile.md`.
   - Commit: `docs: add example profile`
 
@@ -51,21 +51,21 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1A. Project skeleton
 
-- [ ] **1.1 pnpm workspace**: root `package.json` and `pnpm-workspace.yaml` listing `db`, `pipeline`, `web`.
+- [x] **1.1 pnpm workspace**: root `package.json` and `pnpm-workspace.yaml` listing `db`, `pipeline`, `web`.
   - Check: `pnpm install` runs without errors.
   - Commit: `chore: set up pnpm workspace`
 
-- [ ] **1.2 Pipeline package + TypeScript**: `tsconfig.base.json`, `pipeline/package.json`, `pipeline/tsconfig.json`, and `pipeline/src/index.ts` that prints "hello". Add `tsx` and a root script `pipeline:run`.
+- [x] **1.2 Pipeline package + TypeScript**: `tsconfig.base.json`, `pipeline/package.json`, `pipeline/tsconfig.json`, and `pipeline/src/index.ts` that prints "hello". Add `tsx` and a root script `pipeline:run`.
   - Check: `pnpm pipeline:run` prints "hello". `pnpm typecheck` passes.
   - Commit: `chore: add pipeline package with TypeScript`
 
-- [ ] **1.3 Vitest**: add Vitest, `pipeline/vitest.config.ts`, and one smoke test.
+- [x] **1.3 Vitest**: add Vitest, `pipeline/vitest.config.ts`, and one smoke test.
   - Check: `pnpm test` shows 1 passing test.
   - Commit: `test: add vitest with smoke test`
 
 ### 1B. Database
 
-- [ ] **1.4 Prisma schema**: `db/package.json` and `db/prisma/schema.prisma` with only the Phase 1 models: Company, Job, Run, FetchLog, Notification (copy from PLAN.md §2).
+- [x] **1.4 Prisma schema**: `db/package.json` and `db/prisma/schema.prisma` with only the Phase 1 models: Company, Job, Run, FetchLog, Notification (copy from PLAN.md §2).
   - Check: `prisma validate` passes.
   - Commit: `feat(db): add Prisma schema for Phase 1`
 

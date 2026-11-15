@@ -10,6 +10,7 @@
   "scripts": {
     "pipeline:run": "pnpm --filter @jobradar/pipeline start",
     "test": "pnpm -r test",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "db:validate": "pnpm --filter @jobradar/db validate"
   }
 }

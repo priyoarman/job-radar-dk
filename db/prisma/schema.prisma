@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SourceType {
+  TEAMTAILOR
+  RECRUITEE
+  GREENHOUSE
+  LEVER
+  ASHBY
+  EMPLY
+  HRMANAGER
+}
+
+enum FilterStatus {
+  PENDING
+  PASSED
+  DROPPED
+}
+
+enum ScoreStatus {
+  NOT_NEEDED // dropped by filter, or baseline job
+  PENDING
+  DONE
+  FAILED
+}
+
+enum JobStatus {
+  NEW
+  INTERESTED
+  APPLIED
+  NOT_INTERESTED
+}
+
+enum RunStatus {
+  RUNNING
+  SUCCESS
+  PARTIAL
+  FAILED
+}
+
+enum FetchStatus {
+  OK
+  EMPTY // 0 jobs, and that's normal for this company
+  SUSPICIOUS_EMPTY // 0 jobs, but there were jobs last time; maybe the adapter broke
+  ERROR
+  SKIPPED_RECENT // fetched too recently (politeness rule)
+}
+
+enum NotificationKind {
+  RUN_SUMMARY
+  INSTANT
+  DIGEST
+  HEALTH_ALERT
+}
+
+model Company {
+  id         String     @id @default(cuid())
+  slug       String     @unique
+  name       String
+  source     SourceType
+  sourceKey  String
+  careersUrl String?
+  city       String?
+  tags       String[]
+  active     Boolean    @default(true)
+  notes      String?
+
+  // null until the first successful fetch; jobs from that fetch are never emailed.
+  baselineDoneAt DateTime?
+
+  lastFetchedAt       DateTime?
+  lastSuccessAt       DateTime?
+  lastJobCount        Int?
+  consecutiveFailures Int       @default(0)
+  lastError           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  jobs      Job[]
+  fetchLogs FetchLog[]
+
+  @@unique([source, sourceKey])
+}
+
+model Job {
+  id         String  @id @default(cuid())
+  companyId  String
+  company    Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  externalId String // the source's own ID for the job (Teamtailor: RSS <guid>)
+
+  title       String
+  location    String?
+  remoteType  String? // "remote" | "hybrid" | "onsite" | null when unknown
+  description String
+  url         String
+  postedAt    DateTime?
+
+  firstSeenAt DateTime  @default(now())
+  lastSeenAt  DateTime  @default(now())
+  closedAt    DateTime? // set when the job disappears from a successful fetch
+  isBaseline  Boolean   @default(false) // seen on the company's first fetch, never emailed
+
+  filterStatus   FilterStatus @default(PENDING)
+  filterReason   String?
+  scoreStatus    ScoreStatus  @default(PENDING)
+  scoreAttempts  Int          @default(0)
+  lastScoreError String?
+
+  status    JobStatus @default(NEW)
+  appliedAt DateTime?
+
+  // Once set, the job is never emailed again.
+  notificationId String?
+  notification   Notification? @relation(fields: [notificationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([companyId, externalId])
+  @@index([filterStatus, scoreStatus])
+  @@index([firstSeenAt])
+}
+
+model Notification {
+  id                String           @id @default(cuid())
+  kind              NotificationKind
+  subject           String
+  providerMessageId String?
+  sentAt            DateTime         @default(now())
+  jobs              Job[]
+}
+
+model Run {
+  id         String    @id @default(cuid())
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  status     RunStatus @default(RUNNING)
+  trigger    String // "cron" | "manual" | "local"
+  gitSha     String?
+
+  companiesChecked Int     @default(0)
+  companiesSkipped Int     @default(0)
+  companiesFailed  Int     @default(0)
+  jobsFetched      Int     @default(0)
+  jobsNew          Int     @default(0)
+  jobsPassedFilter Int     @default(0)
+  jobsScored       Int     @default(0)
+  llmCalls         Int     @default(0)
+  emailsSent       Int     @default(0)
+  error            String?
+
+  fetchLogs FetchLog[]
+}
+
+model FetchLog {
+  id         String      @id @default(cuid())
+  runId      String
+  run        Run         @relation(fields: [runId], references: [id], onDelete: Cascade)
+  companyId  String
+  company    Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  status     FetchStatus
+  httpStatus Int?
+  jobsFound  Int         @default(0)
+  jobsNew    Int         @default(0)
+  durationMs Int?
+  error      String?
+  createdAt  DateTime    @default(now())
+
+  @@index([companyId, createdAt])
+}
