@@ -13,6 +13,7 @@
     "typecheck": "pnpm -r typecheck",
     "db:validate": "pnpm --filter @jobradar/db validate",
     "db:migrate": "pnpm --filter @jobradar/db migrate",
-    "db:studio": "pnpm --filter @jobradar/db studio"
+    "db:studio": "pnpm --filter @jobradar/db studio",
+    "db:sync": "pnpm --filter @jobradar/db sync"
   }
 }

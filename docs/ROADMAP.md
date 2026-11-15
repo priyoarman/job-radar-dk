@@ -77,7 +77,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: the pipeline can run `prisma.company.count()` and prints `0`.
   - Commit: `feat(db): export shared Prisma client`
 
-- [ ] **1.7 Company sync script**: `db/scripts/sync-companies.ts` reads `config/companies.json`, validates it with Zod, and upserts by `slug` (never deletes).
+- [x] **1.7 Company sync script**: `db/scripts/sync-companies.ts` reads `config/companies.json`, validates it with Zod, and upserts by `slug` (never deletes).
   - Check: run it twice and the company count stays the same. Break the JSON and you get a clear error.
   - Commit: `feat(db): add script to sync companies from seed file`
 

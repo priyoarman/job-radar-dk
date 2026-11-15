@@ -24,7 +24,7 @@ enum FilterStatus {
 }
 
 enum ScoreStatus {
-  NOT_NEEDED // dropped by filter, or baseline job
+  NOT_NEEDED
   PENDING
   DONE
   FAILED
@@ -46,10 +46,10 @@ enum RunStatus {
 
 enum FetchStatus {
   OK
-  EMPTY // 0 jobs, and that's normal for this company
-  SUSPICIOUS_EMPTY // 0 jobs, but there were jobs last time; maybe the adapter broke
+  EMPTY
+  SUSPICIOUS_EMPTY
   ERROR
-  SKIPPED_RECENT // fetched too recently (politeness rule)
+  SKIPPED_RECENT
 }
 
 enum NotificationKind {
@@ -71,7 +71,6 @@ model Company {
   active     Boolean    @default(true)
   notes      String?
 
-  // null until the first successful fetch; jobs from that fetch are never emailed.
   baselineDoneAt DateTime?
 
   lastFetchedAt       DateTime?
@@ -93,7 +92,7 @@ model Job {
   id         String  @id @default(cuid())
   companyId  String
   company    Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  externalId String // the source's own ID for the job (Teamtailor: RSS <guid>)
+  externalId String
 
   title       String
   location    String?
@@ -104,8 +103,8 @@ model Job {
 
   firstSeenAt DateTime  @default(now())
   lastSeenAt  DateTime  @default(now())
-  closedAt    DateTime? // set when the job disappears from a successful fetch
-  isBaseline  Boolean   @default(false) // seen on the company's first fetch, never emailed
+  closedAt    DateTime?
+  isBaseline  Boolean   @default(false)
 
   filterStatus   FilterStatus @default(PENDING)
   filterReason   String?
@@ -116,7 +115,6 @@ model Job {
   status    JobStatus @default(NEW)
   appliedAt DateTime?
 
-  // Once set, the job is never emailed again.
   notificationId String?
   notification   Notification? @relation(fields: [notificationId], references: [id])
 
