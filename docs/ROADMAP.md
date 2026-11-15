@@ -159,7 +159,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1G. Email
 
-- [ ] **1.24 Resend sender + template**: `email/send.ts` and `email/templates.ts` build a simple HTML list of jobs.
+- [x] **1.24 Resend sender + template**: `email/send.ts` and `email/templates.ts` build a simple HTML list of jobs.
   - Check: a test script sends one test email to yourself and it arrives.
   - Commit: `feat(email): add Resend sender and summary template`
 
