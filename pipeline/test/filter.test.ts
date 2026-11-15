@@ -8,7 +8,7 @@ const realTitles: Array<[string, string | null]> = [
   ["Backend Engineer", null],
   ["Platform Engineer", null],
   ["Corporate Security Engineer", null],
-  ["Compliance Product Enablement Student Assistant (French)", null],
+  ["Compliance Product Enablement Student Assistant (French)", "title:entry-without-tech"],
   ["Senior Backend Engineer", "title:senior"],
   ["Senior Backend Engineer - Lending", "title:senior"],
   ["Senior Software Engineer", "title:senior"],
@@ -31,6 +31,25 @@ const realTitles: Array<[string, string | null]> = [
   ["Sales Development Representative - Norway", "title:no-dev-keyword"],
   ["Third Party Risk Specialist, ICT (DORA)", "title:no-dev-keyword"],
   ["Senior Compliance Officer/Compliance Officer", "title:senior"],
+  ["Backend developer", null],
+  ["Backend Developer", null],
+  ["Full Stack Engineer", null],
+  ["Data Engineer", null],
+  ["Software Engineer, Online", null],
+  ["Mainframe / COBOL-udvikler", null],
+  ["Graduate Programme - Finance", "title:entry-without-tech"],
+  ["Graduate Programme – Shipping", "title:entry-without-tech"],
+  ["Intern", "title:entry-without-tech"],
+  ["Internship: Direct Procurement", "title:entry-without-tech"],
+  ["Internship: Procurement Technology, Sustainability & Operations", null],
+  ["Junior Accountant", "title:entry-without-tech"],
+  ["Junior Paid Social Specialist - Part-time", "title:entry-without-tech"],
+  ["(Junior) Sales Medewerker Binnendienst", "title:entry-without-tech"],
+  ["Local Financial Controller (Junior)", "title:entry-without-tech"],
+  ["Heftruckchauffeur (certificaat intern te halen)", "title:entry-without-tech"],
+  ["Working Student HR - People Operations (m/w/d)", "title:entry-without-tech"],
+  ["Working Student Commercial (m/w/d)", "title:entry-without-tech"],
+  ["Praktikant [Podads]", "title:entry-without-tech"],
 ];
 
 const otherTitles: Array<[string, string | null]> = [
@@ -44,6 +63,17 @@ const otherTitles: Array<[string, string | null]> = [
   ["Back End Engineer", null],
   ["Junior Developer", null],
   ["Graduate Programme 2027 - Technology", null],
+  ["Junior Data Analyst", null],
+  ["Working Student Software Development (m/w/d)", null],
+  ["IT Student", null],
+  ["Student Assistant – Data & AI", null],
+  ["Student Assistant, Web", null],
+  ["Trainee – Cloud & DevOps", null],
+  ["Make it happen – Junior Coordinator", "title:entry-without-tech"],
+  ["Junior Programmer", null],
+  ["Data Protection Officer", "title:no-dev-keyword"],
+  ["IT Support (Copenhagen) Student", null],
+  ["Softwarepraktikant", null],
   ["Software Engineering Intern", null],
   ["Internal Audit Specialist", "title:no-dev-keyword"],
   ["Tech Lead", "title:lead"],
@@ -61,6 +91,7 @@ const otherTitles: Array<[string, string | null]> = [
   ["Teamleder, udvikling", "title:leder"],
   ["Udviklingschef", "title:chef"],
   ["Praktikant – softwareudvikling", null],
+  ["Udviklingspraktikant", "title:entry-without-tech"],
   ["Nyuddannet udvikler", null],
   ["Chef (køkken)", "title:chef"],
   ["Retail Assistant", "title:no-dev-keyword"],
@@ -82,9 +113,7 @@ describe("filterJob", () => {
       ),
     );
     const passed = titles.filter((title) => filterJob({ title }).pass);
-    expect(passed.sort()).toEqual(
-      ["Backend Engineer", "Compliance Product Enablement Student Assistant (French)", "Corporate Security Engineer", "Platform Engineer"].sort(),
-    );
+    expect(passed.sort()).toEqual(["Backend Engineer", "Corporate Security Engineer", "Platform Engineer"]);
   });
 });
 
@@ -93,6 +122,7 @@ describe("normalizeTitle", () => {
     ["Full Stack", "fullstack"],
     ["full-stack", "fullstack"],
     ["FULL  STACK", "fullstack"],
+    ["IT Full Stack", "IT fullstack"],
     ["Front-End", "frontend"],
     ["back end", "backend"],
   ])("%s → %s", (input, expected) => {

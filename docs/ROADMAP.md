@@ -145,6 +145,10 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: give one company a bad URL and the others still save.
   - Commit: `feat(pipeline): fetch all active companies politely`
 
+- [x] **1.21b Tighten title filter** (added after the first real run): entry-level words (student, junior, graduate, intern, trainee, praktikant…) only pass together with a tech word (software, data, IT, tech, web, cloud…). Dev words (developer, engineer, udvikler, AI…) still pass on their own. Existing baseline jobs were re-filtered.
+  - Check: "Junior Accountant" and "Internship: Direct Procurement" are dropped as `title:entry-without-tech`, while "Junior Developer" and "Studentermedhjælper til IT-afdelingen" pass.
+  - Commit: `fix(pipeline): require a tech word for entry-level titles`
+
 - [ ] **1.22 Record runs**: `index.ts` creates a `Run` row and one `FetchLog` row per company, and tracks `consecutiveFailures`. If the whole run crashes, it records `FAILED` and exits with code 1.
   - Check: after a run, Studio shows a Run with counts and its FetchLogs.
   - Commit: `feat(pipeline): record runs and fetch logs`
