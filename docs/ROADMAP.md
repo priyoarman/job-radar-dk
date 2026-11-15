@@ -113,7 +113,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: `"<p>Hi&nbsp;<b>there</b></p>"` becomes `"Hi there"`.
   - Commit: `feat(pipeline): add HTML-to-text helper`
 
-- [ ] **1.15 Normalize Teamtailor jobs**: finish `fetchJobs` and `normalize`. Invalid items are logged and skipped.
+- [x] **1.15 Normalize Teamtailor jobs**: finish `fetchJobs` and `normalize`. Invalid items are logged and skipped.
   - Check: snapshot test of the first job passes, and a job with no title is skipped without a crash.
   - Commit: `feat(sources): normalize Teamtailor jobs`
 

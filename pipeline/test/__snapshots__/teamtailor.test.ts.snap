@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`teamtailorAdapter.normalize > maps a real item to a NormalizedJob 1`] = `
+{
+  "company": "Lunar",
+  "description": "Banking hasn’t changed much in decades. We’re changing that. One product at a time.
+Lunar is a Nordic challenger bank building the future of banking, with AI at the core. Our engineers, designers, and product people work on problems that actually matter. Making money simpler, smarter, and more rewar",
+  "externalId": "b1df10ef-b0dd-45e6-99b6-6b07da9fd819",
+  "location": "København, Denmark; Aarhus, Denmark; Stockholm, Sweden",
+  "postedAt": 2026-11-05T11:45:22.000Z,
+  "remoteType": null,
+  "title": "Senior Regulatory Data Engineer",
+  "url": "https://jobs.lunar.app/jobs/8671990-senior-regulatory-data-engineer",
+}
+`;
