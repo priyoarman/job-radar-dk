@@ -87,7 +87,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: test passes. Removing `DATABASE_URL` gives an error that names the variable.
   - Commit: `feat(pipeline): validate env vars with Zod`
 
-- [ ] **1.9 Logger**: `pipeline/src/lib/logger.ts`. One line per event, like `fetch.ok {"company":"x","jobs":5}`.
+- [x] **1.9 Logger**: `pipeline/src/lib/logger.ts`. One line per event, like `fetch.ok {"company":"x","jobs":5}`.
   - Check: calling it from `index.ts` prints a readable line.
   - Commit: `feat(pipeline): add simple structured logger`
 
