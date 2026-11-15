@@ -1,6 +1,8 @@
 import type { Company, Prisma, PrismaClient } from "@jobradar/db";
+import { log } from "../lib/logger";
 import type { NormalizedJob } from "../sources/types";
 import { type JobDiff, diffJobs } from "./diffJobs";
+import { filterJob } from "./filter";
 
 export type SaveCompany = Pick<Company, "id" | "slug" | "baselineDoneAt">;
 
@@ -20,14 +22,19 @@ export function buildJobRows(
   isBaseline: boolean,
   now: Date,
 ): Prisma.JobCreateManyInput[] {
-  return jobs.map(({ company: _company, ...job }) => ({
-    ...job,
-    companyId,
-    isBaseline,
-    scoreStatus: isBaseline ? "NOT_NEEDED" : "PENDING",
-    firstSeenAt: now,
-    lastSeenAt: now,
-  }));
+  return jobs.map(({ company: _company, ...job }) => {
+    const filter = filterJob(job);
+    return {
+      ...job,
+      companyId,
+      isBaseline,
+      filterStatus: filter.pass ? "PASSED" : "DROPPED",
+      filterReason: filter.pass ? null : filter.reason,
+      scoreStatus: isBaseline || !filter.pass ? "NOT_NEEDED" : "PENDING",
+      firstSeenAt: now,
+      lastSeenAt: now,
+    };
+  });
 }
 
 export function fetchStatusFor(openJobs: number, incomingJobs: number): SaveFetchStatus {
@@ -54,11 +61,15 @@ export async function saveJobs(
   const seen = new Set(diff.seenIds);
   const reopened = existing.filter((job) => job.closedAt !== null && seen.has(job.externalId)).length;
 
+  const rows = buildJobRows(diff.newJobs, company.id, isBaseline, now);
+  for (const row of rows) {
+    if (row.filterStatus === "DROPPED") {
+      log.info("filter.dropped", { company: company.slug, title: row.title, reason: row.filterReason });
+    }
+  }
+
   const [inserted, , closed] = await prisma.$transaction([
-    prisma.job.createMany({
-      data: buildJobRows(diff.newJobs, company.id, isBaseline, now),
-      skipDuplicates: true,
-    }),
+    prisma.job.createMany({ data: rows, skipDuplicates: true }),
     prisma.job.updateMany({
       where: { companyId: company.id, externalId: { in: diff.seenIds } },
       data: { lastSeenAt: now, closedAt: null },

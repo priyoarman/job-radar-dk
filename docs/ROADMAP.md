@@ -135,7 +135,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: delete an item from a fixture and that job gets closed. With an empty fixture, nothing gets closed.
   - Commit: `feat(pipeline): track seen and closed jobs safely`
 
-- [ ] **1.20 Title filter**: `filter.ts` keeps titles with dev keywords and drops senior/lead/principal/staff/manager. Store `filterReason`. Table test with ~25 real titles.
+- [x] **1.20 Title filter**: `filter.ts` keeps titles with dev keywords and drops senior/lead/principal/staff/manager. Store `filterReason`. Table test with ~25 real titles.
   - Check: all table cases pass, and "AI Engineer" passes while "Maintenance Lead" is dropped.
   - Commit: `feat(pipeline): add title keyword filter`
 

@@ -28,6 +28,8 @@ describe("buildJobRows", () => {
         postedAt: new Date("2026-11-09T20:20:10Z"),
         companyId: "company-1",
         isBaseline: false,
+        filterStatus: "PASSED",
+        filterReason: null,
         scoreStatus: "PENDING",
         firstSeenAt: now,
         lastSeenAt: now,
@@ -38,6 +40,16 @@ describe("buildJobRows", () => {
   it("marks baseline jobs so they are never scored or emailed", () => {
     const [row] = buildJobRows([job], "company-1", true, now);
     expect(row).toMatchObject({ isBaseline: true, scoreStatus: "NOT_NEEDED" });
+  });
+
+  it("drops jobs that fail the title filter and never scores them", () => {
+    const [row] = buildJobRows([{ ...job, title: "Senior Backend Engineer" }], "company-1", false, now);
+    expect(row).toMatchObject({ filterStatus: "DROPPED", filterReason: "title:senior", scoreStatus: "NOT_NEEDED" });
+  });
+
+  it("still filters baseline jobs, so the dashboard shows why they were dropped", () => {
+    const [row] = buildJobRows([{ ...job, title: "Sales Manager" }], "company-1", true, now);
+    expect(row).toMatchObject({ isBaseline: true, filterStatus: "DROPPED", filterReason: "title:manager" });
   });
 
   it("leaves out the company name, which lives on the Company row", () => {
