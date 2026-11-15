@@ -1,5 +1,6 @@
 import type { Company, SourceType } from "@jobradar/db";
 import { z } from "zod";
+import type { HttpClient } from "../lib/http";
 
 export const REMOTE_TYPES = ["remote", "hybrid", "onsite"] as const;
 
@@ -18,10 +19,8 @@ export type NormalizedJob = z.infer<typeof normalizedJobSchema>;
 
 export type AdapterCompany = Pick<Company, "slug" | "name" | "sourceKey">;
 
-export type FetchTextFn = (url: string) => Promise<string>;
-
 export interface SourceAdapter<Raw> {
   readonly name: SourceType;
-  fetchJobs(company: AdapterCompany, fetchText: FetchTextFn): Promise<Raw[]>;
+  fetchJobs(company: AdapterCompany, http: HttpClient): Promise<Raw[]>;
   normalize(raw: Raw, company: AdapterCompany): NormalizedJob;
 }

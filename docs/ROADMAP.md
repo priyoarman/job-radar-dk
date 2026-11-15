@@ -201,7 +201,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: `prisma migrate status` is up to date, and syncing a `WORKDAY` company fails with `no adapter for source "WORKDAY" yet`.
   - Commit: `feat(db): add more source types`
 
-- [ ] **S1.2 JSON fetch helper**: `fetchJson()` in `lib/http.ts` with the same User-Agent, timeout and retry rules, plus POST support (Workday and Workable need it).
+- [x] **S1.2 JSON fetch helper**: `fetchJson()` in `lib/http.ts` with the same User-Agent, timeout and retry rules, plus POST support (Workday and Workable need it).
   - Commit: `feat(pipeline): add fetchJson helper`
 
 - [ ] **S1.3 Location + Danish rules** (pulled forward from 2.1 and 2.2): keep Denmark / Copenhagen / remote-DK / unknown locations, drop abroad-only jobs and jobs that require Danish. Table tests.

@@ -1,6 +1,6 @@
 import { createPrismaClient } from "@jobradar/db";
 import { loadConfig } from "./config";
-import { fetchText } from "./lib/http";
+import { createHttpClient } from "./lib/http";
 import { createResendSender } from "./email/send";
 import { log } from "./lib/logger";
 import { createProcessCompany, fetchCompanies, sleep } from "./steps/fetchCompanies";
@@ -18,9 +18,7 @@ async function main(): Promise<void> {
         ? null
         : createResendSender({ apiKey: config.RESEND_API_KEY, from: config.EMAIL_FROM, to: config.EMAIL_TO });
     const record = createRecordNotification(prisma, () => new Date());
-    const processCompany = createProcessCompany(prisma, (url) =>
-      fetchText(url, { userAgent: config.USER_AGENT }),
-    );
+    const processCompany = createProcessCompany(prisma, createHttpClient({ userAgent: config.USER_AGENT }));
     const status = await runPipeline({
       prisma,
       trigger: runTriggerFor(config.GITHUB_EVENT_NAME),

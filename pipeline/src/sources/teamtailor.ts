@@ -70,9 +70,9 @@ function parseDate(value: string | undefined): Date | null {
 export const teamtailorAdapter: SourceAdapter<TeamtailorRawItem> = {
   name: "TEAMTAILOR",
 
-  async fetchJobs(company, fetchText) {
+  async fetchJobs(company, http) {
     const url = `${company.sourceKey.replace(/\/+$/, "")}/jobs.rss`;
-    return parseTeamtailorFeed(await fetchText(url));
+    return parseTeamtailorFeed(await http.text(url));
   },
 
   normalize(raw, company) {

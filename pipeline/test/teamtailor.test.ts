@@ -79,16 +79,17 @@ describe("teamtailorAdapter.fetchJobs", () => {
   it.each(["https://lunar.teamtailor.com", "https://lunar.teamtailor.com/"])(
     "fetches <sourceKey>/jobs.rss for %s",
     async (sourceKey) => {
-      const fetchText = vi.fn().mockResolvedValue(fixture("lunar.rss"));
-      const items = await teamtailorAdapter.fetchJobs({ ...company, sourceKey }, fetchText);
-      expect(fetchText).toHaveBeenCalledExactlyOnceWith("https://lunar.teamtailor.com/jobs.rss");
+      const http = { text: vi.fn().mockResolvedValue(fixture("lunar.rss")), json: vi.fn() };
+      const items = await teamtailorAdapter.fetchJobs({ ...company, sourceKey }, http);
+      expect(http.text).toHaveBeenCalledExactlyOnceWith("https://lunar.teamtailor.com/jobs.rss");
+      expect(http.json).not.toHaveBeenCalled();
       expect(items).toHaveLength(19);
     },
   );
 
   it("passes fetch errors through", async () => {
-    const fetchText = vi.fn().mockRejectedValue(new Error("HTTP 503"));
-    await expect(teamtailorAdapter.fetchJobs(company, fetchText)).rejects.toThrow("HTTP 503");
+    const http = { text: vi.fn().mockRejectedValue(new Error("HTTP 503")), json: vi.fn() };
+    await expect(teamtailorAdapter.fetchJobs(company, http)).rejects.toThrow("HTTP 503");
   });
 });
 

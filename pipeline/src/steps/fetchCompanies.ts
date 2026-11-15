@@ -1,10 +1,9 @@
 import type { Company, FetchStatus, PrismaClient } from "@jobradar/db";
 import { errorMessage } from "../lib/errors";
-import { HttpError } from "../lib/http";
+import { type HttpClient, HttpError } from "../lib/http";
 import { log } from "../lib/logger";
 import { normalizeJobs } from "../sources/normalize";
 import { getAdapter } from "../sources/registry";
-import type { FetchTextFn } from "../sources/types";
 import { saveJobs } from "./saveJobs";
 
 export type FetchableCompany = Pick<
@@ -97,11 +96,11 @@ export async function fetchCompanies(
   return outcomes;
 }
 
-export function createProcessCompany(prisma: PrismaClient, fetchText: FetchTextFn) {
+export function createProcessCompany(prisma: PrismaClient, http: HttpClient) {
   return async (company: FetchableCompany, now: Date): Promise<ProcessResult> => {
     try {
       const adapter = getAdapter(company.source);
-      const raws = await adapter.fetchJobs(company, fetchText);
+      const raws = await adapter.fetchJobs(company, http);
       const { jobs } = normalizeJobs(adapter, raws, company);
       const saved = await saveJobs(prisma, company, jobs, now);
       await prisma.company.update({
