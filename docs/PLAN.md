@@ -131,7 +131,7 @@ job-radar-dk/
 - `sourceKey`: what the adapter needs, and its meaning depends on the source:
   - Teamtailor: the career-site base URL (the adapter appends `/jobs.rss`)
   - Recruitee: the subdomain (`example` → `example.recruitee.com`)
-  - Greenhouse: the board token; Lever: the site name; Ashby: the org name
+  - Greenhouse: the board token; Lever: the site name (prefix `eu:` for companies on Lever's EU instance, e.g. `eu:example`); Ashby: the org name
   - Emply / HR Manager: the full listing page URL
 - Only add companies with `TEAMTAILOR` until the other adapters exist. The sync script rejects sources that have no adapter yet.
 

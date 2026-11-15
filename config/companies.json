@@ -161,5 +161,15 @@
     "tags": ["saas", "marketing"],
     "active": true,
     "notes": "Verified 2026-11-13: Greenhouse board, few jobs. Ex-Falcon.io Copenhagen office."
+  },
+  {
+    "slug": "veo",
+    "name": "Veo Technologies",
+    "source": "LEVER",
+    "sourceKey": "veo",
+    "city": "Copenhagen",
+    "tags": ["sports-tech", "ai", "video"],
+    "active": true,
+    "notes": "Verified 2026-11-13: Lever board, ~26 jobs, mostly Copenhagen. NOT veo.teamtailor.com (that's a Finnish company)."
   }
 ]

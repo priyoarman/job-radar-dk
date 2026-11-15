@@ -28,15 +28,5 @@
     "tags": ["ai", "healthtech"],
     "active": true,
     "notes": "Verified 2026-11-13: Ashby board, few jobs. AI company, strong fit."
-  },
-  {
-    "slug": "veo",
-    "name": "Veo Technologies",
-    "source": "LEVER",
-    "sourceKey": "veo",
-    "city": "Copenhagen",
-    "tags": ["sports-tech", "ai", "video"],
-    "active": true,
-    "notes": "Verified 2026-11-13: Lever board, ~26 jobs, mostly Copenhagen. NOT veo.teamtailor.com (that's a Finnish company)."
   }
 ]

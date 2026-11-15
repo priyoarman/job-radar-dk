@@ -1,11 +1,13 @@
 import type { SourceType } from "@jobradar/db";
 import { greenhouseAdapter } from "./greenhouse";
+import { leverAdapter } from "./lever";
 import { teamtailorAdapter } from "./teamtailor";
 import type { SourceAdapter } from "./types";
 
 export const adapters: Partial<Record<SourceType, SourceAdapter<unknown>>> = {
   TEAMTAILOR: teamtailorAdapter,
   GREENHOUSE: greenhouseAdapter,
+  LEVER: leverAdapter,
 };
 
 export function getAdapter(source: SourceType): SourceAdapter<unknown> {

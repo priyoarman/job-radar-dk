@@ -210,7 +210,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 ### S2. Easy JSON portals (~2 h each)
 
 - [x] **S2.1 Greenhouse** adapter (`boards-api.greenhouse.io`), fixtures, tests, registry.
-- [ ] **S2.2 Lever** adapter (`api.lever.co/v0/postings`).
+- [x] **S2.2 Lever** adapter (`api.lever.co/v0/postings`).
 - [ ] **S2.3 Ashby** adapter (`api.ashbyhq.com/posting-api/job-board`). Then move the ready companies from `companies-later.json`.
 - [ ] **S2.4 Recruitee** adapter (`{company}.recruitee.com/api/offers/`).
 - [ ] **S2.5 Workable** adapter.
