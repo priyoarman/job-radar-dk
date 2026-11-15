@@ -677,6 +677,19 @@ Workday has no official public jobs API. Its career sites (`{tenant}.{wdN}.mywor
 
 ---
 
+## 5c. SAP SuccessFactors research (step S3.2, 2026-11-15)
+
+SuccessFactors has no shared job-board domain or public jobs API. Each company runs its own "Career Site Builder" site on its own domain (markers in the HTML: `rmkcdn.successfactors.com`, `jobs2web`, `career2/5.successfactors.eu`).
+
+- **Feeds:** the old public XML feed (`/career?company=…&resultType=XML`) is deprecated by SAP; newer XML feeds are configured per company for job boards and their URLs are private.
+- **`robots.txt` disallows `/services/`** on these sites. That is where both the JSON endpoint (`/services/recruiting/v1/jobs`) and the RSS feed (`/services/rss/…`) live, so neither may be used. `/search/` and `/job/` pages are allowed.
+- **Two kinds of site:**
+  - **Classic search page:** `/search/?q=&locationsearch=Denmark` returns server-rendered HTML rows (`tr.data-row` with `a.jobTitle-link`, `span.jobLocation`, `span.jobDate`) and a "Results 1 – 10 of 65" banner; paging uses `startrow`. Works for **Novo Nordisk** (79 Danish jobs, one page), **Vestas** (65, 10 per page) and **DSV** (17, 10 per page).
+  - **Newer search page:** rendered by JavaScript from `/services/…`, so the HTML has no jobs. **Grundfos, Danfoss and Carlsberg** use it; they cannot be read without breaking `robots.txt`, so they are not supported.
+- **Checked careers sites:** careers.vestas.com, jobs.danfoss.com, careers.carlsberg.com, jobs.dsv.com, careers.novonordisk.com, jobs.grundfos.com (careers.lundbeck.com did not answer; jobs.coloplast.com returned 403).
+
+---
+
 ## 6. Risks and how the design handles them
 
 ### Adapter breaks (a company changes ATS or the feed format changes)

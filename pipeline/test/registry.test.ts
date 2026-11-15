@@ -11,7 +11,7 @@ describe("getAdapter", () => {
   const withoutAdapter = Object.values(SourceType).filter((source) => !(source in adapters));
 
   it("has at least one source type still waiting for an adapter", () => {
-    expect(withoutAdapter).toContain("SUCCESSFACTORS");
+    expect(withoutAdapter).toContain("TALENTECH");
   });
 
   it.each(withoutAdapter)(

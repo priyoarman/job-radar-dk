@@ -218,7 +218,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 ### S3. Big-company portals (~3–4 h each, research first)
 
 - [x] **S3.1 Workday**: research the career-site endpoint, then the adapter with a page limit per run.
-- [ ] **S3.2 SAP SuccessFactors**: research the job feed per site, then the adapter.
+- [x] **S3.2 SAP SuccessFactors**: research the job feed per site, then the adapter.
 
 ### S4. Nordic portals (~3 h each, research first)
 
