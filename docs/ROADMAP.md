@@ -73,7 +73,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: `prisma studio` shows the empty tables.
   - Commit: `feat(db): add initial migration`
 
-- [ ] **1.6 Shared Prisma client**: `db/src/index.ts` exports one `prisma` instance. Import it from `pipeline` to prove the link works.
+- [x] **1.6 Shared Prisma client**: `db/src/index.ts` exports one `prisma` instance. Import it from `pipeline` to prove the link works.
   - Check: the pipeline can run `prisma.company.count()` and prints `0`.
   - Commit: `feat(db): export shared Prisma client`
 

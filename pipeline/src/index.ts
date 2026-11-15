@@ -1,5 +1,13 @@
-function main(): void {
-  console.log("hello from Job Radar DK pipeline");
+import { prisma } from "@jobradar/db";
+
+async function main(): Promise<void> {
+  const companies = await prisma.company.count();
+  console.log(`companies in database: ${companies}`);
 }
 
-main();
+main()
+  .catch((error: unknown) => {
+    console.error(error);
+    process.exitCode = 1;
+  })
+  .finally(() => prisma.$disconnect());
