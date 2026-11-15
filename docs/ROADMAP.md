@@ -127,7 +127,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Check: tests pass.
   - Commit: `feat(pipeline): add diffJobs to find new, seen and gone jobs`
 
-- [ ] **1.18 Save new jobs + baseline**: `saveJobs.ts` inserts with `skipDuplicates`. On a company's first fetch it sets `isBaseline: true` and fills in `baselineDoneAt`.
+- [x] **1.18 Save new jobs + baseline**: `saveJobs.ts` inserts with `skipDuplicates`. On a company's first fetch it sets `isBaseline: true` and fills in `baselineDoneAt`.
   - Check: on the `dev` DB, the first run saves jobs as baseline and the second run saves 0 new jobs.
   - Commit: `feat(pipeline): save new jobs with per-company baseline`
 
