@@ -173,7 +173,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### 1H. Automation and go live
 
-- [ ] **1.27 CI workflow**: `.github/workflows/ci.yml` runs install, typecheck and tests on every push.
+- [x] **1.27 CI workflow**: `.github/workflows/ci.yml` runs install, typecheck and tests on every push.
   - Check: a green tick on GitHub.
   - Commit: `ci: run typecheck and tests on push`
 
