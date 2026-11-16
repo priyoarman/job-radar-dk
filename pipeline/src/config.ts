@@ -16,6 +16,7 @@ const envSchema = z
     GITHUB_EVENT_NAME: z.string().optional(),
     TRIGGER_SOURCE: z.string().optional(),
     GITHUB_SHA: z.string().optional(),
+    HEALTHCHECK_URL: z.url({ protocol: /^https$/ }).optional(),
   })
   .superRefine(
     (env, ctx) => {

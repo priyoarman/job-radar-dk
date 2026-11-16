@@ -232,8 +232,8 @@
     "careersUrl": "https://maersk.wd3.myworkdayjobs.com/en-US/Maersk_Careers",
     "city": "Copenhagen",
     "tags": ["logistics", "enterprise"],
-    "active": true,
-    "notes": "Verified 2026-11-15: Workday site, 41 Danish jobs. Rate-limits bursts (429)."
+    "active": false,
+    "notes": "Verified 2026-11-15: Workday site, 41 Danish jobs. Rate-limits bursts (429). Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "novo-nordisk",
@@ -276,8 +276,8 @@
     "careersUrl": "https://workday.wd5.myworkdayjobs.com/Workday",
     "city": "Copenhagen",
     "tags": ["saas", "hr-tech"],
-    "active": true,
-    "notes": "Verified 2026-11-15: Workday site, 0 Danish jobs at the time of checking (expect EMPTY)."
+    "active": false,
+    "notes": "Verified 2026-11-15: Workday site, 0 Danish jobs at the time of checking (expect EMPTY). Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "databricks",
@@ -443,8 +443,8 @@
     "careersUrl": "https://lego.wd103.myworkdayjobs.com/LEGO_External",
     "city": "Billund",
     "tags": ["enterprise", "consumer"],
-    "active": true,
-    "notes": "Detected 2026-11-16 from lego.com; Workday board not verified yet (rate limits), first pipeline run will."
+    "active": false,
+    "notes": "Detected 2026-11-16 from lego.com; Workday board not verified yet (rate limits), first pipeline run will. Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "stibo-systems",
@@ -454,8 +454,8 @@
     "careersUrl": "https://stibosystems.wd3.myworkdayjobs.com/careers-at-stibo-systems",
     "city": "Aarhus",
     "tags": ["enterprise", "data"],
-    "active": true,
-    "notes": "Detected 2026-11-16 from stibosystems.com; Workday board not verified yet."
+    "active": false,
+    "notes": "Detected 2026-11-16 from stibosystems.com; Workday board not verified yet. Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "jbt-marel",
@@ -464,8 +464,8 @@
     "sourceKey": "https://jbtm.wd108.myworkdayjobs.com/JBT_Marel_Career_Site",
     "careersUrl": "https://jbtm.wd108.myworkdayjobs.com/JBT_Marel_Career_Site",
     "tags": ["industrial", "iot"],
-    "active": true,
-    "notes": "Detected 2026-11-16 from marel.com; Workday board not verified yet."
+    "active": false,
+    "notes": "Detected 2026-11-16 from marel.com; Workday board not verified yet. Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "gn-store-nord",
@@ -475,8 +475,8 @@
     "careersUrl": "https://gngroup.wd502.myworkdayjobs.com/GN-Careers",
     "city": "Ballerup",
     "tags": ["audio", "enterprise"],
-    "active": true,
-    "notes": "Detected 2026-11-16 from gn.com; Workday board not verified yet."
+    "active": false,
+    "notes": "Detected 2026-11-16 from gn.com; Workday board not verified yet. Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "nvidia",
@@ -485,8 +485,8 @@
     "sourceKey": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",
     "careersUrl": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",
     "tags": ["ai", "hardware"],
-    "active": true,
-    "notes": "Detected 2026-11-16 from nvidia.com; Workday board not verified yet. Only Danish jobs are fetched."
+    "active": false,
+    "notes": "Detected 2026-11-16 from nvidia.com; Workday board not verified yet. Only Danish jobs are fetched. Paused 2026-11-16 (R.6): Workday answers GitHub runners with HTTP 429; resume via Apify (step 3.4)."
   },
   {
     "slug": "butter",

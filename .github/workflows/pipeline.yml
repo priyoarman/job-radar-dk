@@ -17,6 +17,7 @@ concurrency:
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   run:
@@ -32,6 +33,7 @@ jobs:
       USER_AGENT: ${{ vars.USER_AGENT }}
       TRIGGER_SOURCE: ${{ inputs.source }}
       MIN_FETCH_INTERVAL_HOURS: ${{ vars.MIN_FETCH_INTERVAL_HOURS }}
+      HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
       PRISMA_HIDE_UPDATE_MESSAGE: "1"
     steps:
       - uses: actions/checkout@v7
@@ -51,3 +53,10 @@ jobs:
         continue-on-error: true
 
       - run: pnpm pipeline:run
+
+      - name: Keep the backup schedule enabled
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/${{ github.repository }}/actions/workflows/pipeline.yml/enable"

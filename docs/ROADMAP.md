@@ -286,15 +286,21 @@ Job Radar is now a **discovery and alert tool only**: find new Danish job posts 
   - Check: `gh run list --workflow pipeline.yml` shows a `workflow_dispatch` run every hour for a day, and the `Run` table has `trigger = "scheduler"` rows.
   - Commit: `ci: let an external scheduler start the pipeline`
   - Progress 2026-11-16 20:58 UTC: cron-job.org test run → HTTP 204; GitHub started the run; it is stored with `trigger = "scheduler"`, and it applied the S5.1 migration. Tick after a full day of hourly runs.
-- [ ] **R.5 Sync companies in CI** (found during R.4): only 52 of the 63 companies in `config/companies.json` were in the database, because `pnpm db:sync` is a manual step. Run the sync in the workflow before the pipeline, so the config file in git is always the truth (new companies still start with a quiet baseline).
+- [x] **R.5 Sync companies in CI** (found during R.4): only 52 of the 63 companies in `config/companies.json` were in the database, because `pnpm db:sync` is a manual step. Run the sync in the workflow before the pipeline, so the config file in git is always the truth (new companies still start with a quiet baseline).
   - Done: `pnpm db:sync` runs after `db:deploy` with `continue-on-error`, so a broken `companies.json` can't stop the alerts (CI already rejects a broken file on push). The sync now also resets a company's baseline when its `source` or `sourceKey` changes, so moving a company to a new board never emails that board's existing jobs.
-  - Check: the next run's "Run pnpm db:sync" step prints `created: 11`, and the `Run` row checks 63 companies.
+  - Verified 2026-11-16 21:09 UTC (manual run): `Synced 63 companies — created: 11, updated: 52`; the 11 new companies (Emply, HR Manager, CUSTOM, DR) were fetched from GitHub with 0 failures, 337 baseline jobs, no email.
   - Commit: `ci: sync companies before each run`
-- [ ] **R.6 Workday is blocked from GitHub** (found during R.4): all 7 Workday companies (LEGO, Maersk, NVIDIA, GN, Stibo, JBT Marel, Workday) get HTTP 429 within ~1 s of their first request, every run, although each gets only one request. They answer from a home connection, so Workday is refusing GitHub's cloud IPs. Options to research: an Apify Workday actor (step 3.4 builds the client), or pausing these companies until then. Until fixed, Workday coverage is zero and the email footer will list them.
-- [ ] **R.2 Keep the cron alive**: GitHub switches off scheduled workflows in a public repo after 60 days without commits (mid-January 2027 at the latest). Add a monthly workflow that keeps the schedule enabled.
-  - Note (2026-11-16): after R.4 this only protects the **backup** schedule; runs started through the API (R.4) are not switched off. Still worth doing, but no longer urgent.
+- [x] **R.6 Workday is blocked from GitHub** (found during R.4): all 7 Workday companies (LEGO, Maersk, NVIDIA, GN, Stibo, JBT Marel, Workday) get HTTP 429 within ~1 s of their first request, every run, although each gets only one request. They answer from a home connection, so Workday is refusing GitHub's cloud IPs. Options to research: an Apify Workday actor (step 3.4 builds the client), or pausing these companies until then. Until fixed, Workday coverage is zero and the email footer will list them.
+  - Done 2026-11-16: the 7 companies are paused (`active: false`, with a note), which also stops the daily warning email. Resume them through Apify after step 3.4.
+- [x] **R.2 Keep the cron alive**: GitHub switches off scheduled workflows in a public repo after 60 days without commits (mid-January 2027 at the latest). Add a monthly workflow that keeps the schedule enabled.
+  - Note (2026-11-16): after R.4 this only protects the **backup** schedule; runs started through the API (R.4) are not switched off.
+  - Done: every run ends with "Keep the backup schedule enabled", which calls GitHub's "enable workflow" API with the run's own token (`actions: write`, nothing more). An hourly scheduler run therefore switches the backup schedule back on if GitHub ever disables it. No commits or extra accounts needed.
+  - Check: that step is green in the next run.
   - Commit: `ci: keep the scheduled pipeline enabled`
 - [ ] **R.3 "Robot is down" email**: if no run has succeeded for 6 hours, send one warning email (at most once a day).
+  - Code (done): every run ends by pinging `HEALTHCHECK_URL` (a GitHub secret; `/fail` when the run failed). An outside watcher is needed because a stopped robot cannot report itself. Without the secret nothing changes.
+  - Setup (by hand, once): healthchecks.io → free account → Add Check "Job Radar pipeline", **Period 1 hour, Grace 5 hours** (= email after 6 h without a ping), email notifications on. Copy its ping URL and run `gh secret set HEALTHCHECK_URL` (paste it).
+  - Check: after the next run the check shows "up"; pause cron-job.org for 6 h once to see the alert (optional).
   - Commit: `feat(pipeline): warn when no run has succeeded for 6 hours`
 
 ---

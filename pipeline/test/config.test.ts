@@ -29,6 +29,13 @@ describe("loadConfig", () => {
   it("treats empty strings as missing, like unset GitHub secrets", () => {
     expect(() => loadConfig({ ...sending, DATABASE_URL: "" })).toThrow(/DATABASE_URL/);
     expect(loadConfig({ ...sending, MIN_FETCH_INTERVAL_HOURS: "" }).MIN_FETCH_INTERVAL_HOURS).toBe(2.5);
+    expect(loadConfig({ ...sending, HEALTHCHECK_URL: "" }).HEALTHCHECK_URL).toBeUndefined();
+  });
+
+  it("accepts an https heartbeat URL and rejects anything else", () => {
+    expect(loadConfig({ ...sending, HEALTHCHECK_URL: "https://hc-ping.com/abc" }).HEALTHCHECK_URL).toBe("https://hc-ping.com/abc");
+    expect(() => loadConfig({ ...sending, HEALTHCHECK_URL: "http://hc-ping.com/abc" })).toThrow(/HEALTHCHECK_URL/);
+    expect(() => loadConfig({ ...sending, HEALTHCHECK_URL: "not a url" })).toThrow(/HEALTHCHECK_URL/);
   });
 
   it.each([

@@ -2,6 +2,7 @@ import { createPrismaClient } from "@jobradar/db";
 import { loadConfig } from "./config";
 import { createHttpClient } from "./lib/http";
 import { createResendSender } from "./email/send";
+import { sendHeartbeat } from "./lib/heartbeat";
 import { log } from "./lib/logger";
 import { createProcessCompany, fetchCompanies, sleep } from "./steps/fetchCompanies";
 import { createRecordNotification, findNotifyInput, notify } from "./steps/notify";
@@ -34,6 +35,7 @@ async function main(): Promise<void> {
         }),
       notify: async () => notify(await findNotifyInput(prisma, new Date()), { dryRun: config.DRY_RUN, send, record }),
     });
+    await sendHeartbeat(config.HEALTHCHECK_URL, status);
     if (status === "FAILED") process.exitCode = 1;
   } finally {
     await prisma.$disconnect();
