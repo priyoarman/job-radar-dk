@@ -285,6 +285,10 @@ Job Radar is now a **discovery and alert tool only**: find new Danish job posts 
     3. "Test run" in cron-job.org → expect HTTP **204**, and a new run in GitHub Actions within a minute.
   - Check: `gh run list --workflow pipeline.yml` shows a `workflow_dispatch` run every hour for a day, and the `Run` table has `trigger = "scheduler"` rows.
   - Commit: `ci: let an external scheduler start the pipeline`
+  - Progress 2026-11-16 20:58 UTC: cron-job.org test run → HTTP 204; GitHub started the run; it is stored with `trigger = "scheduler"`, and it applied the S5.1 migration. Tick after a full day of hourly runs.
+- [ ] **R.5 Sync companies in CI** (found during R.4): only 52 of the 63 companies in `config/companies.json` were in the database, because `pnpm db:sync` is a manual step. Run the sync in the workflow before the pipeline, so the config file in git is always the truth (new companies still start with a quiet baseline).
+  - Commit: `ci: sync companies before each run`
+- [ ] **R.6 Workday is blocked from GitHub** (found during R.4): all 7 Workday companies (LEGO, Maersk, NVIDIA, GN, Stibo, JBT Marel, Workday) get HTTP 429 within ~1 s of their first request, every run, although each gets only one request. They answer from a home connection, so Workday is refusing GitHub's cloud IPs. Options to research: an Apify Workday actor (step 3.4 builds the client), or pausing these companies until then. Until fixed, Workday coverage is zero and the email footer will list them.
 - [ ] **R.2 Keep the cron alive**: GitHub switches off scheduled workflows in a public repo after 60 days without commits (mid-January 2027 at the latest). Add a monthly workflow that keeps the schedule enabled.
   - Note (2026-11-16): after R.4 this only protects the **backup** schedule; runs started through the API (R.4) are not switched off. Still worth doing, but no longer urgent.
   - Commit: `ci: keep the scheduled pipeline enabled`
