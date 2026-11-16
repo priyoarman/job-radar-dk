@@ -104,8 +104,13 @@ async function main(): Promise<void> {
   }
   console.warn = warn;
 
-  writeFileSync(resolve(ROOT, "docs/candidates-report.md"), `${report(results, startedAt)}\n`);
   const suggested = suggestions(results);
+  if (only.length > 0) {
+    console.log("partial run: report files left unchanged");
+    console.log(JSON.stringify({ summary: summarize(results), suggested }, null, 2));
+    return;
+  }
+  writeFileSync(resolve(ROOT, "docs/candidates-report.md"), `${report(results, startedAt)}\n`);
   writeFileSync(resolve(ROOT, "config/candidates-suggested.json"), `${JSON.stringify(suggested, null, 2)}\n`);
   console.log(JSON.stringify({ summary: summarize(results), suggested: suggested.length }));
 }

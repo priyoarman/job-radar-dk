@@ -198,3 +198,18 @@ Claimed systems checked: 39, correct: 6.
 | 149 | Pento | LEVER |   |  | – | – | – | claimed board failed: GET https://api.lever.co/v0/postings/pento?mode=json failed with HTTP 404 |
 | 150 | Baltech | CUSTOM |   |  | – | – | – | no board on supported portals (claimed: CUSTOM) |
 
+## Re-check after the S5.0b location fix (2026-11-16)
+
+The first run counted US states, unlisted countries, world cities and non-European regions as "unknown", so global boards looked far more Danish than they are. Corrected numbers for the confirmed companies:
+
+| Company | Board | jobs | in DK | match | Identity |
+|---|---|---|---|---|---|
+| Databricks | Greenhouse `databricks` | 889 | 9 | 3 (Aarhus: Backend Engineer, Intern 2027, New Grad 2027) | ✔ links to databricks.com |
+| Wolt | Greenhouse `wolt` | 192 | 10 | 0 | ✔ |
+| Butter.us | Teamtailor `butter` | 17 | 7 | 1 (AI Video Editor, København) | ❓ links to careers.allgravy.com; confirm it is the same company |
+| Zapier | Ashby `zapier` | 10 | 4 (EMEA/EU remote) | 0 | ✔ |
+| Kahoot! | Workable `kahoot` | 12 | 3 | 0 | ✔ |
+| Tactile Games | Greenhouse `tactilegames` | 2 | 2 | 0 | ✔ |
+| Sitecore | Ashby `sitecore` | 24 | 0 | 0 | ✔ (no Danish jobs today) |
+| Valtech | Greenhouse `valtech` | 125 | 0 | 0 | ✔ (no Danish jobs today) |
+

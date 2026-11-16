@@ -8,7 +8,7 @@
       "saas"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 10 jobs, 6 in Denmark, 0 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 10 jobs, 4 in Denmark, 0 matching."
   },
   {
     "slug": "sitecore",
@@ -19,7 +19,7 @@
       "saas"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 24 jobs, 13 in Denmark, 3 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 24 jobs, 0 in Denmark, 0 matching."
   },
   {
     "slug": "butter",
@@ -30,7 +30,7 @@
       "saas"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 17 jobs, 7 in Denmark, 1 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 17 jobs, 7 in Denmark, 1 matching."
   },
   {
     "slug": "databricks",
@@ -41,7 +41,7 @@
       "enterprise"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 895 jobs, 307 in Denmark, 25 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 889 jobs, 9 in Denmark, 3 matching."
   },
   {
     "slug": "valtech",
@@ -52,7 +52,7 @@
       "consultancy"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 130 jobs, 29 in Denmark, 7 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 125 jobs, 0 in Denmark, 0 matching."
   },
   {
     "slug": "wolt",
@@ -63,7 +63,7 @@
       "logistics"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 191 jobs, 46 in Denmark, 0 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 192 jobs, 10 in Denmark, 0 matching."
   },
   {
     "slug": "tactilegames",
@@ -74,7 +74,7 @@
       "media"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 2 jobs, 2 in Denmark, 0 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 2 jobs, 2 in Denmark, 0 matching."
   },
   {
     "slug": "kahoot",
@@ -85,6 +85,6 @@
       "media"
     ],
     "active": true,
-    "notes": "Verified 2026-11-15 by candidates:verify: 12 jobs, 3 in Denmark, 0 matching."
+    "notes": "Verified 2026-11-16 (after the S5.0b location fix): 12 jobs, 3 in Denmark, 0 matching."
   }
 ]
