@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { parseCompanies } from "../src/companies";
+import { boardChanged, parseCompanies } from "../src/companies";
 
 const valid = {
   slug: "example-co",
@@ -47,5 +47,18 @@ describe("parseCompanies", () => {
 
   it("rejects a file that is not a list", () => {
     expect(() => parseCompanies({ companies: [] })).toThrow("Invalid companies file");
+  });
+});
+
+describe("boardChanged", () => {
+  const board = { source: "TEAMTAILOR" as const, sourceKey: "https://example.teamtailor.com" };
+
+  it.each([
+    ["a new company", undefined, board, false],
+    ["the same board", board, { ...board }, false],
+    ["a new sourceKey", board, { ...board, sourceKey: "https://careers.example.com" }, true],
+    ["a new source", board, { source: "GREENHOUSE" as const, sourceKey: board.sourceKey }, true],
+  ])("%s → %s", (_label, existing, seed, expected) => {
+    expect(boardChanged(existing, seed)).toBe(expected);
   });
 });

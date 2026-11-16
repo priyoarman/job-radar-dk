@@ -50,3 +50,10 @@ export function parseCompanies(data: unknown): CompanySeed[] {
   }
   return result.data;
 }
+
+export function boardChanged(
+  existing: Pick<CompanySeed, "source" | "sourceKey"> | undefined,
+  seed: Pick<CompanySeed, "source" | "sourceKey">,
+): boolean {
+  return existing !== undefined && (existing.source !== seed.source || existing.sourceKey !== seed.sourceKey);
+}

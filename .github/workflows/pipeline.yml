@@ -47,4 +47,7 @@ jobs:
 
       - run: pnpm db:deploy
 
+      - run: pnpm db:sync
+        continue-on-error: true
+
       - run: pnpm pipeline:run

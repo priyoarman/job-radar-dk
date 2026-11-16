@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { createPrismaClient } from "../src/index";
-import { parseCompanies } from "../src/companies";
+import { boardChanged, parseCompanies } from "../src/companies";
 
 const databaseUrl = process.env["DATABASE_URL"];
 if (!databaseUrl) {
@@ -24,12 +24,13 @@ async function main(): Promise<void> {
   const file = resolve(process.argv[2] ?? DEFAULT_FILE);
   const companies = parseCompanies(readJson(file));
 
-  const existing = new Set(
-    (await prisma.company.findMany({ select: { slug: true } })).map((c) => c.slug),
+  const existing = new Map(
+    (await prisma.company.findMany({ select: { slug: true, source: true, sourceKey: true } })).map((c) => [c.slug, c]),
   );
 
   let created = 0;
   let updated = 0;
+  const rebaselined: string[] = [];
   for (const company of companies) {
     const data = {
       ...company,
@@ -37,20 +38,25 @@ async function main(): Promise<void> {
       city: company.city ?? null,
       notes: company.notes ?? null,
     };
+    const newBoard = boardChanged(existing.get(company.slug), company);
+    if (newBoard) rebaselined.push(company.slug);
     await prisma.company.upsert({
       where: { slug: company.slug },
       create: data,
-      update: data,
+      update: newBoard ? { ...data, baselineDoneAt: null, lastJobCount: null } : data,
     });
     if (existing.has(company.slug)) updated++;
     else created++;
   }
 
   const inFile = new Set(companies.map((c) => c.slug));
-  const onlyInDb = [...existing].filter((slug) => !inFile.has(slug));
+  const onlyInDb = [...existing.keys()].filter((slug) => !inFile.has(slug));
 
   console.log(`Synced ${companies.length} companies from ${file}`);
   console.log(`  created: ${created}, updated: ${updated}`);
+  if (rebaselined.length > 0) {
+    console.log(`  new board, next fetch is a quiet baseline: ${rebaselined.join(", ")}`);
+  }
   if (onlyInDb.length > 0) {
     console.log(`  in database but not in file (left untouched): ${onlyInDb.join(", ")}`);
   }
