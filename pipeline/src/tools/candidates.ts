@@ -13,6 +13,8 @@ export const candidateSchema = z.object({
   claimed: z.array(z.string()).min(1),
   claimedUrl: z.string().nullable(),
   watchedSlug: z.string().optional(),
+  website: z.string().optional(),
+  verified: z.object({ source: z.string(), sourceKey: z.string() }).optional(),
 });
 
 export type Candidate = z.infer<typeof candidateSchema>;
@@ -20,6 +22,7 @@ export type Candidate = z.infer<typeof candidateSchema>;
 export const PROBE_SOURCES = ["TEAMTAILOR", "GREENHOUSE", "LEVER", "LEVER_EU", "ASHBY", "WORKABLE", "RECRUITEE"] as const;
 
 export type ProbeSource = (typeof PROBE_SOURCES)[number];
+export type BoardSource = ProbeSource | "WORKDAY" | "SUCCESSFACTORS";
 export type Probe = { source: ProbeSource; key: string; fromClaim: boolean };
 
 export type Counts = { jobs: number; inDenmark: number; matches: number };
@@ -100,9 +103,9 @@ export function probesFor(candidate: Candidate): Probe[] {
   });
 }
 
-const adapterName = (source: ProbeSource) => (source === "LEVER_EU" ? "LEVER" : source);
+const adapterName = (source: BoardSource) => (source === "LEVER_EU" ? "LEVER" : source);
 
-export async function countBoard(probe: Probe, name: string, http: HttpClient): Promise<Counts> {
+export async function countBoard(probe: { source: BoardSource; key: string }, name: string, http: HttpClient): Promise<Counts> {
   const adapter = getAdapter(adapterName(probe.source));
   const company = { slug: slugFor(name) || "candidate", name, sourceKey: probe.key };
   const raws = await adapter.fetchJobs(company, http);

@@ -17,6 +17,7 @@
     "db:sync": "pnpm --filter @jobradar/db sync",
     "email:test": "pnpm --filter @jobradar/pipeline email:test",
     "db:deploy": "pnpm --filter @jobradar/db migrate:deploy",
-    "candidates:verify": "pnpm --filter @jobradar/pipeline candidates:verify"
+    "candidates:verify": "pnpm --filter @jobradar/pipeline candidates:verify",
+    "candidates:detect": "pnpm --filter @jobradar/pipeline candidates:detect"
   }
 }

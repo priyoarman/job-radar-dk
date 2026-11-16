@@ -237,7 +237,9 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 - [ ] **S5.1 robots.txt checker**, cached per domain for 24 h; HTML sources skip and log `robots-disallowed` when blocked.
 - [ ] **S5.2 Generic JSON-LD adapter** (`CUSTOM`): reads `schema.org/JobPosting` data that many career pages embed.
-- [ ] **S5.3 "Detect portal" script**: careers URL → suggested `companies.json` entry.
+- [x] **S5.3 Careers-page detection** (`pnpm candidates:detect`): reads each candidate's website (robots.txt respected, 1 request/second), finds exact board URLs and their keys, follows up to 3 careers links, and checks supported boards with the real adapters. Writes `docs/careers-detection-report.md` and `config/detected-suggested.json`; adds nothing by itself.
+  - Result (117 websites): 13 boards confirmed with jobs (e.g. Monta, Trackunit, Systematic, SYBO, Fellowmind), 9 found but not verified (Workday: LEGO, Stibo, JBT/Marel, GN, NVIDIA), HR Manager at 4 companies, Emply at 1 (Matas), 72 with no recognisable board, 17 unreachable, 1 blocked by robots.txt.
+  - Commit: `feat(tools): detect job boards from company careers pages`
 - [ ] **S5.4 Grow the company list** to about 100–150 (by hand, with the script's help).
 - [ ] **S5.5 Email grouped by company**, plus a per-source health overview.
 

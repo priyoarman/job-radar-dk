@@ -278,5 +278,277 @@
     "tags": ["saas", "hr-tech"],
     "active": true,
     "notes": "Verified 2026-11-15: Workday site, 0 Danish jobs at the time of checking (expect EMPTY)."
+  },
+  {
+    "slug": "databricks",
+    "name": "Databricks",
+    "source": "GREENHOUSE",
+    "sourceKey": "databricks",
+    "city": "Aarhus",
+    "tags": ["data", "ai"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 889 jobs, 9 in Denmark (Aarhus)."
+  },
+  {
+    "slug": "trackunit",
+    "name": "Trackunit",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.trackunit.com",
+    "careersUrl": "https://careers.trackunit.com",
+    "city": "Aalborg",
+    "tags": ["iot", "saas"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 17 jobs, 9 in Denmark."
+  },
+  {
+    "slug": "monta",
+    "name": "Monta",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.monta.com",
+    "careersUrl": "https://careers.monta.com",
+    "city": "Copenhagen",
+    "tags": ["ev", "saas"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 8 jobs, 6 in Denmark."
+  },
+  {
+    "slug": "systematic",
+    "name": "Systematic",
+    "source": "SUCCESSFACTORS",
+    "sourceKey": "https://jobs.systematic.com",
+    "careersUrl": "https://jobs.systematic.com",
+    "city": "Aarhus",
+    "tags": ["enterprise", "public-sector"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 28 Danish jobs."
+  },
+  {
+    "slug": "sybo",
+    "name": "SYBO Games",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://sybo.teamtailor.com",
+    "city": "Copenhagen",
+    "tags": ["games"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 4 jobs, all in Denmark."
+  },
+  {
+    "slug": "fellowmind",
+    "name": "Fellowmind Denmark",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://career.fellowmind.dk",
+    "careersUrl": "https://career.fellowmind.dk",
+    "city": "Copenhagen",
+    "tags": ["consultancy", "microsoft"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 10 jobs, all in Denmark."
+  },
+  {
+    "slug": "wolt",
+    "name": "Wolt",
+    "source": "GREENHOUSE",
+    "sourceKey": "wolt",
+    "city": "Copenhagen",
+    "tags": ["delivery", "marketplace"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 192 jobs, 10 in Denmark."
+  },
+  {
+    "slug": "kahoot",
+    "name": "Kahoot!",
+    "source": "WORKABLE",
+    "sourceKey": "kahoot",
+    "city": "Copenhagen",
+    "tags": ["edtech"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 12 jobs, 3 in Denmark."
+  },
+  {
+    "slug": "tactile-games",
+    "name": "Tactile Games",
+    "source": "GREENHOUSE",
+    "sourceKey": "tactilegames",
+    "city": "Copenhagen",
+    "tags": ["games"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 2 jobs, both in Denmark."
+  },
+  {
+    "slug": "zapier",
+    "name": "Zapier",
+    "source": "ASHBY",
+    "sourceKey": "zapier",
+    "tags": ["saas", "remote"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 10 jobs, 4 open to EMEA/EU (remote)."
+  },
+  {
+    "slug": "columbus",
+    "name": "Columbus",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.columbusglobal.com",
+    "careersUrl": "https://careers.columbusglobal.com",
+    "city": "Copenhagen",
+    "tags": ["consultancy"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 70 jobs, 9 in Denmark."
+  },
+  {
+    "slug": "impact-commerce",
+    "name": "Impact Commerce",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://career.impactcommerce.com",
+    "careersUrl": "https://career.impactcommerce.com",
+    "city": "Copenhagen",
+    "tags": ["agency", "ecommerce"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 10 jobs, 6 in Denmark."
+  },
+  {
+    "slug": "boozt",
+    "name": "Boozt",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.booztgroup.com",
+    "careersUrl": "https://careers.booztgroup.com",
+    "tags": ["ecommerce"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 10 jobs, 3 in Denmark."
+  },
+  {
+    "slug": "resights",
+    "name": "Resights",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://resightsaps.teamtailor.com",
+    "city": "Copenhagen",
+    "tags": ["proptech", "data"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 3 jobs, all in Denmark."
+  },
+  {
+    "slug": "kanpla",
+    "name": "Kanpla",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.kanpla.io",
+    "careersUrl": "https://careers.kanpla.io",
+    "city": "Copenhagen",
+    "tags": ["saas"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 5 jobs, 2 in Denmark."
+  },
+  {
+    "slug": "lego",
+    "name": "The LEGO Group",
+    "source": "WORKDAY",
+    "sourceKey": "https://lego.wd103.myworkdayjobs.com/LEGO_External",
+    "careersUrl": "https://lego.wd103.myworkdayjobs.com/LEGO_External",
+    "city": "Billund",
+    "tags": ["enterprise", "consumer"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from lego.com; Workday board not verified yet (rate limits), first pipeline run will."
+  },
+  {
+    "slug": "stibo-systems",
+    "name": "Stibo Systems",
+    "source": "WORKDAY",
+    "sourceKey": "https://stibosystems.wd3.myworkdayjobs.com/careers-at-stibo-systems",
+    "careersUrl": "https://stibosystems.wd3.myworkdayjobs.com/careers-at-stibo-systems",
+    "city": "Aarhus",
+    "tags": ["enterprise", "data"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from stibosystems.com; Workday board not verified yet."
+  },
+  {
+    "slug": "jbt-marel",
+    "name": "JBT Marel",
+    "source": "WORKDAY",
+    "sourceKey": "https://jbtm.wd108.myworkdayjobs.com/JBT_Marel_Career_Site",
+    "careersUrl": "https://jbtm.wd108.myworkdayjobs.com/JBT_Marel_Career_Site",
+    "tags": ["industrial", "iot"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from marel.com; Workday board not verified yet."
+  },
+  {
+    "slug": "gn-store-nord",
+    "name": "GN Store Nord",
+    "source": "WORKDAY",
+    "sourceKey": "https://gngroup.wd502.myworkdayjobs.com/GN-Careers",
+    "careersUrl": "https://gngroup.wd502.myworkdayjobs.com/GN-Careers",
+    "city": "Ballerup",
+    "tags": ["audio", "enterprise"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from gn.com; Workday board not verified yet."
+  },
+  {
+    "slug": "nvidia",
+    "name": "NVIDIA",
+    "source": "WORKDAY",
+    "sourceKey": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",
+    "careersUrl": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite",
+    "tags": ["ai", "hardware"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from nvidia.com; Workday board not verified yet. Only Danish jobs are fetched."
+  },
+  {
+    "slug": "butter",
+    "name": "Butter / allgravy",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://butter.teamtailor.com",
+    "careersUrl": "https://careers.allgravy.com",
+    "city": "Copenhagen",
+    "tags": ["saas", "video"],
+    "active": true,
+    "notes": "Verified 2026-11-16: board links to careers.allgravy.com; 17 jobs, 7 in Denmark. Identity accepted by user."
+  },
+  {
+    "slug": "contractbook",
+    "name": "Contractbook (Scrive)",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.scrive.com",
+    "careersUrl": "https://careers.scrive.com",
+    "city": "Copenhagen",
+    "tags": ["legaltech", "saas"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from contractbook.com: board is Scrive's; 4 jobs, 2 in Denmark."
+  },
+  {
+    "slug": "one-com",
+    "name": "one.com (group.one)",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://grouponede.teamtailor.com",
+    "city": "Copenhagen",
+    "tags": ["hosting"],
+    "active": true,
+    "notes": "Detected 2026-11-16 from group.one: group.one's board; 5 jobs, 1 in Denmark."
+  },
+  {
+    "slug": "sitecore",
+    "name": "Sitecore",
+    "source": "ASHBY",
+    "sourceKey": "sitecore",
+    "city": "Copenhagen",
+    "tags": ["saas", "cms"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 24 jobs, 0 in Denmark today."
+  },
+  {
+    "slug": "valtech",
+    "name": "Valtech",
+    "source": "GREENHOUSE",
+    "sourceKey": "valtech",
+    "city": "Copenhagen",
+    "tags": ["agency", "consultancy"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:verify: 125 jobs, 0 in Denmark today."
+  },
+  {
+    "slug": "zeronorth",
+    "name": "ZeroNorth",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.zeronorth.com",
+    "careersUrl": "https://careers.zeronorth.com",
+    "city": "Copenhagen",
+    "tags": ["maritime", "saas"],
+    "active": true,
+    "notes": "Verified 2026-11-16 by candidates:detect: 4 jobs, 0 in Denmark today."
   }
 ]
