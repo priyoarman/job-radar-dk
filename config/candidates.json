@@ -141,7 +141,7 @@
   {"id": 140, "name": "GAMUCATEX", "category": "media", "claimed": ["CUSTOM", "LINKEDIN"], "claimedUrl": null},
   {"id": 141, "name": "Kahoot!", "category": "media", "claimed": ["LEVER"], "claimedUrl": "jobs.lever.co/kahoot", "verified": {"source": "WORKABLE", "sourceKey": "kahoot"}, "watchedSlug": "kahoot"},
   {"id": 142, "name": "TV 2 Digital", "category": "media", "claimed": ["EMPLY"], "claimedUrl": "tv2.emply.net", "website": "https://tv2.dk"},
-  {"id": 143, "name": "DR", "category": "media", "claimed": ["TALENTIUM", "CUSTOM"], "claimedUrl": "dr.dk/karriere", "website": "https://dr.dk"},
+  {"id": 143, "name": "DR", "category": "media", "claimed": ["TALENTIUM", "CUSTOM"], "claimedUrl": "dr.dk/karriere", "website": "https://dr.dk", "watchedSlug": "dr"},
   {"id": 144, "name": "Berlingske Media", "category": "media", "claimed": ["EMPLY"], "claimedUrl": "berlingskemedia.emply.net", "website": "https://berlingskemedia.dk"},
   {"id": 145, "name": "JP/Politikens Hus", "category": "media", "claimed": ["EMPLY"], "claimedUrl": "jppol.emply.net", "website": "https://jppol.dk"},
   {"id": 146, "name": "Clio", "category": "media", "claimed": ["TEAMTAILOR"], "claimedUrl": "clio.teamtailor.com", "website": "https://clio.me"},

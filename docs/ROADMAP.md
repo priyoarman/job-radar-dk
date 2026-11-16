@@ -228,7 +228,7 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 - [x] **S4.2 HR Manager**: Talentech's public Job Portal API (`recruiter-api.hr-manager.net/jobportal.svc/{alias}/positionlist/json/`), with the customer alias as `sourceKey` (research in PLAN.md §5e).
   - Result: BEC added (38 jobs, 17 in Denmark, none pass the filter today). EG's real board turned out to be Teamtailor, so it was added as Teamtailor. EWII and JP/Politikens Hus show only a numeric ID, and their alias is unknown; JP/Pol lists its jobs on jppol.dk (a job for S5.2).
   - Commit: `feat(pipeline): add HR Manager adapter`
-- [ ] **S4.3 Talentech / ReachMee**.
+- [x] ~~**S4.3 Talentech / ReachMee**~~: skipped on 2026-11-16. None of the 150 candidates use ReachMee, and the careers detector found it on no site. Talentech's HR Manager is covered by S4.2. The one "Talentium" claim (DR) turned out to be SuccessFactors.
 
 ### S5. Custom portals and coverage
 

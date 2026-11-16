@@ -687,6 +687,8 @@ SuccessFactors has no shared job-board domain or public jobs API. Each company r
   - **Classic search page:** `/search/?q=&locationsearch=Denmark` returns server-rendered HTML rows (`tr.data-row` with `a.jobTitle-link`, `span.jobLocation`, `span.jobDate`) and a "Results 1 – 10 of 65" banner; paging uses `startrow`. Works for **Novo Nordisk** (79 Danish jobs, one page), **Vestas** (65, 10 per page) and **DSV** (17, 10 per page).
   - **Newer search page:** rendered by JavaScript from `/services/…`, so the HTML has no jobs. **Grundfos, Danfoss and Carlsberg** use it; they cannot be read without breaking `robots.txt`, so they are not supported.
 - **Checked careers sites:** careers.vestas.com, jobs.danfoss.com, careers.carlsberg.com, jobs.dsv.com, careers.novonordisk.com, jobs.grundfos.com (careers.lundbeck.com did not answer; jobs.coloplast.com returned 403).
+- **Mirrored sites (DR, added 2026-11-16):** `www.dr.dk/om-dr/job` shows DR's SuccessFactors site inside DR's own website, but its job links, its paging and its `jobs.dr.dk` links are all broken (404 or no DNS), and dr.dk's `robots.txt` blocks `/search/`. The page's `<link rel="canonical">` gives the real host, `dr.jobs.hr.cloud.sap` (SAP's hosting), where the classic search works and is allowed. **Lesson:** for a SuccessFactors site on a company's own domain, check the canonical link first.
+- **Other languages:** DR's banner is Danish ("Resultater 1 – 20 af 27") and so are its dates ("13. nov. 2026"). The adapter reads the numbers from the `.paginationLabel` element in any language, and understands Danish and English month names.
 
 ---
 

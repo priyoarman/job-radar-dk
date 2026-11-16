@@ -6,6 +6,7 @@ import {
   MAX_PAGES,
   PAUSE_MS,
   fetchDenmarkRows,
+  parseDate,
   parseSearchPage,
   searchUrl,
   siteOrigin,
@@ -47,6 +48,8 @@ describe("parseSearchPage", () => {
     ["novonordisk-denmark.html", 79, 79, 79],
     ["vestas-denmark-page1.html", 10, 10, 65],
     ["dsv-denmark-page1.html", 10, 10, 17],
+    ["dr-denmark-page1.html", 20, 20, 27],
+    ["dr-denmark-page2.html", 7, 27, 27],
   ])("reads every row and the results banner of %s", (name, rows, last, total) => {
     const page = parseSearchPage(html(name));
     expect(page.rows).toHaveLength(rows);
@@ -118,6 +121,14 @@ describe("fetchDenmarkRows", () => {
     expect(http.text).toHaveBeenCalledTimes(1 + MAX_PAGES);
   });
 
+  it("follows a Danish results banner to the next page", async () => {
+    const http = fakeHttp(robots(), html("dr-denmark-page1.html"), html("dr-denmark-page2.html"));
+    const rows = await fetchDenmarkRows("https://dr.jobs.hr.cloud.sap", http, 0);
+    expect(rows).toHaveLength(27);
+    expect(new Set(rows.map((r) => r.path)).size).toBe(27);
+    expect(http.text.mock.calls.map(([url]) => url).at(-1)).toBe("https://dr.jobs.hr.cloud.sap/search/?q=&locationsearch=Denmark&startrow=20");
+  });
+
   it("stops before searching when robots.txt forbids the search page", async () => {
     const http = fakeHttp("User-agent: *\nDisallow: /search/");
     await expect(fetchDenmarkRows("https://jobs.dsv.com", http, 0)).rejects.toThrow("robots-disallowed");
@@ -127,6 +138,22 @@ describe("fetchDenmarkRows", () => {
   it("fails clearly on a site with the newer search page instead of reporting 0 jobs", async () => {
     const http = fakeHttp(robots(), html("grundfos-new-search-page.html"));
     await expect(fetchDenmarkRows("https://jobs.grundfos.com", http, 0)).rejects.toThrow("newer search page");
+  });
+});
+
+describe("parseDate", () => {
+  it.each([
+    ["4 Nov 2026", "2026-11-04"],
+    ["13. nov. 2026", "2026-11-13"],
+    ["29. okt. 2026", "2026-10-29"],
+    ["1. maj 2026", "2026-05-01"],
+    ["Nov 4, 2026", "2026-11-04"],
+  ])("reads %j as %s", (value, day) => {
+    expect(parseDate(value)).toEqual(new Date(`${day}T00:00:00Z`));
+  });
+
+  it.each(["13. foo. 2026", "soon", null])("returns null for %j", (value) => {
+    expect(parseDate(value)).toBeNull();
   });
 });
 
@@ -159,8 +186,8 @@ describe("successFactorsAdapter.normalize", () => {
     expect(job.postedAt).toBeNull();
   });
 
-  it("normalizes every row on all three real pages", () => {
-    for (const name of ["novonordisk-denmark.html", "vestas-denmark-page1.html", "dsv-denmark-page1.html"]) {
+  it("normalizes every row on all the real pages", () => {
+    for (const name of ["novonordisk-denmark.html", "vestas-denmark-page1.html", "dsv-denmark-page1.html", "dr-denmark-page1.html", "dr-denmark-page2.html"]) {
       const pageRows = parseSearchPage(html(name)).rows;
       const { jobs, skipped } = normalizeJobs(successFactorsAdapter, pageRows, novo);
       expect(skipped).toBe(0);
@@ -175,5 +202,15 @@ describe("successFactorsAdapter.normalize", () => {
     expect(skipped).toBe(1);
     expect(jobs).toHaveLength(1);
     expect(String(warn.mock.calls[0]?.[0])).toMatch(/normalize\.skipped .*"source":"SUCCESSFACTORS".*title/);
+  });
+
+  it("maps a real DR row with its Danish date", () => {
+    const dr = { slug: "dr", name: "DR", sourceKey: "https://dr.jobs.hr.cloud.sap" };
+    const row = parseSearchPage(html("dr-denmark-page1.html")).rows[0]!;
+    const job = successFactorsAdapter.normalize(row, dr);
+    expect(job.url.startsWith("https://dr.jobs.hr.cloud.sap/job/")).toBe(true);
+    expect(job.location).toMatch(/, DK, \d{4}$/);
+    expect(job.postedAt).toEqual(parseDate(row.date));
+    expect(job.postedAt).not.toBeNull();
   });
 });

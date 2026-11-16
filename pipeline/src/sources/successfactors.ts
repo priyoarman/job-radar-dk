@@ -45,7 +45,9 @@ export function parseSearchPage(html: string): SearchPage {
     rows.push({ title, path, location: clean(location.text()) || null, date: date || null });
   });
 
-  const banner = clean($("body").text()).match(/Results\s*(\d+)\s*[–-]\s*(\d+)\s*of\s*(\d+)/);
+  const label = clean($(".paginationLabel").first().text());
+  const banner =
+    label.match(/(\d+)\s*[–-]\s*(\d+)\D+(\d+)/) ?? clean($("body").text()).match(/Results\s*(\d+)\s*[–-]\s*(\d+)\s*of\s*(\d+)/);
   return {
     rows,
     last: banner ? Number(banner[2]) : null,
@@ -74,8 +76,18 @@ export async function fetchDenmarkRows(
   return rows;
 }
 
-function parseDate(value: string | null): Date | null {
+const MONTHS: Record<string, number> = {
+  jan: 0, feb: 1, mar: 2, apr: 3, maj: 4, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, dec: 11,
+};
+
+export function parseDate(value: string | null): Date | null {
   if (!value) return null;
+  const dayMonthYear = /^(\d{1,2})\.?\s+([a-zæøå]+)\.?\s+(\d{4})$/i.exec(value.trim());
+  if (dayMonthYear) {
+    const month = MONTHS[dayMonthYear[2]!.slice(0, 3).toLowerCase()];
+    if (month === undefined) return null;
+    return new Date(Date.UTC(Number(dayMonthYear[3]), month, Number(dayMonthYear[1])));
+  }
   const date = new Date(`${value} UTC`);
   return Number.isNaN(date.getTime()) ? null : date;
 }

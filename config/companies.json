@@ -583,5 +583,16 @@
     "tags": ["saas", "enterprise"],
     "active": true,
     "notes": "Verified 2026-11-16: Teamtailor, 28 jobs, 13 in Denmark. HR Manager (alias eg) only holds open-application forms."
+  },
+  {
+    "slug": "dr",
+    "name": "DR",
+    "source": "SUCCESSFACTORS",
+    "sourceKey": "https://dr.jobs.hr.cloud.sap",
+    "careersUrl": "https://www.dr.dk/om-dr/job",
+    "city": "Copenhagen",
+    "tags": ["media", "public"],
+    "active": true,
+    "notes": "Verified 2026-11-16: SuccessFactors classic search on SAP's host (www.dr.dk/om-dr/job is a mirror with broken links), 27 jobs, Danish banner."
   }
 ]
