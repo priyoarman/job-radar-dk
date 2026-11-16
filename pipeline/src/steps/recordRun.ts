@@ -2,11 +2,11 @@ import type { Prisma, PrismaClient, RunStatus } from "@jobradar/db";
 import { errorMessage } from "../lib/errors";
 import type { CompanyOutcome } from "./fetchCompanies";
 
-export type RunTrigger = "cron" | "manual" | "local";
+export type RunTrigger = "cron" | "scheduler" | "manual" | "local";
 
-export function runTriggerFor(githubEventName: string | undefined): RunTrigger {
+export function runTriggerFor(githubEventName: string | undefined, triggerSource?: string): RunTrigger {
   if (githubEventName === "schedule") return "cron";
-  if (githubEventName === "workflow_dispatch") return "manual";
+  if (githubEventName === "workflow_dispatch") return triggerSource === "scheduler" ? "scheduler" : "manual";
   return "local";
 }
 

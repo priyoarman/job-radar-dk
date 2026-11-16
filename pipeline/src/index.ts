@@ -21,7 +21,7 @@ async function main(): Promise<void> {
     const processCompany = createProcessCompany(prisma, createHttpClient({ userAgent: config.USER_AGENT }));
     const status = await runPipeline({
       prisma,
-      trigger: runTriggerFor(config.GITHUB_EVENT_NAME),
+      trigger: runTriggerFor(config.GITHUB_EVENT_NAME, config.TRIGGER_SOURCE),
       gitSha: config.GITHUB_SHA ?? null,
       now: () => new Date(),
       fetchAll: (companies) =>

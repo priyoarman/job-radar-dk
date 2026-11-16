@@ -146,7 +146,7 @@ model Run {
   startedAt  DateTime  @default(now())
   finishedAt DateTime?
   status     RunStatus @default(RUNNING)
-  trigger    String // "cron" | "manual" | "local"
+  trigger    String // "cron" | "scheduler" | "manual" | "local"
   gitSha     String?
 
   companiesChecked Int     @default(0)

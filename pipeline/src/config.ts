@@ -14,6 +14,7 @@ const envSchema = z
     MIN_FETCH_INTERVAL_HOURS: z.coerce.number().positive().default(2.5),
     APP_BASE_URL: z.url().default("http://localhost:3000"),
     GITHUB_EVENT_NAME: z.string().optional(),
+    TRIGGER_SOURCE: z.string().optional(),
     GITHUB_SHA: z.string().optional(),
   })
   .superRefine(

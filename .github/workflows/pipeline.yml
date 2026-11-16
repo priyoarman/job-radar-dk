@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "17 */3 * * *"
   workflow_dispatch:
+    inputs:
+      source:
+        description: "Who started the run: manual (this button) or scheduler (cron-job.org)"
+        type: choice
+        options: [manual, scheduler]
+        default: manual
 
 concurrency:
   group: pipeline
@@ -24,6 +30,7 @@ jobs:
       EMAIL_FROM: ${{ vars.EMAIL_FROM }}
       DRY_RUN: ${{ vars.DRY_RUN }}
       USER_AGENT: ${{ vars.USER_AGENT }}
+      TRIGGER_SOURCE: ${{ inputs.source }}
       MIN_FETCH_INTERVAL_HOURS: ${{ vars.MIN_FETCH_INTERVAL_HOURS }}
       PRISMA_HIDE_UPDATE_MESSAGE: "1"
     steps:

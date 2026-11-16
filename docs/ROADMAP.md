@@ -278,8 +278,15 @@ Job Radar is now a **discovery and alert tool only**: find new Danish job posts 
   - Found: Maersk and Workday (Peakon) get HTTP 429 on their first request every run (2 failures in a row). Workday seems to rate-limit GitHub's cloud IPs. To look at in Phase 2 (2.3 touches the Workday adapter).
   - Re-check after R.4 has run for a day.
 - [ ] **R.4 Reliable trigger** (added after R.1): a free external scheduler (cron-job.org) calls GitHub's "run workflow" API every hour with a fine-grained token that can only start workflows in this repo. The GitHub schedule stays as a backup; the `concurrency` group stops overlaps, and `MIN_FETCH_INTERVAL_HOURS` stops any company being fetched too often.
-  - Check: `gh run list --workflow pipeline.yml` shows a `workflow_dispatch` run every hour for a day.
+  - Code (done): the "Run workflow" button has a `source` input (`manual` or `scheduler`), stored as the run's `trigger`, so scheduler runs can be told apart from clicks.
+  - Setup (by hand, once):
+    1. GitHub → Settings → Developer settings → Fine-grained tokens → Generate: name `job-radar-scheduler`, expiry 1 year (note the date), repository access **only `job-radar-dk`**, permission **Actions: Read and write** (nothing else).
+    2. cron-job.org → free account → Create cronjob: URL `https://api.github.com/repos/priyoarman/job-radar-dk/actions/workflows/pipeline.yml/dispatches`, every hour at minute 7. Advanced: method `POST`; headers `Accept: application/vnd.github+json`, `Authorization: Bearer <token>`, `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`; body `{"ref":"main","inputs":{"source":"scheduler"}}`. Turn on its failure emails.
+    3. "Test run" in cron-job.org → expect HTTP **204**, and a new run in GitHub Actions within a minute.
+  - Check: `gh run list --workflow pipeline.yml` shows a `workflow_dispatch` run every hour for a day, and the `Run` table has `trigger = "scheduler"` rows.
+  - Commit: `ci: let an external scheduler start the pipeline`
 - [ ] **R.2 Keep the cron alive**: GitHub switches off scheduled workflows in a public repo after 60 days without commits (mid-January 2027 at the latest). Add a monthly workflow that keeps the schedule enabled.
+  - Note (2026-11-16): after R.4 this only protects the **backup** schedule; runs started through the API (R.4) are not switched off. Still worth doing, but no longer urgent.
   - Commit: `ci: keep the scheduled pipeline enabled`
 - [ ] **R.3 "Robot is down" email**: if no run has succeeded for 6 hours, send one warning email (at most once a day).
   - Commit: `feat(pipeline): warn when no run has succeeded for 6 hours`

@@ -19,11 +19,24 @@ const outcome = (status: CompanyOutcome["status"], overrides: Partial<CompanyOut
 describe("runTriggerFor", () => {
   it.each([
     ["schedule", "cron"],
-    ["workflow_dispatch", "manual"],
     ["push", "local"],
     [undefined, "local"],
   ])("%s → %s", (eventName, expected) => {
     expect(runTriggerFor(eventName)).toBe(expected);
+  });
+
+  it.each([
+    ["scheduler", "scheduler"],
+    ["manual", "manual"],
+    [undefined, "manual"],
+    ["", "manual"],
+    ["something-else", "manual"],
+  ])("workflow_dispatch with source %j → %s", (source, expected) => {
+    expect(runTriggerFor("workflow_dispatch", source)).toBe(expected);
+  });
+
+  it("ignores the source for a GitHub schedule run", () => {
+    expect(runTriggerFor("schedule", "scheduler")).toBe("cron");
   });
 });
 
