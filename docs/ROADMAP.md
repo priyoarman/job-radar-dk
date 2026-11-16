@@ -222,7 +222,9 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 
 ### S4. Nordic portals (~3 h each, research first)
 
-- [ ] **S4.1 Emply** (look for hidden JSON before parsing HTML).
+- [x] **S4.1 Emply** (look for hidden JSON before parsing HTML). Found it: the listing page loads jobs from `POST /api/integration/vacancy/get-page` (research in PLAN.md §5d).
+  - Result: Matas added (21 jobs, 1 passes the filter). EG's Emply site is empty (EG now uses HR Manager), and the other 18 "Emply" candidates have no site under their name.
+  - Commit: `feat(pipeline): add Emply adapter`
 - [ ] **S4.2 HR Manager**.
 - [ ] **S4.3 Talentech / ReachMee**.
 

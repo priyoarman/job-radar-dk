@@ -690,6 +690,17 @@ SuccessFactors has no shared job-board domain or public jobs API. Each company r
 
 ---
 
+## 5d. Emply research (step S4.1, 2026-11-16)
+
+Emply (now owned by Paychex) career sites live at `{company}.career.emply.com`. `robots.txt` allows everything.
+
+- **Hidden JSON:** the job list page (e.g. `/ledige-stillinger`, or `/da/ledige-stillinger`) has no jobs in its HTML. Its script loads them with `POST /api/integration/vacancy/get-page` and the body `{count, offset, sectionId, langCode, sortByProjectDataId, filters: [], searchText: "", sortAscending: false, light: false, isJobAgent: false, siteId: null}`. The answer is `{vacancies[], count}`, and `count` is the total, so paging by `offset` works.
+- **Per-site settings in the page script:** `sectionId` (a UUID), `languageKey`, `sortByProjectDataId` and the job link path (`var adLink = '/ad/'`, or `'/da/ad/'` on sites with a language prefix). The adapter reads the page each run instead of storing these, so a site redesign doesn't break it silently.
+- **Each vacancy** has `id` (UUID, used as `externalId`), `title`, `titleAsUrl` + `shortId` (for the link), `location` (street address), `published`, `deadline`, `talentPool` (open applications, skipped), `externalCseAdLink` (set when the ad lives elsewhere) and `translations[]` with the full HTML description in `content`. No remote/hybrid field.
+- **Coverage:** `{name}.emply.net` and unknown `{name}.career.emply.com` hosts redirect to paychex.eu. Of the 20 candidates claiming Emply, only Matas has a live site with jobs; EG's site exists but is empty.
+
+---
+
 ## 6. Risks and how the design handles them
 
 ### Adapter breaks (a company changes ATS or the feed format changes)

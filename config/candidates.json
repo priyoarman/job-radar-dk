@@ -113,7 +113,7 @@
   {"id": 112, "name": "Boozt", "category": "logistics", "claimed": ["TEAMTAILOR"], "claimedUrl": "careers.booztgroup.com", "website": "https://booztgroup.com", "watchedSlug": "boozt"},
   {"id": 113, "name": "Wolt Denmark", "category": "logistics", "claimed": ["GREENHOUSE"], "claimedUrl": "boards.greenhouse.io/wolt", "verified": {"source": "GREENHOUSE", "sourceKey": "wolt"}, "watchedSlug": "wolt"},
   {"id": 114, "name": "Bestseller Tech", "category": "logistics", "claimed": ["SMARTRECRUITERS"], "claimedUrl": "jobs.smartrecruiters.com/Bestseller", "website": "https://bestseller.com"},
-  {"id": 115, "name": "Matas Digital", "category": "logistics", "claimed": ["EMPLY"], "claimedUrl": "matas.emply.net", "website": "https://matas.dk"},
+  {"id": 115, "name": "Matas Digital", "category": "logistics", "claimed": ["EMPLY"], "claimedUrl": "matas.emply.net", "website": "https://matas.dk", "watchedSlug": "matas"},
   {"id": 116, "name": "Novo Nordisk", "category": "health", "claimed": ["SUCCESSFACTORS"], "claimedUrl": "novonordisk.com/careers", "watchedSlug": "novo-nordisk"},
   {"id": 117, "name": "Novonesis", "category": "health", "claimed": ["SUCCESSFACTORS"], "claimedUrl": "novonesis.com/careers", "website": "https://novonesis.com"},
   {"id": 118, "name": "Coloplast", "category": "health", "claimed": ["SUCCESSFACTORS"], "claimedUrl": "coloplast.com/careers", "website": "https://coloplast.com"},

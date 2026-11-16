@@ -550,5 +550,16 @@
     "tags": ["maritime", "saas"],
     "active": true,
     "notes": "Verified 2026-11-16 by candidates:detect: 4 jobs, 0 in Denmark today."
+  },
+  {
+    "slug": "matas",
+    "name": "Matas",
+    "source": "EMPLY",
+    "sourceKey": "https://matas.career.emply.com/ledige-stillinger",
+    "careersUrl": "https://matas.career.emply.com/ledige-stillinger",
+    "city": "Allerød",
+    "tags": ["retail", "ecommerce"],
+    "active": true,
+    "notes": "Verified 2026-11-16: Emply career site, 21 jobs (mostly stores; 1 Data Engineer at HQ)."
   }
 ]
