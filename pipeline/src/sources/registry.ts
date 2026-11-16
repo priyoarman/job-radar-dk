@@ -2,6 +2,7 @@ import type { SourceType } from "@jobradar/db";
 import { ashbyAdapter } from "./ashby";
 import { emplyAdapter } from "./emply";
 import { greenhouseAdapter } from "./greenhouse";
+import { hrManagerAdapter } from "./hrmanager";
 import { leverAdapter } from "./lever";
 import { recruiteeAdapter } from "./recruitee";
 import { successFactorsAdapter } from "./successfactors";
@@ -20,6 +21,7 @@ export const adapters: Partial<Record<SourceType, SourceAdapter<unknown>>> = {
   WORKDAY: workdayAdapter,
   SUCCESSFACTORS: successFactorsAdapter,
   EMPLY: emplyAdapter,
+  HRMANAGER: hrManagerAdapter,
 };
 
 export function getAdapter(source: SourceType): SourceAdapter<unknown> {

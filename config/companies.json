@@ -561,5 +561,27 @@
     "tags": ["retail", "ecommerce"],
     "active": true,
     "notes": "Verified 2026-11-16: Emply career site, 21 jobs (mostly stores; 1 Data Engineer at HQ)."
+  },
+  {
+    "slug": "bec",
+    "name": "BEC Financial Technologies",
+    "source": "HRMANAGER",
+    "sourceKey": "bec",
+    "careersUrl": "https://bec.dk",
+    "city": "Roskilde",
+    "tags": ["fintech", "enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-16: HR Manager alias bec, 38 jobs (17 in Roskilde/Aalborg, the rest in Warsaw)."
+  },
+  {
+    "slug": "eg",
+    "name": "EG",
+    "source": "TEAMTAILOR",
+    "sourceKey": "https://careers.egsoftware.com",
+    "careersUrl": "https://careers.egsoftware.com/jobs",
+    "city": "Ballerup",
+    "tags": ["saas", "enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-16: Teamtailor, 28 jobs, 13 in Denmark. HR Manager (alias eg) only holds open-application forms."
   }
 ]

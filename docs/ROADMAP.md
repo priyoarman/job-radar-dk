@@ -225,7 +225,9 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 - [x] **S4.1 Emply** (look for hidden JSON before parsing HTML). Found it: the listing page loads jobs from `POST /api/integration/vacancy/get-page` (research in PLAN.md §5d).
   - Result: Matas added (21 jobs, 1 passes the filter). EG's Emply site is empty (EG now uses HR Manager), and the other 18 "Emply" candidates have no site under their name.
   - Commit: `feat(pipeline): add Emply adapter`
-- [ ] **S4.2 HR Manager**.
+- [x] **S4.2 HR Manager**: Talentech's public Job Portal API (`recruiter-api.hr-manager.net/jobportal.svc/{alias}/positionlist/json/`), with the customer alias as `sourceKey` (research in PLAN.md §5e).
+  - Result: BEC added (38 jobs, 17 in Denmark, none pass the filter today). EG's real board turned out to be Teamtailor, so it was added as Teamtailor. EWII and JP/Politikens Hus show only a numeric ID, and their alias is unknown; JP/Pol lists its jobs on jppol.dk (a job for S5.2).
+  - Commit: `feat(pipeline): add HR Manager adapter`
 - [ ] **S4.3 Talentech / ReachMee**.
 
 ### S5. Custom portals and coverage

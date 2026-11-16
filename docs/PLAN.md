@@ -701,6 +701,19 @@ Emply (now owned by Paychex) career sites live at `{company}.career.emply.com`. 
 
 ---
 
+## 5e. HR Manager research (step S4.2, 2026-11-16)
+
+HR Manager belongs to Talentech, which documents a public **Job Portal API** that needs no login ("TR Job Portal API (public)" in Talentech's docs).
+
+- **`robots.txt`:** `candidate.hr-manager.net` disallows everything except `/ApplicationInit.aspx?` (the job ad links), so its list pages may not be used. `recruiter-api.hr-manager.net` has no `robots.txt`.
+- **List:** `GET https://recruiter-api.hr-manager.net/jobportal.svc/{alias}/positionlist/json/?incads=1&take=100&skip=0`. Without `take` it returns only 25 positions (BEC has 38); `take` is capped at 100, and `skip` pages. `incads=1` adds the full HTML ad, so one request is enough. The answer has `TransactionStatus.StatusCode` (0 = OK), `Items[]` and `PositionCountList` (the total).
+- **Each position** has `Id` (used as `externalId`), `Name` (title), `AdvertisementUrlSecure` (the public ad link), `Published`/`Created` as .NET dates (`/Date(1794227672000+0100)/`; year 0001 means none), `PositionLocationMultiSelection[]` (city names, e.g. Roskilde and Warsaw), `WorkPlace`, and `Advertisements[0].Content` (HTML).
+- **The alias is required:** the numeric `cid` in links (e.g. `cid=307`) does not work, and an unknown alias gives HTTP 400. Aliases appear in `customer=` links on career pages.
+- **Usage limits (API Usage Notice):** at most 8 calls per hour and 200 per day per customer and method. The pipeline makes 1–3 calls per company every 3 hours.
+- **Findings:** `bec` = 38 jobs (21 Warsaw, 16 Roskilde, 1 Aalborg). `eg` exists but has 0 jobs: EG's job board is Teamtailor (`careers.egsoftware.com`), and HR Manager only holds its open-application forms. EWII (`cid=307`) and JP/Politikens Hus (`cid=333`) have no known alias (`ewii`, `jppol` and `jp` are unknown).
+
+---
+
 ## 6. Risks and how the design handles them
 
 ### Adapter breaks (a company changes ATS or the feed format changes)

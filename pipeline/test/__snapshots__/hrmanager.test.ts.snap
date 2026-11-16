@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`hrManagerAdapter.normalize > matches the snapshot for the first BEC position 1`] = `
+{
+  "company": "BEC Financial Technologies",
+  "description": "You will join our AI Hub. The AI Hub drives the adoption of AI across BEC and helps transform the way software is developed, delivered and operated. We work closely with engineering teams, architects and technology partners to explore and apply emerging AI technologies where they create real business value.
+The Senior AI Engineering Specialist role offers a unique opportunity to work at the forefront of AI for software engineering within the financial technology industry. You will shape engineering best practices for AI software development, support AI utilization in financial products and help development teams successfully adopt new AI-powered ways of working potentially impacting +500 employees.
+Your direct manager will be Henriette Jensen.
+Primary task and responsibilities include:
+- Establish best practices for AI-assisted software development, including coding, testing and engineering workflows (~30%)
+- Develop prototypes, proofs of concept and provide as AI SME across several areas incl. financial services, software development and internal processes (~30%)
+- Act as a subject matter expert and trusted advisor to engineering teams adopting AI (~30%)
+- Evaluate emerging AI technologies, tools and models relevant to software engineering (~10%)
+- Collaborate with architects, platform engineers, developers and external technology partners to identify opportunities for AI adoption
+- Join AI hub, a strategic centralized unit, that includes AI engineers, Legal SME and AI evangelist (supporting user adoption) located mostly in Warsaw. Only a few yearly trips to Denmark will be required
+- Share knowledge through training, demos, communities of practice and technical guidance
+To succeed you will have:
+- Extensive experience as a software engineer, software architect or similar senior technical role
+- Hands-on experience with Generative AI technologies, LLMs and AI-assisted software development
+- Experience using tools such as Claude Code, GitHub Copilot or similar AI engineering platforms
+- Strong understanding of software engineering practices, SDLC and modern development workflows
+- Curiosity and passion for experimenting with emerging technologies and sharing knowledge with others
+- Bachelor's or Master's degree in Computer Science, Data Science, or a related field
+- Fluent English communication skills, both written and spoken
+- A proactive approach, solution and service-oriented mindset
+- A curious mind with an open nature and desire to knowledge-share with others
+It’s nice-to-have:
+- Experience training, fine-tuning or evaluating AI models
+- Experience with AI harnesses, evaluation frameworks or benchmarking approaches
+- Experience with Azure AI Foundry, OpenAI or Anthropic technologies
+- Experience with Python or Java
+- Knowledge of agentic AI systems and autonomous workflows
+- Experience working within highly regulated environments such as financial services
+- Familiarity with AI governance, responsible AI and emerging AI regulations
+Be your best self with BEC’s Benefits!
+We offer a diverse range of benefits for our employees. Here are just a few of them.
+- Type of cooperation: employment contract
+- Mental health support
+- Free lunch at the office
+- Professional development
+- Referral bonus up to PLN 10,000
+- PLN 600 on a benefit platform a month
+- Passion clubs and social events (Tennis, salsa dancing, board games, family picnics and more!)
+What does the recruitment process look like?
+- Send us your CV: We want to get to know you
+- Screening call: Let’s chat and see if we’re a match
+- Meet our talent partner and technical expert: Learn more about the job, BEC Poland, and tell us more about your skills and experience.
+- Meet your future manager and team: See who you’ll be working closely with.
+- Time to sign the contract: We’re ready to welcome you to BEC!
+If you have any questions related to the position, please contact Patrycja Krzykala - Talent attraction partner.
+BEC is in the process of being acquired by our largest customer and co-owner, Nykredit, which is Denmark's largest mortgage provider and third-largest bank. We will become part of a new and larger organization called Nykredit Financial Technologies. In the transition phase, we are recruiting for roles that we expect to be highly needed in our future organization.",
+  "externalId": "71567",
+  "location": "Warsaw",
+  "postedAt": 2026-11-09T12:34:32.000Z,
+  "remoteType": null,
+  "title": "AI engineer (senior)",
+  "url": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1017&ProjectId=71567&DepartmentId=9752&MediaId=5",
+}
+`;
