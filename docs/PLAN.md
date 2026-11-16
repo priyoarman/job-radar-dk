@@ -1,8 +1,10 @@
 # Job Radar DK: Implementation Plan
 
-A personal system that watches Danish tech companies' career pages, scores new jobs against my profile with an LLM, and emails me strong matches with a draft application.
+A personal system that watches Danish tech companies' career pages and the big Danish job sites, keeps the jobs that mention my stack, and emails them to me within a few hours, so I can be one of the first applicants.
 
-**Hard rules:** no auto-applying, no LinkedIn scraping, polite fetching. I review and send every application myself.
+> **Changed on 2026-11-16:** the LLM scoring and drafted applications are dropped; the app is now discovery and alerts only. See [§7](#7-new-direction-discovery-and-fast-alerts-2026-11-16). Sections 2–5 below still describe the original design where they mention scores, drafts or the dashboard.
+
+**Hard rules:** no auto-applying, polite fetching of every site we read ourselves (robots.txt, pauses, intervals). I review and send every application myself. LinkedIn, Indeed and Jobnet are read only through Apify, logged out, never with my own account.
 
 ---
 
@@ -17,11 +19,13 @@ A personal system that watches Danish tech companies' career pages, scores new j
 | Database | Neon Postgres (free tier) | Plain Postgres, works cleanly with Prisma, free branches for dev, test, and demo. |
 | Scheduler | GitHub Actions cron, every 3 hours | Free, no server to run. |
 | Email | Resend from `onboarding@resend.dev` to my own address | No domain needed for personal alerts. A domain can be added in Phase 5. |
-| LLM | Groq, `llama-3.3-70b-versatile`, temperature 0 | Fast and cheap/free. The model name is stored with every score. |
+| LLM | ~~Groq~~ dropped on 2026-11-16 | Fit is judged by hand with Claude, outside the app. |
+| Search filter | Stack keywords in title or description, from `config/keywords.json` | Simple, explainable, editable without code. |
+| Job sites | Jobindex + IT-Jobbank (RSS), The Hub (JSON), LinkedIn + Indeed + Jobnet (Apify) | Free sources first; Apify only where there is no other way. |
 | Dashboard hosting | Vercel | Free, and the natural home for Next.js. |
 | Dashboard auth | NextAuth with the GitHub provider, allowlisted to my GitHub login | Single user, no password storage. |
 | Demo | A separate Vercel deployment with `DEMO_MODE=true` pointing at a separate Neon branch of fake data | Real data can never leak into the demo. |
-| Cover letter | English, written in the short and direct Danish business tone | Jobs that require Danish are filtered out anyway. |
+| Cover letter | ~~In the app~~ dropped on 2026-11-16 | Written by hand with Claude. |
 | Phase 1 email | **One summary email per run**, and the cheap title-keyword filter is pulled forward from Phase 2 | Keeps Phase 1 usable instead of spammy. |
 
 ---
@@ -775,3 +779,31 @@ The roadmap planned a JSON-LD-only adapter, but none of the 117 candidate websit
 
 ### Scope creep (8–10 h/week)
 - Each phase ends with something usable. Adapters beyond Teamtailor are optional extras, not blockers. If a week is busy, skip it, because the pipeline keeps running on its own.
+
+---
+
+## 7. New direction: discovery and fast alerts (2026-11-16)
+
+**Why:** Danish companies dislike automated applications, and a per-job review with Claude (CV + cover letter, by hand) is better than an in-app score. What the app can do that a person can't is **watch everything, all the time**. So the goal is: a job that mentions my stack reaches my inbox within ~3 hours of being posted.
+
+**What changes:**
+- **Filter:** a job passes when one of my stack keywords (TypeScript, React, Node, PostgreSQL, Next.js, …, with their spellings) appears in its **title or description**, it is in Denmark, and the title is not senior. The matched keywords are stored and shown in the email.
+- **More sources:** besides the ~63 company boards, the big job sites, which cover hundreds of companies each:
+
+| Source | How | Cost | Notes (checked 2026-11-16) |
+|---|---|---|---|
+| Jobindex | Official RSS: `jobindex.dk/jobsoegning.rss?q=<word>` | Free | 20 jobs per feed. `robots.txt` forbids `sort=`, `page=`, `jobage=`, several parameters and multi-word `+` queries, so one plain word per feed. |
+| IT-Jobbank | Same RSS on `it-jobbank.dk` | Free | Jobindex's IT site; `react` gave KMD, Netcompany, Leadr, New Loop. Same rules. |
+| The Hub | JSON: `thehub.io/api/v2/jobsandfeatured?countryCode=DK&sorting=newJobs&page=N` | Free | 385 Danish jobs, 15 per page, newest first; no description in the list. Not documented, may change. |
+| LinkedIn | Apify `valig/linkedin-jobs-scraper` | ~$0.40 / 1,000 jobs | Against LinkedIn's terms; scraped logged out by Apify. |
+| Indeed | Apify `valig/indeed-jobs-scraper` | ~$0.10 / 1,000 jobs | Against Indeed's terms. |
+| Jobnet (Workindenmark) | Apify `blackfalcondata/jobnet-scraper` | ~$2 / 1,000 jobs | Workindenmark's search is Jobnet; its own backend needs a session (HTTP 401). Small actor, test first. |
+| Jobbank.dk | – | – | Parked: answers our bot with HTTP 500 even on the allowed `/job/` path. |
+
+- **Search sources are different from company boards:** a search only shows the newest matches, so jobs that drop out are **not** closed, and the employer is stored per job.
+- **Duplicates across sources** are expected (company board + Jobindex + LinkedIn). They are merged by cleaned employer name + cleaned title within 30 days, and the email says "also on …".
+- **Apify** runs through its HTTP API from GitHub Actions with an `APIFY_TOKEN` secret and a result cap per run; only recent posts are requested, so the cost should stay at a few dollars a month (to be confirmed by a test run).
+
+**Dropped:** `Score` and `Draft` models, eval set, Groq, signed "mark as applied" links, NextAuth and the demo deployment. The dashboard is optional.
+
+**Order:** reliability (Phase 1R) → keyword filter (Phase 2) → free job sites + dedupe (3.2, 3.3, 3.7) → Apify sources (3.4–3.6) → speed and polish. Steps are in [ROADMAP.md](ROADMAP.md).

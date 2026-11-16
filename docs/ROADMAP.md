@@ -253,226 +253,100 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Round 1 (2026-11-16): 57 → 63. `candidates:detect` now also reports a company's own career page with job links (`found-custom`), and its rerun on the 94 unwatched candidates found 2 (Dept: really Greenhouse; Salling: category pages, not jobs). Probing HR Manager aliases and Emply hosts by name found Energinet, Andel, Nemlig.com (HR Manager), Init, Novicell (Emply); NNIT and Jyske Bank have empty HR Manager accounts. IMC Trading found on Greenhouse as `imc` (Aarhus office). Fixed the location rule for Hong Kong, Macao, Korea and a few short country names (IMC's Hong Kong jobs passed as "unknown").
   - Left out: Dept (locations are office codes like DTNL, so the location rule can't tell its few Danish jobs apart), Coop and Grundfos-style newer SuccessFactors pages, Agreena (Ashby board gone).
   - Next round: the remaining ~90 candidates mostly load jobs with JavaScript or are big companies on Workday/SuccessFactors with their own domains; they need a look by hand (find the careers page in a browser, note the board, verify with the adapter).
-- [ ] **S5.5 Email grouped by company**, plus a per-source health overview.
+- [x] ~~**S5.5 Email grouped by company**, plus a per-source health overview~~: dropped on 2026-11-16. The new email (step 2.4) lists the newest jobs first with their matched keywords, and the footer already flags sources that need action.
 
 ---
 
-## Phase 2: Smart filtering + LLM scoring
+## New direction (decided 2026-11-16)
 
-**Goal:** only good matches reach you, each with a score and a reason.
-**Time:** about 2–3 weeks.
+Job Radar is now a **discovery and alert tool only**: find new Danish job posts that mention your stack, fast, so you can be one of the first applicants. Reviewing the fit and writing the CV and cover letter happen by hand, with Claude, outside the app.
 
-### 2A. Better filter
-
-- [x] ~~**2.1 Location rule**~~: done earlier as step S1.3 (whole of Denmark; on-site, hybrid or remote).
-  - Commit: `feat(filter): keep Copenhagen, remote-DK and hybrid jobs`
-
-- [x] ~~**2.2 Danish rule**~~: dropped on 2026-11-15. Ads in Danish or any language are fine; only the location matters.
-  - Commit: `feat(filter): drop jobs that require Danish`
-
-### 2B. LLM scoring
-
-- [ ] **2.3 Score table**: add the `Score` model and run the migration.
-  - Check: Studio shows the Score table.
-  - Commit: `feat(db): add Score model`
-
-- [ ] **2.4 Profile loader**: `lib/profile.ts` reads `profile.md` locally or the `PROFILE_MD` env var in CI, and computes `profileHash`.
-  - Commit: `feat(pipeline): load profile and compute hash`
-
-- [ ] **2.5 Score schema**: a Zod schema for the LLM answer (the four parts, level, danishRequired, skills, redFlags, reason).
-  - Commit: `feat(llm): add score response schema`
-
-- [ ] **2.6 Groq client**: `llm/groq.ts` calls the model in JSON mode at temperature 0, validates the answer with Zod, and retries once with the error message if validation fails.
-  - Check: one real call returns a valid object.
-  - Commit: `feat(llm): add Groq client with schema validation`
-
-- [ ] **2.7 Score prompt v1**: `llm/score.prompt.ts` with the rubric, today's date and your graduation date, and the job wrapped as untrusted data. Export `SCORE_PROMPT_VERSION = "score-v1"`.
-  - Commit: `feat(llm): add score prompt v1 with rubric`
-
-- [ ] **2.8 Score step**: score `PENDING` jobs, oldest first, up to `MAX_LLM_CALLS_PER_RUN` per run. The code adds up the parts, caps the score at 40 if Danish is required, and saves the Score.
-  - Check: a dry run on `dev` scores a few jobs, and the rows appear in Studio.
-  - Commit: `feat(pipeline): score pending jobs with per-run cap`
-
-### 2C. Measure quality
-
-- [ ] **2.9 Eval set**: `eval/jobs.json` with 20 real jobs **you** scored by hand before running the model.
-  - Commit: `test(eval): add 20 hand-scored jobs`
-
-- [ ] **2.10 Eval script**: `pnpm eval` prints a table, the average error, and the % of jobs placed in the same bucket as yours.
-  - Check: it runs and prints numbers. Write them down.
-  - Commit: `feat(eval): add eval script`
-
-- [ ] **2.11 Improve the prompt** (repeat as needed): change the prompt, bump the version, and rerun the eval. Aim for ≥ 80 % bucket agreement.
-  - Commit: `feat(llm): improve score prompt (v2)` and so on.
-
-### 2D. Smarter emails
-
-- [ ] **2.12 Instant email for 75+**: one email per strong job, with the score and reason.
-  - Commit: `feat(email): send instant email for 75+ jobs`
-
-- [ ] **2.13 Daily digest for 55–74**: sent on the first run after 08:00 Copenhagen time, once a day.
-  - Commit: `feat(email): send daily digest for 55-74 jobs`
-
-- [ ] **2.14 Remove the Phase 1 summary email**, since instant + digest replace it.
-  - Commit: `refactor(email): replace run summary with instant and digest`
-
-- [ ] **2.15 CI secrets**: add `GROQ_API_KEY` and `PROFILE_MD` to GitHub and to the workflow.
-  - Check: a cron run scores jobs in production.
-  - Commit: `ci: pass Groq and profile secrets to pipeline`
-
-**🏁 Phase 2 done** when you get instant emails for good matches, a daily digest, and the eval shows ≥ 80 % agreement.
+**Dropped:** LLM scoring, drafted applications, "mark as applied" links (the old Phases 2 and 3). The dashboard is now optional (Phase 6).
+**Kept:** every source adapter, the dedupe, the baseline, the health warnings, the cron.
+**Details:** [PLAN.md §7](PLAN.md#7-new-direction-discovery-and-fast-alerts-2026-11-16).
 
 ---
 
-## Phase 3: Draft applications + "mark as applied"
+## Phase 1R: Reliability
 
-**Goal:** strong matches arrive with a ready draft, and you can mark them as applied from the email.
-**Time:** about 1–2 weeks.
+**Goal:** the alerts can never stop silently.
+**Time:** about 3 hours.
 
-### 3A. Drafts
-
-- [ ] **3.1 Draft table**: add the `Draft` model and run the migration.
-  - Commit: `feat(db): add Draft model`
-
-- [ ] **3.2 Draft schema + prompt v1**: cover letter (≤ 200 words, direct tone), 3–4 CV bullets, screening answers, a gaps note. Only facts from your profile.
-  - Commit: `feat(llm): add draft prompt v1`
-
-- [ ] **3.3 Draft step**: only for jobs scoring 75+, and only once per job.
-  - Commit: `feat(pipeline): draft applications for strong matches`
-
-- [ ] **3.4 Anti-invention check**: the code lists skills and companies in the draft that are **not** in your profile and saves them as `warnings`. Include a test.
-  - Check: a fake draft mentioning "Kubernetes" gets a warning.
-  - Commit: `feat(pipeline): flag draft claims not found in profile`
-
-- [ ] **3.5 Draft in the email**: the instant email shows the draft, with any warnings in red at the top.
-  - Commit: `feat(email): include draft and warnings in instant email`
-
-### 3B. Mark as applied
-
-- [ ] **3.6 Create the web app**: a Next.js + Tailwind app in `web/` showing one simple page.
-  - Check: `pnpm --filter web dev` opens at localhost:3000.
-  - Commit: `feat(web): scaffold Next.js app with Tailwind`
-
-- [ ] **3.7 Signed links**: a helper that signs and checks `jobId + action` with `LINK_SIGNING_SECRET` (HMAC). Include tests.
-  - Check: a tampered link is rejected.
-  - Commit: `feat: add signed action links`
-
-- [ ] **3.8 Confirm page**: `/a/[action]` shows a "Confirm" button. Pressing it sends a POST that updates the job. Opening the link alone changes nothing, so email scanners can't trigger it.
-  - Commit: `feat(web): add confirm page for applied / not interested`
-
-- [ ] **3.9 Links in email**: add "Mark as applied" and "Not interested" links to the instant email.
-  - Commit: `feat(email): add mark-as-applied links`
-
-- [ ] **3.10 Deploy to Vercel**: set the env vars and set `APP_BASE_URL` to the Vercel URL.
-  - Check: clicking a link in a real email and confirming updates the job.
-  - Commit: `chore(web): configure Vercel deploy`
-
-**🏁 Phase 3 done** when a 75+ email contains a usable draft and the applied link works.
+- [ ] **R.1 Acceptance check** (left over from 1.29): a real new job reached the inbox exactly once. Note the date and the job.
+  - Checked 2026-11-16 20:16 UTC: **not passed yet.** 0 emails sent so far; the 01:05 run's 22 passing jobs were the quiet baseline of the 26 companies added on 15 Nov. GitHub config is right (`DRY_RUN=false`, email secrets set).
+  - Found: **GitHub started only 2 of ~7 scheduled runs in 19 h** (01:05 and 11:33 UTC; 12:17, 15:17 and 18:17 never ran). GitHub's scheduler is best effort and drops runs under load. Fixed by R.4.
+  - Found: Maersk and Workday (Peakon) get HTTP 429 on their first request every run (2 failures in a row). Workday seems to rate-limit GitHub's cloud IPs. To look at in Phase 2 (2.3 touches the Workday adapter).
+  - Re-check after R.4 has run for a day.
+- [ ] **R.4 Reliable trigger** (added after R.1): a free external scheduler (cron-job.org) calls GitHub's "run workflow" API every hour with a fine-grained token that can only start workflows in this repo. The GitHub schedule stays as a backup; the `concurrency` group stops overlaps, and `MIN_FETCH_INTERVAL_HOURS` stops any company being fetched too often.
+  - Check: `gh run list --workflow pipeline.yml` shows a `workflow_dispatch` run every hour for a day.
+- [ ] **R.2 Keep the cron alive**: GitHub switches off scheduled workflows in a public repo after 60 days without commits (mid-January 2027 at the latest). Add a monthly workflow that keeps the schedule enabled.
+  - Commit: `ci: keep the scheduled pipeline enabled`
+- [ ] **R.3 "Robot is down" email**: if no run has succeeded for 6 hours, send one warning email (at most once a day).
+  - Commit: `feat(pipeline): warn when no run has succeeded for 6 hours`
 
 ---
 
-## Phase 4: Dashboard
+## Phase 2: Keyword filter
 
-**Goal:** see and manage everything in a web UI, plus a public demo.
-**Time:** about 2–3 weeks.
+**Goal:** a job reaches you when its title or description mentions your stack.
+**Time:** about 6–8 hours.
 
-### 4A. Login and layout
-
-- [ ] **4.1 Login**: NextAuth with GitHub. Only `ALLOWED_GITHUB_LOGIN` can log in.
-  - Check: you can log in, and a different GitHub account is rejected.
-  - Commit: `feat(web): add GitHub login restricted to owner`
-
-- [ ] **4.2 Layout + nav**: sidebar or top nav with Jobs, Companies, Pipeline, Health.
-  - Commit: `feat(web): add app layout and navigation`
-
-### 4B. Jobs
-
-- [ ] **4.3 Jobs table**: title, company, score, status, date, sorted by score.
-  - Commit: `feat(web): add jobs table`
-
-- [ ] **4.4 Filters**: by bucket, status, company, and "dropped" with its reason.
-  - Commit: `feat(web): add job filters`
-
-- [ ] **4.5 Job detail page**: description, score breakdown, skills, red flags, the draft with copy buttons, and the filter reason.
-  - Commit: `feat(web): add job detail page`
-
-- [ ] **4.6 Status buttons**: Interested / Applied / Not interested, using server actions.
-  - Commit: `feat(web): change job status from detail page`
-
-### 4C. Companies
-
-- [ ] **4.7 Companies list**: last fetch, job count, failures, last error.
-  - Commit: `feat(web): add companies page`
-
-- [ ] **4.8 Add company form**: validated with the same Zod schema as the seed file.
-  - Commit: `feat(web): add company form`
-
-- [ ] **4.9 Pause / resume a company**
-  - Commit: `feat(web): pause and resume companies`
-
-### 4D. Pipeline and health
-
-- [ ] **4.10 Pipeline page**: funnel for the last run and the last 7 days (fetched → new → passed → scored → 55+ → 75+ → applied).
-  - Commit: `feat(web): add pipeline funnel page`
-
-- [ ] **4.11 Health page**: time since the last good run (red if over 6 hours), failing companies, LLM calls today, latest errors.
-  - Commit: `feat(web): add health page`
-
-### 4E. Demo
-
-- [ ] **4.12 Demo seed script**: `db/src/seed-demo.ts` creates fake companies, jobs, scores and drafts. Run it against a new Neon `demo` branch.
-  - Commit: `feat(db): add demo seed data`
-
-- [ ] **4.13 Demo mode**: when `DEMO_MODE=true`, there's no login, no changes are allowed, and a "Demo data" banner shows.
-  - Commit: `feat(web): add read-only demo mode`
-
-- [ ] **4.14 Deploy the demo**: a second Vercel project using the demo DB and `DEMO_MODE=true`.
-  - Check: opening the demo URL in a private window shows fake data and no login.
-  - Commit: `chore: document demo deployment`
-
-**🏁 Phase 4 done** when you use the dashboard daily and the demo link works for strangers.
+- [ ] **2.1 Keyword config**: `config/keywords.json` with each keyword and its spellings, e.g. `node` → "node", "node.js", "nodejs"; `next.js` → "next.js", "nextjs" (never the bare word "next"); `postgresql` → "postgresql", "postgres"; `react` as a whole word ("React Native" yes, "reactive" no). Plus the drop words (senior, lead, …) and whether the seniority rule is on. Zod-validated. Table tests.
+  - Commit: `feat(pipeline): add keyword config with spelling variants`
+- [ ] **2.2 New filter rule**: pass when a keyword appears in the title **or** description, the job is in Denmark (location rule unchanged) and the title is not senior (if switched on). Store the matched keywords on the job (`matchedKeywords`, migration). Drop reasons stay in `filterReason`.
+  - Commit: `feat(pipeline): filter jobs by stack keywords`
+- [ ] **2.3 Descriptions for Workday and SuccessFactors**: their adapters only read titles. Fetch the job page for **new** jobs only, so a job that mentions React only in its text can still match.
+  - Commit: `feat(pipeline): fetch descriptions for new Workday and SuccessFactors jobs`
+- [ ] **2.4 Better email**: newest first, the job's own posting date ("posted 2 h ago"), the matched keywords, and the source.
+  - Commit: `feat(email): show posting date, keywords and source`
+- [ ] **2.5 Dry run on saved jobs**: a script that runs the new rule over the jobs already in the database and prints what would pass, compared with the old rule. Tune the keywords before switching over.
+  - Commit: `feat(tools): compare the keyword filter with the title filter`
 
 ---
 
-## Phase 5: Portfolio polish
+## Phase 3: Job sites
+
+**Goal:** one alert covers company boards **and** the big Danish job sites, without duplicates.
+**Time:** about 12–15 hours.
+
+- [ ] **3.1 Groundwork**: new source types `JOBINDEX`, `ITJOBBANK`, `THEHUB`, `LINKEDIN`, `INDEED`, `JOBNET` (migration). An `employer` field on jobs, because one search covers many companies. Search sources never close jobs that drop out of the results (a search only shows the newest jobs). Search sources read their search words from `config/keywords.json`.
+  - Commit: `feat(db): add job-site sources and employer name`
+- [ ] **3.2 Jobindex and IT-Jobbank** (official RSS, free): `https://www.jobindex.dk/jobsoegning.rss?q=<keyword>` and the same on `www.it-jobbank.dk`. **One plain `q=` per feed**: their `robots.txt` forbids `sort=`, `page=`, `jobage=`, several parameters, and multi-word queries with `+`. First check how a feed orders its 20 jobs; if it is not newest first, adjust before relying on it. Fixtures, tests, then live.
+  - Commit: `feat(sources): add Jobindex and IT-Jobbank RSS`
+- [ ] **3.3 The Hub** (free): `https://thehub.io/api/v2/jobsandfeatured?countryCode=DK&sorting=newJobs&page=N`, pages 1–2 per run (15 jobs each). No description in the list, so read the job page for new jobs only. Not an official API: keep fixtures, and the health warning catches changes.
+  - Commit: `feat(sources): add The Hub`
+- [ ] **3.4 Apify client**: run an actor through Apify's API with `APIFY_TOKEN` (GitHub secret), a cap on results per run, a timeout, and the cost of each run in the log.
+  - Commit: `feat(pipeline): add Apify client with a cost cap`
+- [ ] **3.5 LinkedIn via Apify** (`valig/linkedin-jobs-scraper`, about $0.40 per 1,000 jobs): first a small paid test run to see the real output and cost, then the adapter: your keywords, Denmark, only recent posts (and maybe "under 10 applicants").
+  - Commit: `feat(sources): add LinkedIn jobs via Apify`
+- [ ] **3.6 Indeed and Jobnet via Apify** (`valig/indeed-jobs-scraper` ~$0.10 per 1,000; `blackfalcondata/jobnet-scraper` ~$2 per 1,000, with a "new only" mode). Jobnet is the search behind Workindenmark. A test run each, then keep or drop.
+  - Commit: `feat(sources): add Indeed and Jobnet via Apify`
+- [ ] **3.7 No duplicates across sources**: the same job on a company board, Jobindex and LinkedIn becomes **one** email entry ("also on Jobindex, LinkedIn"). Match on a cleaned employer name ("EG A/S" = "EG") plus a cleaned title, within 30 days. Do this right after the second source goes live.
+  - Commit: `feat(pipeline): merge the same job from several sources`
+- [ ] **3.8 Jobbank.dk** (parked): `jobbank.dk` answers our bot with HTTP 500 even on `/job/`, which its `robots.txt` allows. Ask Jobbank's support whether a feed or API exists; until then, use Jobbank's own job-agent email.
+
+---
+
+## Phase 4: Speed (optional)
+
+- [ ] **4.1 Hourly runs for free sources**: company boards with light APIs, Jobindex, IT-Jobbank and The Hub every hour; Workday, career pages and Apify sources stay at every 3 hours (rate limits and cost).
+  - Commit: `feat(pipeline): check light sources every hour`
+
+---
+
+## Phase 5: README and polish
 
 **Goal:** a recruiter understands the project in 60 seconds.
-**Time:** about 1 week.
 
-- [ ] **5.1 README intro**: what it is, why you built it, the demo link, how to run it locally.
-  - Commit: `docs: write README intro and setup`
-- [ ] **5.2 Architecture diagram**: a Mermaid diagram of the pipeline steps.
-  - Commit: `docs: add architecture diagram`
-- [ ] **5.3 How scoring works**: the rubric, the eval set, and your eval results table.
-  - Commit: `docs: explain scoring and eval results`
-- [ ] **5.4 Screenshots + GIF**: dashboard and an example email (fake data only).
-  - Commit: `docs: add screenshots and demo GIF`
-- [ ] **5.5 Design decisions + ethics**: why each main choice; no auto-apply, polite fetching, no LinkedIn.
-  - Commit: `docs: add design decisions and ethics section`
-- [ ] **5.6 Badges**: CI status and test count.
-  - Commit: `docs: add CI badge`
-- [ ] **5.7 Privacy check**: search the git history for your surname, email and phone number. Fix anything you find before sharing the repo.
-  - Commit: *only if you had to fix something*
-- [ ] **5.8 Release**: tag `v1.0.0` on GitHub with short release notes.
-  - Commit: *none, it's a git tag:* `git tag v1.0.0 && git push --tags`
-
-**🏁 Project done.** 🎉
+- [ ] **5.1 README**: what it is (one alert, many sources, early applicant), how to run it locally, the sources it covers.
+- [ ] **5.2 Architecture diagram** (Mermaid): sources → normalize → dedupe → filter → email.
+- [ ] **5.3 Design decisions and ethics**: polite fetching (robots.txt, pauses, intervals), no auto-applying, and how the LinkedIn/Indeed/Jobnet data is obtained (through Apify, logged out, against those sites' terms; your own account is never used).
+- [ ] **5.4 Example email** (fake data) and CI badge.
+- [ ] **5.5 Privacy check**: search the git history for your surname, email and phone number.
+- [ ] **5.6 Release**: tag `v1.0.0`.
 
 ---
 
-## Extra: more job sources (any time after Phase 2)
+## Phase 6: Dashboard (optional)
 
-Each adapter follows the same five steps, each with its own commit:
-1. Save a fixture → `test: add <source> fixtures`
-2. Parse it → `feat(sources): parse <source> response`
-3. Normalize it + snapshot test → `feat(sources): normalize <source> jobs`
-4. Register it → `feat(sources): register <source> adapter`
-5. Add one real company to `companies.json` → `chore: add first <source> company`
-
-Order:
-- [ ] Recruitee
-- [ ] Greenhouse
-- [ ] Lever
-- [ ] Ashby
-- [ ] robots.txt checker (needed before HTML sources) → `feat(pipeline): respect robots.txt for HTML sources`
-- [ ] Emply / HR Manager (look for hidden JSON first, use Cheerio only if there's none)
+A small read-only Next.js page: latest jobs with their keywords and sources, and source health. Only if there is time; the inbox is the product.
