@@ -28,6 +28,7 @@ const LABEL: Record<DetectionResult["status"], string> = {
   confirmed: "Board found and confirmed, has jobs",
   "confirmed-empty": "Board found and confirmed, 0 jobs right now",
   "found-unverified": "Board found, not verified (Workday, or its check failed)",
+  "found-custom": "Own career page with job links (CUSTOM), check by hand",
   unsupported: "Uses a system we can't read yet",
   blocked: "robots.txt forbids reading the careers page",
   "nothing-found": "No job board recognised on the website",

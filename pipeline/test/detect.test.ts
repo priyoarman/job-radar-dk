@@ -136,6 +136,33 @@ describe("detectCompany", () => {
     expect(result.note).toContain("503");
   });
 
+  it("reports the company's own career page when it links to job pages", async () => {
+    const http = site({
+      "https://www.example.dk/robots.txt": "",
+      "https://www.example.dk/": '<a href="/karriere/">Karriere</a><a href="/jobs/one/">One</a>',
+      "https://www.example.dk/karriere/": '<a href="/jobs/one/">One</a><a href="/jobs/two/">Two</a><a href="/jobs/three/">Three</a>',
+    });
+    expect(await detectCompany(company, http)).toMatchObject({
+      status: "found-custom",
+      system: "CUSTOM",
+      sourceKey: "https://www.example.dk/karriere/",
+      note: "3 job links on the page; check it by hand",
+    });
+  });
+
+  it("prefers a readable own career page over a system we cannot read", async () => {
+    const http = site({
+      "https://www.example.dk/robots.txt": "",
+      "https://www.example.dk/": '<a href="https://candidate.hr-manager.net/Agent/Subscription.aspx?cid=333">Jobagent</a><a href="/jobs/a/">A</a><a href="/jobs/b/">B</a>',
+    });
+    expect(await detectCompany(company, http)).toMatchObject({ status: "found-custom", sourceKey: "https://www.example.dk/" });
+  });
+
+  it("needs at least two job links before suggesting a career page", async () => {
+    const http = site({ "https://www.example.dk/robots.txt": "", "https://www.example.dk/": '<a href="/jobs/only-one/">Job</a>' });
+    expect((await detectCompany(company, http)).status).toBe("nothing-found");
+  });
+
   it("reports nothing-found when the site has no recognisable board", async () => {
     const http = site({ "https://www.example.dk/robots.txt": "", "https://www.example.dk/": "<p>Hello</p>" });
     expect((await detectCompany(company, http)).status).toBe("nothing-found");

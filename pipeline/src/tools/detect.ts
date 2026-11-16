@@ -2,6 +2,7 @@ import * as cheerio from "cheerio";
 import { errorMessage } from "../lib/errors";
 import type { HttpClient } from "../lib/http";
 import { isPathAllowed, robotsTxtFor } from "../lib/robots";
+import { jobLinks } from "../sources/custom";
 import { type Candidate, type Counts, countBoard } from "./candidates";
 
 export type Supported = "TEAMTAILOR" | "GREENHOUSE" | "LEVER" | "LEVER_EU" | "ASHBY" | "WORKABLE" | "RECRUITEE" | "WORKDAY" | "SUCCESSFACTORS";
@@ -40,6 +41,8 @@ const PATTERNS: Pattern[] = [
   { system: "REACHMEE", regex: /https?:\/\/[a-z0-9.-]*reachmee\.com[^"'\s<)]*/gi, key: (m) => m[0] },
   { system: "JSONLD", regex: /"@type"\s*:\s*"JobPosting"/g, key: (_m, page) => page.href },
 ];
+
+export const MIN_CUSTOM_LINKS = 2;
 
 export function detectBoards(html: string, pageUrl: string): Detection[] {
   const page = new URL(pageUrl);
@@ -89,7 +92,7 @@ export type DetectionResult = {
   id: number;
   name: string;
   website: string;
-  status: "confirmed" | "confirmed-empty" | "found-unverified" | "unsupported" | "blocked" | "nothing-found" | "error";
+  status: "confirmed" | "confirmed-empty" | "found-unverified" | "found-custom" | "unsupported" | "blocked" | "nothing-found" | "error";
   system?: string;
   sourceKey?: string;
   counts?: Counts;
@@ -169,19 +172,31 @@ export async function detectCompany(candidate: Candidate & { website?: string },
     return null;
   };
 
+  let custom: { url: string; links: number } | null = null;
+  const noteCustom = (html: string, url: string) => {
+    const links = jobLinks(html, url).length;
+    if (links >= MIN_CUSTOM_LINKS && links > (custom?.links ?? 0)) custom = { url, links };
+  };
+
   const start = await read(website);
   if (start !== null) {
     const hit = await tryDetections(detectBoards(start, website));
     if (hit) return { ...hit, requests };
+    noteCustom(start, website);
     for (const link of careersLinks(start, website)) {
       const html = await read(link);
       if (html === null) continue;
+      noteCustom(html, link);
       const linked = await tryDetections([...detectBoards(link, link), ...detectBoards(html, link)]);
       if (linked) return { ...linked, requests };
     }
   }
   if (empty) return { ...(empty as DetectionResult), requests };
   if (unverified) return { ...(unverified as DetectionResult), requests };
+  const page = custom as { url: string; links: number } | null;
+  if (page) {
+    return { ...base, status: "found-custom", system: "CUSTOM", sourceKey: page.url, pages, other, note: `${page.links} job links on the page; check it by hand`, requests };
+  }
   if (other.length > 0) return { ...base, status: "unsupported", system: other[0]!.system, sourceKey: other[0]!.key, pages, other, requests };
   if (blocked) return { ...base, status: "blocked", pages, other, note: "robots.txt disallows the page", requests };
   if (start === null) return { ...base, status: "error", pages, other, note: lastError, requests };

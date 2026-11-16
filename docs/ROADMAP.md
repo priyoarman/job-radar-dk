@@ -250,6 +250,9 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Result (117 websites): 13 boards confirmed with jobs (e.g. Monta, Trackunit, Systematic, SYBO, Fellowmind), 9 found but not verified (Workday: LEGO, Stibo, JBT/Marel, GN, NVIDIA), HR Manager at 4 companies, Emply at 1 (Matas), 72 with no recognisable board, 17 unreachable, 1 blocked by robots.txt.
   - Commit: `feat(tools): detect job boards from company careers pages`
 - [ ] **S5.4 Grow the company list** to about 100–150 (by hand, with the script's help).
+  - Round 1 (2026-11-16): 57 → 63. `candidates:detect` now also reports a company's own career page with job links (`found-custom`), and its rerun on the 94 unwatched candidates found 2 (Dept: really Greenhouse; Salling: category pages, not jobs). Probing HR Manager aliases and Emply hosts by name found Energinet, Andel, Nemlig.com (HR Manager), Init, Novicell (Emply); NNIT and Jyske Bank have empty HR Manager accounts. IMC Trading found on Greenhouse as `imc` (Aarhus office). Fixed the location rule for Hong Kong, Macao, Korea and a few short country names (IMC's Hong Kong jobs passed as "unknown").
+  - Left out: Dept (locations are office codes like DTNL, so the location rule can't tell its few Danish jobs apart), Coop and Grundfos-style newer SuccessFactors pages, Agreena (Ashby board gone).
+  - Next round: the remaining ~90 candidates mostly load jobs with JavaScript or are big companies on Workday/SuccessFactors with their own domains; they need a look by hand (find the careers page in a browser, note the board, verify with the adapter).
 - [ ] **S5.5 Email grouped by company**, plus a per-source health overview.
 
 ---

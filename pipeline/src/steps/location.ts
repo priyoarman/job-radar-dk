@@ -27,7 +27,8 @@ const ABROAD = [
   "edinburgh", "dublin", "paris", "lyon", "madrid", "barcelona", "lisbon", "porto", "milan", "rome", "warsaw",
   "krakow", "kraków", "wroclaw", "wrocław", "vilnius", "riga", "tallinn", "prague", "vienna", "zurich", "zürich",
   "geneva", "budapest", "bucharest", "cluj", "kyiv", "new york", "san francisco", "boston", "seattle",
-  "austin", "toronto", "bangalore", "bengaluru", "pune", "hyderabad",
+  "austin", "toronto", "bangalore", "bengaluru", "pune", "hyderabad", "hong kong", "macau", "korea", "bosnia",
+  "macedonia", "burma", "ivory coast", "palestine", "swaziland",
 ];
 
 const ABROAD_UPPERCASE = ["UK", "US", "USA"];
@@ -47,7 +48,7 @@ function countryNames(): string[] {
       } catch {
         continue;
       }
-      if (name && name !== code) result.push(name.replace(/\s*\(.*\)$/, "").toLowerCase());
+      if (name && name !== code) result.push(name.replace(/\s*\(.*\)$/, "").replace(/ SAR China$/, "").toLowerCase());
     }
   }
   return result;

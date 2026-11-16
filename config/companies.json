@@ -605,5 +605,67 @@
     "tags": ["media"],
     "active": true,
     "notes": "Verified 2026-11-16: own WordPress list page, 12 jobs at /jobs/<slug>/, no JSON-LD. HR Manager cid=333, alias unknown."
+  },
+  {
+    "slug": "energinet",
+    "name": "Energinet",
+    "source": "HRMANAGER",
+    "sourceKey": "energinet",
+    "careersUrl": "https://energinet.dk",
+    "city": "Fredericia",
+    "tags": ["energy", "public"],
+    "active": true,
+    "notes": "Verified 2026-11-16 (S5.4 name probe): HR Manager alias energinet, 29 jobs in Denmark, 5 pass the filter."
+  },
+  {
+    "slug": "andel",
+    "name": "Andel",
+    "source": "HRMANAGER",
+    "sourceKey": "andel",
+    "careersUrl": "https://andel.dk",
+    "tags": ["energy"],
+    "active": true,
+    "notes": "Verified 2026-11-16 (S5.4 name probe): HR Manager alias andel, 9 jobs in Denmark. Its Ashby board is unused."
+  },
+  {
+    "slug": "nemlig",
+    "name": "Nemlig.com",
+    "source": "HRMANAGER",
+    "sourceKey": "nemlig",
+    "careersUrl": "https://nemlig.com",
+    "tags": ["ecommerce", "logistics"],
+    "active": true,
+    "notes": "Verified 2026-11-16 (S5.4 name probe): HR Manager alias nemlig, 8 jobs in Denmark."
+  },
+  {
+    "slug": "init",
+    "name": "Init",
+    "source": "EMPLY",
+    "sourceKey": "https://init.career.emply.com/",
+    "careersUrl": "https://init.career.emply.com/",
+    "tags": ["enterprise"],
+    "active": true,
+    "notes": "Verified 2026-11-16 (S5.4 name probe): Emply career site, 9 jobs."
+  },
+  {
+    "slug": "novicell",
+    "name": "Novicell",
+    "source": "EMPLY",
+    "sourceKey": "https://novicell.career.emply.com/ledige-stillinger",
+    "careersUrl": "https://novicell.career.emply.com/ledige-stillinger",
+    "tags": ["consultancy", "agency"],
+    "active": true,
+    "notes": "Verified 2026-11-16 (S5.4 name probe): Emply career site, 0 jobs today."
+  },
+  {
+    "slug": "imc",
+    "name": "IMC Trading",
+    "source": "GREENHOUSE",
+    "sourceKey": "imc",
+    "careersUrl": "https://www.imc.com/eu/careers",
+    "city": "Aarhus",
+    "tags": ["fintech", "trading"],
+    "active": true,
+    "notes": "Verified 2026-11-16: Greenhouse board imc, 156 jobs worldwide, 7 in Aarhus (5 pass the filter)."
   }
 ]
