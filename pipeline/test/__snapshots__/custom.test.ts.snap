@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`customAdapter.normalize > matches the snapshot for the JSON-LD page 1`] = `
+{
+  "company": "JP/Politikens Hus",
+  "description": "Build and maintain Denmark's leading payroll system for the public sector - solving complex, mission-critical challenges that keep the Danish welfare system running.
+Do you want to help build and maintain Denmark's strongest payroll system for public sector customers? Are you energised by complex, high-stakes technical challenges?
+Then you might be the senior software developer we're looking for!
+As part of the department
+At EG Silkeborg Data, our ambition is to be the most valuable partner for the Danish public sector. We develop and operate products within Payroll, Finance, HR Administration, Organisation and Management Information for municipalities and regions across Denmark. Time and again, we deliver strong, high-quality solutions - because everyone on our team is committed to sustaining and developing the Danish welfare system through digitalisation.
+Public sector employees expect to be paid the right amount at the right time, and it's our job to make sure that happens. Payroll calculation is complex, so high quality - in both our solution and our deliveries - is essential to customer satisfaction. The Payroll & Finance team responsible for this service currently counts 11 people across Denmark and Poland, and your future colleagues are looking forward to welcoming you. Most of our current platform runs on mainframe, DB2 and Cobol.
+The role is based in our Aarhus office, and regular office presence is an essential part of the job. We are therefore looking for candidates who are able to work from our Aarhus office.
+Your tasks: Build, Maintain and Modernise a Mission-Critical Payroll Platform
+• Develop new services, working in close collaboration with fellow developers on the team and beyond
+• Maintain a highly complex platform, resolving incidents as they arise
+• Ensure high quality in our solutions through reviews and testing
+• Spot and remove technical debt, so we keep renewing the platform and delivering strong business value
+• Challenge how we work, and help optimise our processes and methods
+• You'll bring hands-on knowledge of and experience with DB2 and Cobol.
+You are the ideal candidate if you
+• Have strong analytical skills, and the confidence to get to grips with a complex domain
+• Communicate well with the colleagues around you - whether that's a business developer, or someone from support or sales
+• Can collaborate in a global setup with colleagues in both Denmark and Poland, so you're fluent in English, spoken and written
+• Are a team player who brings energy, good humour and the will to succeed
+• Have experience with DB2 and Cobol
+What's in it for you?
+Flexible working hours, the option to work from home when it suits you, and a lunch, fruit, coffee and tea scheme are all part of everyday life here - alongside a competitive salary based on your qualifications.
+• Real ownership - put your fingerprint on how we work: shape our methods, our solutions and the way the team solves problems.
+• Meaningful impact - help make sure public sector employees across Denmark get paid correctly and on time - real work that keeps the Danish welfare system running.
+• Growth mandate - join a company in exciting growth, with a genuine mandate to modernise a mission-critical platform and remove technical debt as you go.
+• AI at the frontier - you stay updated on new AI capabilities and translate them into practical value for how we maintain and modernise our payroll platform.
+• Collaborative culture - work alongside colleagues in Denmark and Poland who bring trust, openness and no politics to how we build software together.
+Our Values:
+• Lead the Industry - We bring deep industry expertise and help our customers lead their industry.
+• Make it Happen - We take ownership, move fast and deliver real impact.
+• Stronger Together - We collaborate across borders with high standards, trust, openness and no politics.
+We look forward to hearing from you!
+If you'd like to know more before applying, feel free to contact Manager, Lotte Jensen on +45 3035 0840. We evaluate applications on an ongoing basis and hire once we've found the right candidate, so please send your application as soon as possible. All enquiries are treated confidentially. Start date: as soon as possible.
+At EG, we build software that makes a difference.
+Our industry-specific software helps people and businesses work smarter every day. From doctors spending more time with patients to builders running safer, more efficient projects.
+Our software is built by peers from the industry and backed by EG's scale for stability, innovation, and security. If you're ambitious, curious, and take pride in ownership, you'll thrive here. You'll be trusted to grow your skills, shape meaningful solutions, and make an impact together with talented colleagues across borders.
+Join us in creating software that works for people - not software that makes people work.
+Curious what it's really like to work at EG?
+Explore life at EG, meet some of your future colleagues, and see our values in action: Working at EG
+See all our open positions here
+Learn more about EG here.
+#LI-Onsite",
+  "externalId": "https://careers.egsoftware.com/jobs/8254011-software-developer-mainframe-cobol",
+  "location": "Aarhus, DK",
+  "postedAt": 2026-08-21T12:04:01.000Z,
+  "remoteType": null,
+  "title": "Software Developer - Mainframe/Cobol",
+  "url": "https://careers.egsoftware.com/jobs/8254011-software-developer-mainframe-cobol",
+}
+`;

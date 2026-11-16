@@ -594,5 +594,16 @@
     "tags": ["media", "public"],
     "active": true,
     "notes": "Verified 2026-11-16: SuccessFactors classic search on SAP's host (www.dr.dk/om-dr/job is a mirror with broken links), 27 jobs, Danish banner."
+  },
+  {
+    "slug": "jppol",
+    "name": "JP/Politikens Hus",
+    "source": "CUSTOM",
+    "sourceKey": "https://jppol.dk/karriere/",
+    "careersUrl": "https://jppol.dk/karriere/",
+    "city": "Copenhagen",
+    "tags": ["media"],
+    "active": true,
+    "notes": "Verified 2026-11-16: own WordPress list page, 12 jobs at /jobs/<slug>/, no JSON-LD. HR Manager cid=333, alias unknown."
   }
 ]

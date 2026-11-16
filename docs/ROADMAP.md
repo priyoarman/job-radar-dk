@@ -243,7 +243,9 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
   - Done: one shared cache in `lib/robots.ts` (per HTTP client, so per run; 24 h is the most RFC 9309 allows, and a cache across runs would need a table for ~50 tiny requests a day). The careers detector uses it too. A blocked company gets the new fetch status `SKIPPED_ROBOTS`: not an error, no failure count, run stays `SUCCESS`, and the email footer says "blocked by its robots.txt".
   - Check: `prisma migrate status` shows the new migration applied after the next pipeline run.
   - Commit: `feat(pipeline): cache robots.txt and skip blocked sources`
-- [ ] **S5.2 Generic JSON-LD adapter** (`CUSTOM`): reads `schema.org/JobPosting` data that many career pages embed.
+- [x] **S5.2 Career-page adapter** (`CUSTOM`, changed from "JSON-LD only" on 2026-11-16 because no candidate site has JSON-LD): reads a company's own job list page, opens each job page, and uses `schema.org/JobPosting` JSON-LD when present, otherwise the heading and main text (research in PLAN.md §5f).
+  - Result: JP/Politikens Hus added (12 jobs, 1 passes the filter: Fullstack-udvikler).
+  - Commit: `feat(pipeline): add career-page adapter, watch JP/Politikens Hus`
 - [x] **S5.3 Careers-page detection** (`pnpm candidates:detect`): reads each candidate's website (robots.txt respected, 1 request/second), finds exact board URLs and their keys, follows up to 3 careers links, and checks supported boards with the real adapters. Writes `docs/careers-detection-report.md` and `config/detected-suggested.json`; adds nothing by itself.
   - Result (117 websites): 13 boards confirmed with jobs (e.g. Monta, Trackunit, Systematic, SYBO, Fellowmind), 9 found but not verified (Workday: LEGO, Stibo, JBT/Marel, GN, NVIDIA), HR Manager at 4 companies, Emply at 1 (Matas), 72 with no recognisable board, 17 unreachable, 1 blocked by robots.txt.
   - Commit: `feat(tools): detect job boards from company careers pages`

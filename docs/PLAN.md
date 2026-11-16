@@ -132,8 +132,10 @@ job-radar-dk/
   - Teamtailor: the career-site base URL (the adapter appends `/jobs.rss`)
   - Recruitee: the subdomain (`example` → `example.recruitee.com`)
   - Greenhouse: the board token; Lever: the site name (prefix `eu:` for companies on Lever's EU instance, e.g. `eu:example`); Ashby: the org name
-  - Emply / HR Manager: the full listing page URL
-- Only add companies with `TEAMTAILOR` until the other adapters exist. The sync script rejects sources that have no adapter yet.
+  - Emply: the full listing page URL; HR Manager: the customer alias (e.g. `bec`)
+  - Workday: the careers-site URL; SuccessFactors: the site's origin (the real one, see §5c)
+  - Custom: the company's own job list page; job links must sit under a folder like `/jobs/` or `/stillinger/` (see §5f)
+- The sync script rejects sources that have no adapter yet (today only `TALENTECH`).
 
 ---
 
@@ -713,6 +715,18 @@ HR Manager belongs to Talentech, which documents a public **Job Portal API** tha
 - **The alias is required:** the numeric `cid` in links (e.g. `cid=307`) does not work, and an unknown alias gives HTTP 400. Aliases appear in `customer=` links on career pages.
 - **Usage limits (API Usage Notice):** at most 8 calls per hour and 200 per day per customer and method. The pipeline makes 1–3 calls per company every 3 hours.
 - **Findings:** `bec` = 38 jobs (21 Warsaw, 16 Roskilde, 1 Aalborg). `eg` exists but has 0 jobs: EG's job board is Teamtailor (`careers.egsoftware.com`), and HR Manager only holds its open-application forms. EWII (`cid=307`) and JP/Politikens Hus (`cid=333`) have no known alias (`ewii`, `jppol` and `jp` are unknown).
+
+---
+
+## 5f. Career-page adapter (step S5.2, 2026-11-16)
+
+The roadmap planned a JSON-LD-only adapter, but none of the 117 candidate websites read by the careers detector embed `schema.org/JobPosting`, JP/Politikens Hus included. So `CUSTOM` reads a company's own job list page instead, and uses JSON-LD when a job page has it.
+
+- **List page:** the `sourceKey`. Job links are same-site links with a job folder (`job(s)`, `jobopslag`, `stilling(er)`, `ledige-stillinger`, `vacancy/vacancies`, `position(s)`, `opening(s)`) followed by a job name; at most 40 per run.
+- **Job pages:** one request each, 1.5 s apart, `robots.txt` checked per page (cached). With JobPosting JSON-LD (also inside `@graph`): title, `jobLocation` (city, country), `TELECOMMUTE` → remote, `datePosted`, `description`. Without it: the first `<h1>`, the text of `<main>` (or `<article>`, or `<body>`) without menus, headers, footers and forms, and `article:published_time` if present.
+- **Id:** the job page URL. Sites that change their URLs will look like new jobs, which is acceptable for small sites.
+- **Errors:** a job page that is gone (404/410) or blocked by `robots.txt` is skipped and logged as `custom.job-skipped`. Any other error fails the whole company, because a half-read list would mark still-open jobs as closed.
+- **JP/Politikens Hus:** `jppol.dk/karriere/` (WordPress) lists 12 jobs at `/jobs/<slug>/`; the pages have no JSON-LD but clean `<main>` content. Its jobs are also on HR Manager (`cid=333`), but the alias is unknown (`jppol`, `jp`, `jppolitikenshus`, `jppolitiken`, `politikenshus`, `jp-pol`, `jpph` are not it). WordPress has no jobs type in `/wp-json/wp/v2/types`.
 
 ---
 
