@@ -10,11 +10,13 @@ export function runTriggerFor(githubEventName: string | undefined): RunTrigger {
   return "local";
 }
 
+const isSkipped = (o: CompanyOutcome) => o.status === "SKIPPED_RECENT" || o.status === "SKIPPED_ROBOTS";
+
 export function summarizeOutcomes(outcomes: readonly CompanyOutcome[]) {
   const sum = (pick: (o: CompanyOutcome) => number) => outcomes.reduce((n, o) => n + pick(o), 0);
   return {
-    companiesChecked: outcomes.filter((o) => o.status !== "SKIPPED_RECENT").length,
-    companiesSkipped: outcomes.filter((o) => o.status === "SKIPPED_RECENT").length,
+    companiesChecked: outcomes.filter((o) => !isSkipped(o)).length,
+    companiesSkipped: outcomes.filter(isSkipped).length,
     companiesFailed: outcomes.filter((o) => o.status === "ERROR").length,
     jobsFetched: sum((o) => o.jobsFound),
     jobsNew: sum((o) => o.jobsNew),
@@ -29,6 +31,7 @@ export function runStatusFor(outcomes: readonly CompanyOutcome[]): Extract<RunSt
 export function healthUpdateFor(outcome: CompanyOutcome): Prisma.CompanyUpdateInput | null {
   if (outcome.status === "SKIPPED_RECENT") return null;
   if (outcome.status === "ERROR") return { consecutiveFailures: { increment: 1 }, lastError: outcome.error };
+  if (outcome.status === "SKIPPED_ROBOTS") return { lastError: outcome.error };
   return { consecutiveFailures: 0, lastError: null };
 }
 

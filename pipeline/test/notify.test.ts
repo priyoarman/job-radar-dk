@@ -62,6 +62,7 @@ describe("warningsFrom", () => {
     [{ consecutiveFailures: 3, lastError: "HTTP 404", lastFetchStatus: "ERROR" as const }, ["failing"]],
     [{ consecutiveFailures: 7, lastFetchStatus: "ERROR" as const }, ["failing"]],
     [{ lastFetchStatus: "SUSPICIOUS_EMPTY" as const }, ["suspicious-empty"]],
+    [{ lastFetchStatus: "SKIPPED_ROBOTS" as const, lastError: "robots-disallowed: x" }, ["robots-disallowed"]],
     [{ lastFetchStatus: "EMPTY" as const }, []],
     [{ lastFetchStatus: null }, []],
   ])("%j → %j", (overrides, reasons) => {

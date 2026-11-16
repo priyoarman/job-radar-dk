@@ -239,7 +239,10 @@ A small commit is easy to understand, easy to review, and easy to undo if someth
 - [x] **S5.0b Location rule for global boards**: recognise US states (names and ", CA"-style codes), every country name (via `Intl.DisplayNames`), codes like `USCA`, big world cities and non-European regions (APAC, NAMER, Latin America…), so "Mountain View, California" or "Seoul, South Korea" no longer count as unknown. Found by S5.0: only 3 of Databricks' 25 "matches" were really in Denmark.
   - Commit: `fix(pipeline): recognise US states and all countries in the location rule`
 
-- [ ] **S5.1 robots.txt checker**, cached per domain for 24 h; HTML sources skip and log `robots-disallowed` when blocked.
+- [x] **S5.1 robots.txt checker**, cached per domain for 24 h; HTML sources skip and log `robots-disallowed` when blocked.
+  - Done: one shared cache in `lib/robots.ts` (per HTTP client, so per run; 24 h is the most RFC 9309 allows, and a cache across runs would need a table for ~50 tiny requests a day). The careers detector uses it too. A blocked company gets the new fetch status `SKIPPED_ROBOTS`: not an error, no failure count, run stays `SUCCESS`, and the email footer says "blocked by its robots.txt".
+  - Check: `prisma migrate status` shows the new migration applied after the next pipeline run.
+  - Commit: `feat(pipeline): cache robots.txt and skip blocked sources`
 - [ ] **S5.2 Generic JSON-LD adapter** (`CUSTOM`): reads `schema.org/JobPosting` data that many career pages embed.
 - [x] **S5.3 Careers-page detection** (`pnpm candidates:detect`): reads each candidate's website (robots.txt respected, 1 request/second), finds exact board URLs and their keys, follows up to 3 careers links, and checks supported boards with the real adapters. Writes `docs/careers-detection-report.md` and `config/detected-suggested.json`; adds nothing by itself.
   - Result (117 websites): 13 boards confirmed with jobs (e.g. Monta, Trackunit, Systematic, SYBO, Fellowmind), 9 found but not verified (Workday: LEGO, Stibo, JBT/Marel, GN, NVIDIA), HR Manager at 4 companies, Emply at 1 (Matas), 72 with no recognisable board, 17 unreachable, 1 blocked by robots.txt.

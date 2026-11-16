@@ -48,6 +48,14 @@ describe("summarizeOutcomes", () => {
     });
   });
 
+  it("counts a company blocked by robots.txt as skipped, not checked or failed", () => {
+    expect(summarizeOutcomes([outcome("OK"), outcome("SKIPPED_ROBOTS"), outcome("SKIPPED_RECENT")])).toMatchObject({
+      companiesChecked: 1,
+      companiesSkipped: 2,
+      companiesFailed: 0,
+    });
+  });
+
   it("returns zeros for a run with no companies", () => {
     expect(summarizeOutcomes([])).toEqual({
       companiesChecked: 0,
@@ -67,6 +75,7 @@ describe("runStatusFor", () => {
     [[], "SUCCESS"],
     [["OK", "ERROR"], "PARTIAL"],
     [["ERROR", "ERROR"], "PARTIAL"],
+    [["OK", "SKIPPED_ROBOTS"], "SUCCESS"],
   ] as const)("%j → %s", (statuses, expected) => {
     expect(runStatusFor(statuses.map((s) => outcome(s)))).toBe(expected);
   });
@@ -82,6 +91,12 @@ describe("healthUpdateFor", () => {
 
   it.each(["OK", "EMPTY", "SUSPICIOUS_EMPTY"] as const)("resets the failure count after %s", (status) => {
     expect(healthUpdateFor(outcome(status))).toEqual({ consecutiveFailures: 0, lastError: null });
+  });
+
+  it("keeps the failure count but stores the reason when robots.txt blocks a company", () => {
+    expect(healthUpdateFor(outcome("SKIPPED_ROBOTS", { error: "robots-disallowed: https://x/search/" }))).toEqual({
+      lastError: "robots-disallowed: https://x/search/",
+    });
   });
 
   it("leaves a skipped company unchanged", () => {

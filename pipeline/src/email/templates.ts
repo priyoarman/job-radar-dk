@@ -45,12 +45,15 @@ function jobText(job: EmailJob): string {
 export type SourceWarning = {
   slug: string;
   name: string;
-  reason: "failing" | "suspicious-empty";
+  reason: "failing" | "suspicious-empty" | "robots-disallowed";
   consecutiveFailures: number;
   lastError: string | null;
 };
 
 function warningLine(warning: SourceWarning): string {
+  if (warning.reason === "robots-disallowed") {
+    return "is blocked by its robots.txt, so it is skipped. Find another source for it or set active: false.";
+  }
   if (warning.reason === "suspicious-empty") {
     return "returned 0 jobs but had jobs before. The feed or adapter may have changed.";
   }

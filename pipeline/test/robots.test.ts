@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 import { HttpError } from "../src/lib/http";
-import { RobotsDisallowedError, assertAllowedByRobots, isPathAllowed } from "../src/lib/robots";
+import { ROBOTS_TTL_MS, RobotsDisallowedError, assertAllowedByRobots, isPathAllowed, robotsTxtFor } from "../src/lib/robots";
 
 const realRobots = readFileSync(resolve(import.meta.dirname, "fixtures/successfactors/robots-allowed.txt"), "utf8");
 
@@ -79,5 +79,54 @@ describe("assertAllowedByRobots", () => {
       throw new HttpError("https://careers.example.com/robots.txt", 503);
     });
     await expect(assertAllowedByRobots(client, "https://careers.example.com/search/")).rejects.toThrow("503");
+  });
+});
+
+describe("robotsTxtFor cache", () => {
+  const http = (text: (url: string) => Promise<string>) => ({ text: vi.fn(text), json: vi.fn() });
+  const T0 = Date.parse("2026-11-16T12:00:00Z");
+
+  it("reads robots.txt once per site and reuses it", async () => {
+    const client = http(async () => realRobots);
+    await assertAllowedByRobots(client, "https://a.example.com/search/", () => T0);
+    await assertAllowedByRobots(client, "https://a.example.com/job/1/", () => T0 + 1_000);
+    await robotsTxtFor(client, "https://b.example.com", () => T0);
+    expect(client.text.mock.calls.map(([url]) => url)).toEqual([
+      "https://a.example.com/robots.txt",
+      "https://b.example.com/robots.txt",
+    ]);
+  });
+
+  it(`reads it again once it is ${ROBOTS_TTL_MS / 3_600_000} hours old`, async () => {
+    const client = http(async () => realRobots);
+    await robotsTxtFor(client, "https://a.example.com", () => T0);
+    await robotsTxtFor(client, "https://a.example.com", () => T0 + ROBOTS_TTL_MS - 1);
+    expect(client.text).toHaveBeenCalledTimes(1);
+    await robotsTxtFor(client, "https://a.example.com", () => T0 + ROBOTS_TTL_MS);
+    expect(client.text).toHaveBeenCalledTimes(2);
+  });
+
+  it("remembers a missing robots.txt as allow-all", async () => {
+    const client = http(async () => {
+      throw new HttpError("https://a.example.com/robots.txt", 404);
+    });
+    await expect(robotsTxtFor(client, "https://a.example.com", () => T0)).resolves.toBe("");
+    await robotsTxtFor(client, "https://a.example.com", () => T0);
+    expect(client.text).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not remember a server error, so the next check tries again", async () => {
+    const client = http(async () => realRobots);
+    client.text.mockRejectedValueOnce(new HttpError("https://a.example.com/robots.txt", 503));
+    await expect(robotsTxtFor(client, "https://a.example.com", () => T0)).rejects.toThrow("503");
+    await expect(robotsTxtFor(client, "https://a.example.com", () => T0)).resolves.toBe(realRobots);
+    expect(client.text).toHaveBeenCalledTimes(2);
+  });
+
+  it("keeps a separate cache for each HTTP client", async () => {
+    const first = http(async () => "User-agent: *\nDisallow: /");
+    const second = http(async () => "");
+    await expect(assertAllowedByRobots(first, "https://a.example.com/x", () => T0)).rejects.toThrow("robots-disallowed");
+    await expect(assertAllowedByRobots(second, "https://a.example.com/x", () => T0)).resolves.toBeUndefined();
   });
 });

@@ -1,8 +1,7 @@
 import * as cheerio from "cheerio";
 import { errorMessage } from "../lib/errors";
 import type { HttpClient } from "../lib/http";
-import { HttpError } from "../lib/http";
-import { isPathAllowed } from "../lib/robots";
+import { isPathAllowed, robotsTxtFor } from "../lib/robots";
 import { type Candidate, type Counts, countBoard } from "./candidates";
 
 export type Supported = "TEAMTAILOR" | "GREENHOUSE" | "LEVER" | "LEVER_EU" | "ASHBY" | "WORKABLE" | "RECRUITEE" | "WORKDAY" | "SUCCESSFACTORS";
@@ -106,7 +105,6 @@ async function verifyDetection(detection: Detection, name: string, http: HttpCli
 
 export async function detectCompany(candidate: Candidate & { website?: string }, http: HttpClient): Promise<DetectionResult> {
   let requests = 0;
-  const robotsByOrigin = new Map<string, string>();
   const counted: HttpClient = {
     text: (url) => {
       requests++;
@@ -126,23 +124,10 @@ export async function detectCompany(candidate: Candidate & { website?: string },
   let blocked = false;
   let lastError: string | undefined;
 
-  const robotsFor = async (origin: string): Promise<string> => {
-    const cached = robotsByOrigin.get(origin);
-    if (cached !== undefined) return cached;
-    let text = "";
-    try {
-      text = await counted.text(`${origin}/robots.txt`);
-    } catch (error) {
-      if (!(error instanceof HttpError && error.status >= 400 && error.status < 500)) throw error;
-    }
-    robotsByOrigin.set(origin, text);
-    return text;
-  };
-
   const read = async (url: string): Promise<string | null> => {
     const { origin, pathname, search } = new URL(url);
     try {
-      if (!isPathAllowed(await robotsFor(origin), `${pathname}${search}`)) {
+      if (!isPathAllowed(await robotsTxtFor(counted, origin), `${pathname}${search}`)) {
         blocked = true;
         return null;
       }

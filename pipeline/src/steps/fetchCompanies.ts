@@ -2,6 +2,7 @@ import type { Company, FetchStatus, PrismaClient } from "@jobradar/db";
 import { errorMessage } from "../lib/errors";
 import { type HttpClient, HttpError } from "../lib/http";
 import { log } from "../lib/logger";
+import { RobotsDisallowedError } from "../lib/robots";
 import { normalizeJobs } from "../sources/normalize";
 import { getAdapter } from "../sources/registry";
 import { saveJobs } from "./saveJobs";
@@ -78,10 +79,12 @@ export async function fetchCompanies(
       const durationMs = options.now().getTime() - startedAt.getTime();
       const httpStatus = error instanceof HttpError ? error.status : null;
       const message = errorMessage(error);
-      log.error("fetch.error", { company: company.slug, httpStatus, error: message, durationMs });
+      const blocked = error instanceof RobotsDisallowedError;
+      if (blocked) log.warn("fetch.robots-disallowed", { company: company.slug, url: error.url, durationMs });
+      else log.error("fetch.error", { company: company.slug, httpStatus, error: message, durationMs });
       outcomes.push({
         ...base,
-        status: "ERROR",
+        status: blocked ? "SKIPPED_ROBOTS" : "ERROR",
         httpStatus,
         jobsFound: 0,
         jobsNew: 0,

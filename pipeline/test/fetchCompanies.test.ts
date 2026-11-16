@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { HttpError } from "../src/lib/http";
+import { RobotsDisallowedError } from "../src/lib/robots";
 import {
   type FetchCompaniesOptions,
   type FetchableCompany,
@@ -115,6 +116,15 @@ describe("fetchCompanies", () => {
     const processCompany = vi.fn().mockRejectedValue(new HttpError("https://x/jobs.rss", 404));
     const [outcome] = await fetchCompanies([company("gone")], options({ processCompany }));
     expect(outcome).toMatchObject({ status: "ERROR", httpStatus: 404, error: expect.stringContaining("404") });
+  });
+
+  it("skips a company whose page robots.txt forbids, without counting it as an error", async () => {
+    const warn = vi.mocked(console.warn);
+    const processCompany = vi.fn().mockRejectedValue(new RobotsDisallowedError("https://www.dr.dk/search/?q="));
+    const [outcome] = await fetchCompanies([company("dr")], options({ processCompany }));
+    expect(outcome).toMatchObject({ status: "SKIPPED_ROBOTS", httpStatus: null, error: expect.stringContaining("robots-disallowed") });
+    expect(String(warn.mock.calls[0]?.[0])).toMatch(/^WARN fetch\.robots-disallowed .*"url":"https:\/\/www\.dr\.dk\/search\/\?q="/);
+    expect(console.error).not.toHaveBeenCalled();
   });
 
   it("measures how long each company took", async () => {

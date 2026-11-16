@@ -66,6 +66,13 @@ describe("renderJobsEmail with warnings", () => {
     expect(text).toContain("⚠️ Sources needing attention\n- Lunar: failed 3 runs in a row. Last error: HTTP 404 <gone>\n- ATP: returned 0 jobs");
   });
 
+  it("says plainly when a source is blocked by robots.txt", () => {
+    const blocked: SourceWarning = { slug: "dr", name: "DR", reason: "robots-disallowed", consecutiveFailures: 0, lastError: "robots-disallowed: x" };
+    expect(renderJobsEmail([job("A")], [blocked]).html).toContain(
+      "<strong>DR</strong> is blocked by its robots.txt, so it is skipped. Find another source for it or set active: false.",
+    );
+  });
+
   it("has no footer when every source is healthy", () => {
     expect(renderJobsEmail([job("A")], []).html).not.toContain("Sources needing attention");
   });

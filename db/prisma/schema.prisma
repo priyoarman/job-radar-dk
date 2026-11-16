@@ -55,6 +55,7 @@ enum FetchStatus {
   SUSPICIOUS_EMPTY
   ERROR
   SKIPPED_RECENT
+  SKIPPED_ROBOTS
 }
 
 enum NotificationKind {

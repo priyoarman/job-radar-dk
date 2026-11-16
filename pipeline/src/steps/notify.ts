@@ -50,6 +50,7 @@ export function warningsFrom(companies: readonly CompanyHealth[]): SourceWarning
   return companies.flatMap((c): SourceWarning[] => {
     const base = { slug: c.slug, name: c.name, consecutiveFailures: c.consecutiveFailures, lastError: c.lastError };
     if (c.consecutiveFailures >= FAILURES_BEFORE_WARNING) return [{ ...base, reason: "failing" }];
+    if (c.lastFetchStatus === "SKIPPED_ROBOTS") return [{ ...base, reason: "robots-disallowed" }];
     if (c.lastFetchStatus === "SUSPICIOUS_EMPTY") return [{ ...base, reason: "suspicious-empty" }];
     return [];
   });

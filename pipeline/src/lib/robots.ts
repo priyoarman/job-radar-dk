@@ -62,14 +62,32 @@ export class RobotsDisallowedError extends Error {
   }
 }
 
-export async function assertAllowedByRobots(http: HttpClient, url: string): Promise<void> {
-  const { origin, pathname, search } = new URL(url);
-  let robotsTxt: string;
-  try {
-    robotsTxt = await http.text(`${origin}/robots.txt`);
-  } catch (error) {
-    if (error instanceof HttpError && error.status >= 400 && error.status < 500) return;
-    throw error;
+export const ROBOTS_TTL_MS = 24 * 60 * 60 * 1000;
+
+type CachedRobots = { text: string; fetchedAt: number };
+
+const cacheByClient = new WeakMap<HttpClient, Map<string, CachedRobots>>();
+
+export async function robotsTxtFor(http: HttpClient, origin: string, now: () => number = Date.now): Promise<string> {
+  let cache = cacheByClient.get(http);
+  if (!cache) {
+    cache = new Map();
+    cacheByClient.set(http, cache);
   }
-  if (!isPathAllowed(robotsTxt, `${pathname}${search}`)) throw new RobotsDisallowedError(url);
+  const cached = cache.get(origin);
+  if (cached && now() - cached.fetchedAt < ROBOTS_TTL_MS) return cached.text;
+
+  let text = "";
+  try {
+    text = await http.text(`${origin}/robots.txt`);
+  } catch (error) {
+    if (!(error instanceof HttpError && error.status >= 400 && error.status < 500)) throw error;
+  }
+  cache.set(origin, { text, fetchedAt: now() });
+  return text;
+}
+
+export async function assertAllowedByRobots(http: HttpClient, url: string, now: () => number = Date.now): Promise<void> {
+  const { origin, pathname, search } = new URL(url);
+  if (!isPathAllowed(await robotsTxtFor(http, origin, now), `${pathname}${search}`)) throw new RobotsDisallowedError(url);
 }
