@@ -677,5 +677,15 @@
     "tags": ["job-site"],
     "active": true,
     "notes": "LinkedIn search for React Typescript in Denmark, posted in the last 24 hours. Fetched once a day through Apify (valig/linkedin-jobs-scraper). No title filter."
+  },
+  {
+    "slug": "jobindex-react-typescript",
+    "name": "Jobindex",
+    "source": "JOBINDEX",
+    "sourceKey": "https://www.jobindex.dk/jobsoegning?jobage=7&q=react+typescript",
+    "careersUrl": "https://www.jobindex.dk/jobsoegning?jobage=7&q=react+typescript",
+    "tags": ["job-site"],
+    "active": true,
+    "notes": "Jobindex search for react OR typescript, posted in the last 7 days. Read once a day from the official RSS feed (jobsoegning.rss?q=...), because robots.txt forbids jobage= for bots; the 7-day limit is applied in code. No title filter."
   }
 ]

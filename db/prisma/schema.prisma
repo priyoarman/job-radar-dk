@@ -21,6 +21,7 @@ enum SourceType {
   TALENTECH
   CUSTOM
   LINKEDIN
+  JOBINDEX
 }
 
 enum FilterStatus {
