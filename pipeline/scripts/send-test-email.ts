@@ -14,12 +14,23 @@ async function main(): Promise<void> {
       title: "TEST: Junior Full Stack Developer",
       location: "København, Denmark",
       url: "https://example.com/jobs/1-junior-full-stack-developer",
+      postedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
       company: { name: "Example Co" },
+    },
+    {
+      title: "TEST: Frontend Developer (React/TypeScript)",
+      location: "Copenhagen, Denmark",
+      url: "https://example.com/jobs/3-frontend-developer",
+      employer: "Example Employer A/S",
+      postedAt: new Date(new Date().setUTCHours(0, 0, 0, 0)),
+      company: { name: "LinkedIn" },
     },
     {
       title: "TEST: Student Developer <AI & Data>",
       location: null,
       url: "https://example.com/jobs/2-student-developer",
+      postedAt: null,
+      firstSeenAt: new Date(),
       company: { name: "Another Co" },
     },
   ]);
