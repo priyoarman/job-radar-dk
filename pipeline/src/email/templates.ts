@@ -5,8 +5,46 @@ export type EmailJob = {
   location: string | null;
   url: string;
   employer?: string | null;
+  postedAt?: Date | null;
+  firstSeenAt?: Date;
   company: { name: string };
 };
+
+const TIME_ZONE = "Europe/Copenhagen";
+
+function isDateOnly(date: Date): boolean {
+  if (date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0) return true;
+  const local = new Intl.DateTimeFormat("en-GB", { timeZone: TIME_ZONE, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  return local.format(date) === "00:00";
+}
+
+export function formatWhen(date: Date, reference: Date, withTime = true): string {
+  const parts = (value: Date) =>
+    Object.fromEntries(
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: TIME_ZONE,
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23",
+      })
+        .formatToParts(value)
+        .map((part) => [part.type, part.value]),
+    );
+  const p = parts(date);
+  const year = p["year"] === parts(reference)["year"] ? "" : ` ${p["year"]}`;
+  const time = withTime ? `, ${p["hour"]}:${p["minute"]}` : "";
+  return `${p["weekday"]} ${p["day"]} ${p["month"]}${year}${time}`;
+}
+
+export function postedLine(job: Pick<EmailJob, "postedAt" | "firstSeenAt">, now: Date = new Date()): string | null {
+  if (job.postedAt) return `Posted ${formatWhen(job.postedAt, now, !isDateOnly(job.postedAt))}`;
+  if (job.firstSeenAt) return `Posted: unknown · found ${formatWhen(job.firstSeenAt, now)}`;
+  return null;
+}
 
 const HTML_ESCAPES: Record<string, string> = {
   "&": "&amp;",
@@ -38,17 +76,20 @@ export function subjectFor(jobs: readonly EmailJob[]): string {
 
 function jobHtml(job: EmailJob): string {
   const location = job.location ? ` · ${escapeHtml(job.location)}` : "";
+  const posted = postedLine(job);
   return [
     '<li style="margin:0 0 16px">',
     `<a href="${escapeHtml(job.url)}" style="font-size:16px;font-weight:600;color:#1a56db">${escapeHtml(job.title)}</a>`,
     `<div style="color:#555">${escapeHtml(employerOf(job))}${location}${escapeHtml(sourceNote(job))}</div>`,
+    posted ? `<div style="color:#555;font-size:13px">${escapeHtml(posted)}</div>` : "",
     "</li>",
   ].join("");
 }
 
 function jobText(job: EmailJob): string {
   const location = job.location ? ` · ${job.location}` : "";
-  return `- ${job.title}\n  ${employerOf(job)}${location}${sourceNote(job)}\n  ${job.url}`;
+  const posted = postedLine(job);
+  return `- ${job.title}\n  ${employerOf(job)}${location}${sourceNote(job)}${posted ? `\n  ${posted}` : ""}\n  ${job.url}`;
 }
 
 export type SourceWarning = {

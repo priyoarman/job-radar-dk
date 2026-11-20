@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it, vi } from "vitest";
-import { LINKEDIN_ACTOR, linkedinAdapter, searchInput } from "../src/sources/linkedin";
+import { LINKEDIN_ACTOR, linkedinAdapter, postedAtFrom, searchInput } from "../src/sources/linkedin";
 import { normalizeJobs } from "../src/sources/normalize";
 
 const raws = JSON.parse(
@@ -41,11 +41,37 @@ describe("linkedinAdapter.fetchJobs", () => {
     const result = await linkedinAdapter.fetchJobs(company, http, { runActor });
     expect(runActor).toHaveBeenCalledExactlyOnceWith(LINKEDIN_ACTOR, searchInput(SEARCH_URL));
     expect(result).toHaveLength(raws.length);
+    expect(result[0]).toMatchObject({ id: "4489579463", fetchedAt: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/) });
     expect(http.json).not.toHaveBeenCalled();
   });
 
   it("fails clearly when no Apify token is configured", async () => {
     await expect(linkedinAdapter.fetchJobs(company, http, { runActor: null })).rejects.toThrow("APIFY_TOKEN is not set");
+  });
+});
+
+describe("postedAtFrom", () => {
+  const fetchedAt = "2026-11-20T22:18:00.000Z";
+
+  it.each([
+    ["30 minutes ago", "2026-11-20T21:48:00.000Z"],
+    ["1 minute ago", "2026-11-20T22:17:00.000Z"],
+    ["6 hours ago", "2026-11-20T16:18:00.000Z"],
+    ["1 hour ago", "2026-11-20T21:18:00.000Z"],
+  ])("works out the time from %s", (postedTimeAgo, expected) => {
+    expect(postedAtFrom({ postedDate: "2026-11-20T00:00:00.000Z", postedTimeAgo, fetchedAt })).toEqual(new Date(expected));
+  });
+
+  it.each(["2 weeks ago", "1 day ago", "", null])("falls back to the posted date for %s", (postedTimeAgo) => {
+    expect(postedAtFrom({ postedDate: "2026-11-20T00:00:00.000Z", postedTimeAgo, fetchedAt })).toEqual(
+      new Date("2026-11-20T00:00:00.000Z"),
+    );
+  });
+
+  it("falls back to the posted date when the fetch time is unknown", () => {
+    expect(postedAtFrom({ postedDate: "2026-11-20T00:00:00.000Z", postedTimeAgo: "2 hours ago" })).toEqual(
+      new Date("2026-11-20T00:00:00.000Z"),
+    );
   });
 });
 

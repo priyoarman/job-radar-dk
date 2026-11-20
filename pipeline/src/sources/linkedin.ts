@@ -13,6 +13,8 @@ const jobSchema = z.object({
   location: z.string().nullish(),
   description: z.string().nullish(),
   postedDate: z.string().nullish(),
+  postedTimeAgo: z.string().nullish(),
+  fetchedAt: z.string().nullish(),
 });
 
 export type LinkedInSearchInput = {
@@ -42,12 +44,26 @@ function parseDate(value: string | null | undefined): Date | null {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+const UNIT_MS = { minute: 60_000, hour: 3_600_000 } as const;
+
+export function postedAtFrom(job: Pick<z.infer<typeof jobSchema>, "postedDate" | "postedTimeAgo" | "fetchedAt">): Date | null {
+  const fetchedAt = parseDate(job.fetchedAt);
+  const ago = /^(\d+)\s+(minute|hour)s?\s+ago$/i.exec(job.postedTimeAgo?.trim() ?? "");
+  if (fetchedAt && ago) {
+    const unit = ago[2]!.toLowerCase() as keyof typeof UNIT_MS;
+    return new Date(fetchedAt.getTime() - Number(ago[1]) * UNIT_MS[unit]);
+  }
+  return parseDate(job.postedDate);
+}
+
 export const linkedinAdapter: SourceAdapter<unknown> = {
   name: "LINKEDIN",
 
   async fetchJobs(company, _http, deps) {
     if (!deps?.runActor) throw new Error("APIFY_TOKEN is not set, so the LinkedIn search cannot run");
-    return deps.runActor(LINKEDIN_ACTOR, searchInput(company.sourceKey));
+    const items = await deps.runActor(LINKEDIN_ACTOR, searchInput(company.sourceKey));
+    const fetchedAt = new Date().toISOString();
+    return items.map((item) => (item && typeof item === "object" ? { ...item, fetchedAt } : item));
   },
 
   normalize(raw, company) {
@@ -61,7 +77,7 @@ export const linkedinAdapter: SourceAdapter<unknown> = {
       remoteType: null,
       description: job.description ?? "",
       url: `https://www.linkedin.com/jobs/view/${encodeURIComponent(id)}`,
-      postedAt: parseDate(job.postedDate),
+      postedAt: postedAtFrom(job),
     });
   },
 };

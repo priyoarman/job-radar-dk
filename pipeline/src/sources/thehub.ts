@@ -1,5 +1,7 @@
 import { z } from "zod";
+import { htmlToText } from "../lib/html";
 import type { HttpClient } from "../lib/http";
+import { log } from "../lib/logger";
 import { assertAllowedByRobots } from "../lib/robots";
 import { type SourceAdapter, normalizedJobSchema } from "./types";
 
@@ -20,7 +22,29 @@ const jobSchema = z.object({
   isRemote: z.boolean().nullish(),
   location: z.object({ address: z.string().nullish(), locality: z.string().nullish() }).nullish(),
   company: z.object({ name: z.string().nullish() }).nullish(),
+  publishedAt: z.string().nullish(),
+  description: z.string().nullish(),
 });
+
+const detailSchema = z.object({
+  doc: z.object({ publishedAt: z.string().nullish(), description: z.string().nullish() }),
+});
+
+export function detailUrl(searchUrl: string, id: string): string {
+  return new URL(`/api/jobs/${encodeURIComponent(id)}`, new URL(searchUrl).origin).toString();
+}
+
+async function withDetail(searchUrl: string, raw: unknown, http: HttpClient): Promise<unknown> {
+  const id = (raw as { id?: unknown } | null)?.id;
+  if (typeof id !== "string") return raw;
+  try {
+    const { doc } = detailSchema.parse(await http.json(detailUrl(searchUrl, id)));
+    return { ...(raw as object), publishedAt: doc.publishedAt ?? null, description: doc.description ?? null };
+  } catch (error) {
+    log.warn("thehub.detail-failed", { id, error: error instanceof Error ? error.message : String(error) });
+    return raw;
+  }
+}
 
 export function apiUrl(searchUrl: string, page: number): string {
   const link = new URL(searchUrl);
@@ -48,7 +72,15 @@ async function fetchAllPages(searchUrl: string, http: HttpClient): Promise<unkno
     pages = result.pages;
     jobs.push(...result.jobs);
   }
-  return jobs;
+  const detailed: unknown[] = [];
+  for (const raw of jobs) detailed.push(await withDetail(searchUrl, raw, http));
+  return detailed;
+}
+
+function parseDate(value: string | null | undefined): Date | null {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
 export const theHubAdapter: SourceAdapter<unknown> = {
@@ -67,9 +99,9 @@ export const theHubAdapter: SourceAdapter<unknown> = {
       company: job.company?.name?.trim() || company.name,
       location,
       remoteType: job.isRemote ? "remote" : null,
-      description: "",
+      description: job.description ? htmlToText(job.description) : "",
       url: `https://thehub.io/jobs/${encodeURIComponent(job.id)}`,
-      postedAt: null,
+      postedAt: parseDate(job.publishedAt),
     });
   },
 };

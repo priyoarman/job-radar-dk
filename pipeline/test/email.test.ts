@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { createResendSender } from "../src/email/send";
-import { type EmailJob, type SourceWarning, escapeHtml, renderJobsEmail, subjectFor } from "../src/email/templates";
+import { type EmailJob, type SourceWarning, escapeHtml, postedLine, renderJobsEmail, subjectFor } from "../src/email/templates";
 
 const job = (title: string, company = "Lunar", location: string | null = "København, Denmark"): EmailJob => ({
   title,
@@ -51,6 +51,39 @@ describe("renderJobsEmail", () => {
 
   it("uses singular wording for one job", () => {
     expect(renderJobsEmail([job("A")]).text.startsWith("1 new job for you")).toBe(true);
+  });
+});
+
+describe("postedLine", () => {
+  const now = new Date("2026-11-21T10:00:00Z");
+
+  it.each([
+    ["an exact time, shown in Danish time", new Date("2026-11-20T13:05:00Z"), "Posted Fri 20 Nov, 14:05"],
+    ["a date-only value at midnight UTC", new Date("2026-11-20T00:00:00Z"), "Posted Fri 20 Nov"],
+    ["a date-only value at midnight in Denmark", new Date("2026-11-19T23:00:00Z"), "Posted Fri 20 Nov"],
+    ["a summer date at midnight in Denmark", new Date("2026-07-28T22:00:00Z"), "Posted Wed 29 Jul"],
+    ["a date from another year", new Date("2025-12-30T00:00:00Z"), "Posted Tue 30 Dec 2025"],
+  ])("formats %s", (_why, postedAt, expected) => {
+    expect(postedLine({ postedAt }, now)).toBe(expected);
+  });
+
+  it("says when the job was found if the source has no posting time", () => {
+    expect(postedLine({ postedAt: null, firstSeenAt: new Date("2026-11-21T09:17:00Z") }, now)).toBe(
+      "Posted: unknown · found Sat 21 Nov, 10:17",
+    );
+  });
+
+  it("shows nothing when neither time is known", () => {
+    expect(postedLine({}, now)).toBeNull();
+  });
+});
+
+describe("renderJobsEmail with posting times", () => {
+  it("puts the posting time under the employer line", () => {
+    const posted = { ...job("Backend Engineer"), postedAt: new Date("2026-11-20T13:05:00Z") };
+    const { html, text } = renderJobsEmail([posted]);
+    expect(text).toContain("- Backend Engineer\n  Lunar · København, Denmark\n  Posted Fri 20 Nov, 14:05\n  https://");
+    expect(html).toContain(">Posted Fri 20 Nov, 14:05</div>");
   });
 });
 
