@@ -1,0 +1,493 @@
+{
+ "jobs": {
+  "total": 37,
+  "limit": 15,
+  "page": 3,
+  "pages": 3,
+  "suggestions": {
+   "jobPositionTypes": {
+    "5b8e46b3853f039706b6ea70": 34,
+    "5b8e46b3853f039706b6ea74": 2,
+    "5b8e46b3853f039706b6ea71": 1,
+    "5b8e46b3853f039706b6ea72": 2
+   },
+   "jobRoles": {
+    "devops": 5,
+    "backenddeveloper": 19,
+    "mobiledevelopment": 3,
+    "cxo": 1,
+    "engineer": 21,
+    "frontenddeveloper": 9,
+    "productmanagement": 2,
+    "fullstackdeveloper": 21,
+    "datascience": 1
+   },
+   "remote": 2,
+   "paid": 36
+  },
+  "docs": [
+   {
+    "id": "6aa9dc41f0b1bfe4cfb01451",
+    "key": "proper-product-engineer-8374434",
+    "title": "Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 830,
+     "total": 10468
+    },
+    "company": {
+     "id": "5d69232caa685273240fa730",
+     "key": "proper",
+     "name": "Rumli",
+     "website": "https://www.rumli.com",
+     "numberOfEmployees": "11-50",
+     "founded": "2017",
+     "logoImage": {
+      "size": 14053,
+      "filetype": "image/png",
+      "originalname": "Favicon-white-background.png",
+      "id": "6a2bc14f70291b341092fb6d",
+      "path": "/files/s3/20260612082031-7a2a7a2894bf9280db1bfa6e7830b5d4.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aa496774fe964368a490a47",
+    "key": "performativ-senior-front-end-engineer-8333268",
+    "title": "Senior Front-End Engineer",
+    "location": {
+     "locality": "København K",
+     "country": "Denmark",
+     "address": "København K, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 817,
+     "total": 10422
+    },
+    "company": {
+     "id": "5ffa42a7612a1c7c80a7e2c2",
+     "key": "performativ",
+     "name": "Performativ",
+     "website": "https://performativ.com",
+     "numberOfEmployees": "11-50",
+     "founded": "2020",
+     "logoImage": {
+      "size": 202672,
+      "filetype": "image/jpeg",
+      "originalname": "performativ_icon_black.jpg",
+      "id": "69e746a833081052bb3d96b5",
+      "path": "/files/s3/20260421094304-da18d3365026a1fb174e59a976c2eb6b.jpg"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aa1f3d1961a30471ccb37f8",
+    "key": "senior-software-engineer-accounting-bookkeeping",
+    "title": "Senior Software Engineer, Accounting & Bookkeeping",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 766,
+     "total": 10303
+    },
+    "company": {
+     "id": "63639778fb40b2416920f26c",
+     "key": "flatpay",
+     "name": "Flatpay",
+     "website": "http://www.flatpay.com",
+     "numberOfEmployees": "200+",
+     "founded": "2021",
+     "logoImage": {
+      "size": 10323,
+      "filetype": "image/png",
+      "originalname": "20230307_flatpay_logomark_black.png",
+      "id": "64d5f93312e59bbbdce905bf",
+      "path": "/files/s3/20230811090243-4cdcc538296764e71654b8c7b32bedac.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aa1f3d1961a30471ccb37f4",
+    "key": "senior-software-engineer-internal-tools",
+    "title": "Senior Software Engineer, Internal Tools",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 775,
+     "total": 10447
+    },
+    "company": {
+     "id": "63639778fb40b2416920f26c",
+     "key": "flatpay",
+     "name": "Flatpay",
+     "website": "http://www.flatpay.com",
+     "numberOfEmployees": "200+",
+     "founded": "2021",
+     "logoImage": {
+      "size": 10323,
+      "filetype": "image/png",
+      "originalname": "20230307_flatpay_logomark_black.png",
+      "id": "64d5f93312e59bbbdce905bf",
+      "path": "/files/s3/20230811090243-4cdcc538296764e71654b8c7b32bedac.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a9f500664eac57366beac97",
+    "key": "relesys-senior-frontend-engineer-8323839",
+    "title": "Senior Frontend Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 794,
+     "total": 11374
+    },
+    "company": {
+     "id": "56b8b62654f298f74317ed60",
+     "key": "relesys",
+     "name": "Relesys",
+     "website": "http://relesys.net/",
+     "numberOfEmployees": "51-100",
+     "video": "",
+     "founded": "2014",
+     "logoImage": {
+      "size": 58486,
+      "filetype": "image/png",
+      "originalname": "SoMe icon.png",
+      "id": "679a6464a97e564a7eb6a595",
+      "path": "/files/s3/20250129172452-60048fad4f821f74feec48e5ba400aa5.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a727dcb650cb842b85b0fbe",
+    "key": "performativ-lead-cloud-engineer-8141352",
+    "title": "Lead Cloud Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 849,
+     "total": 16905
+    },
+    "company": {
+     "id": "5ffa42a7612a1c7c80a7e2c2",
+     "key": "performativ",
+     "name": "Performativ",
+     "website": "https://performativ.com",
+     "numberOfEmployees": "11-50",
+     "founded": "2020",
+     "logoImage": {
+      "size": 202672,
+      "filetype": "image/jpeg",
+      "originalname": "performativ_icon_black.jpg",
+      "id": "69e746a833081052bb3d96b5",
+      "path": "/files/s3/20260421094304-da18d3365026a1fb174e59a976c2eb6b.jpg"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a2ca6e5f7fd1a2ebcfe0e7e",
+    "key": "software-engineer-mobile",
+    "title": "Software Engineer (Mobile)",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 728,
+     "total": 19529
+    },
+    "company": {
+     "id": "5f3bd2b14b57fc757fb9fa64",
+     "key": "tetonai",
+     "name": "Teton",
+     "website": "http://teton.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2020",
+     "logoImage": {
+      "size": 98460,
+      "filetype": "image/png",
+      "originalname": "final.png",
+      "id": "668acf8b56df93dccd35ff58",
+      "path": "/files/s3/20240707172531-dafaa1a88dc2365146a23a096ec96893.png"
+     }
+    },
+    "saved": false
+   }
+  ]
+ },
+ "featuredJobs": {
+  "total": 6,
+  "limit": 15,
+  "page": 1,
+  "pages": 1,
+  "docs": [
+   {
+    "id": "6afee92e5d235286de8e5b52",
+    "key": "no-title-34004",
+    "title": "Senior Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 561,
+     "total": 561
+    },
+    "company": {
+     "id": "6924512c1cd59309d1a5ac29",
+     "key": "sumary-aps",
+     "name": "Sumary",
+     "website": "https://sumary.com/",
+     "numberOfEmployees": "11-50",
+     "founded": "2025",
+     "logoImage": {
+      "size": 32594,
+      "filetype": "image/png",
+      "originalname": "social-symbol-dark.png",
+      "id": "6a0d74baa336f5cbefab072e",
+      "path": "/files/s3/20260520084546-77e86eed263b1c5ec39fdf2057e93b32.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6af45051e165207e56b29e3b",
+    "key": "no-title-41298",
+    "title": "Co-CTO",
+    "isRemote": true,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea74"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 2415,
+     "total": 2979
+    },
+    "company": {
+     "id": "6af44b10dd872f681b219fe3",
+     "key": "tono",
+     "name": "Tono",
+     "website": "https://tonohq.com/",
+     "numberOfEmployees": "1-10",
+     "founded": "2023",
+     "logoImage": {
+      "size": 8270,
+      "filetype": "image/png",
+      "originalname": "Tono square logo.png",
+      "id": "6af427283b9bdcefdc03bafb",
+      "path": "/files/s3/20261111082824-994c4f388fc2fbc388badb2f629b5b82.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6adf24b0ceee3bd93cb848af",
+    "key": "no-title-15687",
+    "title": "Fullstack Softwareudvikler (Aarhus) ",
+    "location": {
+     "country": "Denmark",
+     "locality": "Aarhus",
+     "address": "Aarhus, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 1206,
+     "total": 3765
+    },
+    "company": {
+     "id": "60140a12759e3670691ec854",
+     "key": "cyberpilot",
+     "name": "CyberPilot.io",
+     "website": "https://cyberpilot.io/",
+     "numberOfEmployees": "11-50",
+     "video": "",
+     "founded": "2016",
+     "logoImage": {
+      "size": 41005,
+      "filetype": "image/png",
+      "originalname": "cp-500x500-sort (1).png",
+      "id": "601407c9759e3670691e2f71",
+      "path": "/files/s3/20210129130409-28e9a921ccb949de31ecb7a4873ae886.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a981a9d74e9db6710ba978e",
+    "key": "no-title-80670",
+    "title": "Senior Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 1567,
+     "total": 34959
+    },
+    "company": {
+     "id": "6a981a972b32ec67725ab3be",
+     "key": "realmforge",
+     "name": "Realmforge",
+     "website": "https://realmforge.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2026",
+     "logoImage": {
+      "size": 442560,
+      "filetype": "image/png",
+      "originalname": "R.png",
+      "id": "6a9812b274e9db6710ba25ea",
+      "path": "/files/s3/20260902121234-f01ca02c728d35e6a348dd9732005415.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6ab5ba1089831d5aad0201d1",
+    "key": "senior-staff-full-stack-engineer",
+    "title": "Senior / Staff Full-stack Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 10643,
+     "total": 53476
+    },
+    "company": {
+     "id": "66191e9ed5192284c3c6ae36",
+     "key": "electricity-maps-1",
+     "name": "Electricity Maps",
+     "website": "https://www.electricitymaps.com/",
+     "numberOfEmployees": "11-50",
+     "founded": "2016",
+     "logoImage": {
+      "size": 10121,
+      "filetype": "image/png",
+      "originalname": "Screenshot 2025-08-28 at 11.54.12.png",
+      "id": "68b0274ad13d66a502828006",
+      "path": "/files/s3/20250828095418-31ba3bd9a4277ce5e8b9667b1d64391e.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a886279405f30c73297b5d9",
+    "key": "pandektes-senior-product-engineer-de20f12c-79ab-4d6e-9b35-e033a8322e60",
+    "title": "Senior Product Engineer ",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 810,
+     "total": 16913
+    },
+    "company": {
+     "id": "636516274ff1a41bab0ae974",
+     "key": "pandektes",
+     "name": "Pandektes",
+     "website": "https://pandektes.com",
+     "numberOfEmployees": "11-50",
+     "video": "",
+     "founded": "2023",
+     "logoImage": {
+      "size": 6745,
+      "filetype": "image/png",
+      "originalname": "linkedin-logo-400.png",
+      "id": "6ac3587598a7d0be1e640dc8",
+      "path": "/files/s3/20261005075741-8051840733cd862e52116d758a58a3ae.png"
+     }
+    },
+    "saved": false
+   }
+  ],
+  "randFeaturedIndex": 2
+ }
+}

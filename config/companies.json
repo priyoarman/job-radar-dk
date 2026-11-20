@@ -687,5 +687,15 @@
     "tags": ["job-site"],
     "active": true,
     "notes": "Jobindex search for react OR typescript, posted in the last 7 days. Read once a day from the official RSS feed (jobsoegning.rss?q=...), because robots.txt forbids jobage= for bots; the 7-day limit is applied in code. No title filter."
+  },
+  {
+    "slug": "thehub-typescript",
+    "name": "The Hub",
+    "source": "THEHUB",
+    "sourceKey": "https://thehub.io/jobs?search=typescript&countryCode=DK&sorting=newJobs",
+    "careersUrl": "https://thehub.io/jobs?search=typescript&countryCode=DK&sorting=newJobs",
+    "tags": ["job-site"],
+    "active": true,
+    "notes": "The Hub search for typescript in Denmark, newest first. Read once a day from the JSON API behind the page (api/v2/jobsandfeatured, all pages, at most 10). No title filter."
   }
 ]

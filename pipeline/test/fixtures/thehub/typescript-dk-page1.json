@@ -1,0 +1,772 @@
+{
+ "jobs": {
+  "total": 37,
+  "limit": 15,
+  "page": 1,
+  "pages": 3,
+  "suggestions": {
+   "jobPositionTypes": {
+    "5b8e46b3853f039706b6ea72": 2,
+    "5b8e46b3853f039706b6ea71": 1,
+    "5b8e46b3853f039706b6ea70": 34,
+    "5b8e46b3853f039706b6ea74": 2
+   },
+   "jobRoles": {
+    "devops": 5,
+    "datascience": 1,
+    "productmanagement": 2,
+    "fullstackdeveloper": 21,
+    "frontenddeveloper": 9,
+    "cxo": 1,
+    "engineer": 21,
+    "backenddeveloper": 19,
+    "mobiledevelopment": 3
+   },
+   "remote": 2,
+   "paid": 36
+  },
+  "docs": [
+   {
+    "id": "6adf190afe5ce0d913bf032f",
+    "key": "senior-typescript-udvikler-fullstacknodereact-til-danmarks-mest-uafhaengige-medie",
+    "title": "Senior TypeScript udvikler (fullstack/Node/React) til Danmarks mest uafhængige medie",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 874,
+     "total": 3377
+    },
+    "company": {
+     "id": "67a4806a5a0d1e7c9ac7133d",
+     "key": "frihedsbrevet",
+     "name": "Frihedsbrevet",
+     "website": "http://frihedsbrevet.dk",
+     "numberOfEmployees": "11-50",
+     "founded": "2021",
+     "logoImage": {
+      "size": 662,
+      "filetype": "image/png",
+      "originalname": "logo100x100.png",
+      "id": "67a472915a0d1e7c9ac4dceb",
+      "path": "/files/s3/20250206082801-2c3be86606145ca47bcffbb22d28402c.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aff8e24c0b7b1e5e0d26431",
+    "key": "fullstack-engineer-cph",
+    "title": "Fullstack Engineer - CPH",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 209,
+     "total": 209
+    },
+    "company": {
+     "id": "61b70f0b59c1540629b6d307",
+     "key": "lunar-1",
+     "name": "Lunar",
+     "website": "https://www.lunar.app/en/personal",
+     "numberOfEmployees": "200+",
+     "video": "",
+     "founded": "2015",
+     "logoImage": {
+      "size": 2984,
+      "filetype": "image/jpeg",
+      "originalname": "1637660776673.jpeg",
+      "id": "61b70a2259c1540629b4bf17",
+      "path": "/files/s3/20211213085354-844fb13062f372e692a0594472d3d638.jpeg"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6afee92e5d235286de8e5b52",
+    "key": "no-title-34004",
+    "title": "Senior Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 561,
+     "total": 561
+    },
+    "company": {
+     "id": "6924512c1cd59309d1a5ac29",
+     "key": "sumary-aps",
+     "name": "Sumary",
+     "website": "https://sumary.com/",
+     "numberOfEmployees": "11-50",
+     "founded": "2025",
+     "logoImage": {
+      "size": 32594,
+      "filetype": "image/png",
+      "originalname": "social-symbol-dark.png",
+      "id": "6a0d74baa336f5cbefab072e",
+      "path": "/files/s3/20260520084546-77e86eed263b1c5ec39fdf2057e93b32.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6af45051e165207e56b29e3b",
+    "key": "no-title-41298",
+    "title": "Co-CTO",
+    "isRemote": true,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea74"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 2415,
+     "total": 2979
+    },
+    "company": {
+     "id": "6af44b10dd872f681b219fe3",
+     "key": "tono",
+     "name": "Tono",
+     "website": "https://tonohq.com/",
+     "numberOfEmployees": "1-10",
+     "founded": "2023",
+     "logoImage": {
+      "size": 8270,
+      "filetype": "image/png",
+      "originalname": "Tono square logo.png",
+      "id": "6af427283b9bdcefdc03bafb",
+      "path": "/files/s3/20261111082824-994c4f388fc2fbc388badb2f629b5b82.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6afdbc46ecb9b0875658e55e",
+    "key": "no-title-01382",
+    "title": "AI-native Full-stack Developer with ML (part-time/student)",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea71",
+     "5b8e46b3853f039706b6ea72"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 836,
+     "total": 836
+    },
+    "company": {
+     "id": "65a1727968ec61152d6536c1",
+     "key": "anemo-robotics",
+     "name": "Anemo Robotics",
+     "website": "https://anemorobotics.com/",
+     "numberOfEmployees": "1-10",
+     "founded": "2023",
+     "logoImage": {
+      "size": 205642,
+      "filetype": "image/png",
+      "originalname": "Icon_BlueGradient.png",
+      "id": "6966464c492748737ebcc048",
+      "path": "/files/s3/20260113131908-7feb85f5a2cb61b8891ed5726d07210c.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aaaae3fab2173abd344733d",
+    "key": "software-engineer-fleet",
+    "title": "Software Engineer(Fleet)",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 686,
+     "total": 9802
+    },
+    "company": {
+     "id": "5f3bd2b14b57fc757fb9fa64",
+     "key": "tetonai",
+     "name": "Teton",
+     "website": "http://teton.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2020",
+     "logoImage": {
+      "size": 98460,
+      "filetype": "image/png",
+      "originalname": "final.png",
+      "id": "668acf8b56df93dccd35ff58",
+      "path": "/files/s3/20240707172531-dafaa1a88dc2365146a23a096ec96893.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6adf24b0ceee3bd93cb848af",
+    "key": "no-title-15687",
+    "title": "Fullstack Softwareudvikler (Aarhus) ",
+    "location": {
+     "country": "Denmark",
+     "locality": "Aarhus",
+     "address": "Aarhus, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 1206,
+     "total": 3765
+    },
+    "company": {
+     "id": "60140a12759e3670691ec854",
+     "key": "cyberpilot",
+     "name": "CyberPilot.io",
+     "website": "https://cyberpilot.io/",
+     "numberOfEmployees": "11-50",
+     "video": "",
+     "founded": "2016",
+     "logoImage": {
+      "size": 41005,
+      "filetype": "image/png",
+      "originalname": "cp-500x500-sort (1).png",
+      "id": "601407c9759e3670691e2f71",
+      "path": "/files/s3/20210129130409-28e9a921ccb949de31ecb7a4873ae886.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a20c04f0b3b2add892bd9f9",
+    "key": "mid-level-backend-engineer-roaming",
+    "title": "Mid Level Backend Engineer - Roaming",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 972,
+     "total": 2956
+    },
+    "company": {
+     "id": "5f9b2087977e6f564e0bf7bb",
+     "key": "monta",
+     "name": "Monta",
+     "website": "https://monta.com",
+     "numberOfEmployees": "200+",
+     "video": "",
+     "founded": "2020",
+     "logoImage": {
+      "size": 4439,
+      "filetype": "image/jpeg",
+      "originalname": "montaapp_logo.jpg",
+      "id": "68947c460bda56726740c7de",
+      "path": "/files/s3/20250807101326-2c6fded2fc47ccd42f726d63de2ca535.jpg"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6af70399ddbdaaa5a7411b4a",
+    "key": "no-title-08225",
+    "title": "Full-stack Developer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 2036,
+     "total": 2036
+    },
+    "company": {
+     "id": "6af7038865b794a5500e32a1",
+     "key": "aiomic",
+     "name": "Aiomic",
+     "website": "http://www.aiomic.com",
+     "numberOfEmployees": "1-10",
+     "founded": "2020",
+     "logoImage": {
+      "size": 1114677,
+      "filetype": "image/jpeg",
+      "originalname": "Aiomic3.jpg",
+      "id": "6af701a8e987cea525ff7c9d",
+      "path": "/files/s3/20261113122512-3497de245ab0f2aa881e81729974d781.jpg"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a981a9d74e9db6710ba978e",
+    "key": "no-title-80670",
+    "title": "Senior Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 1567,
+     "total": 34959
+    },
+    "company": {
+     "id": "6a981a972b32ec67725ab3be",
+     "key": "realmforge",
+     "name": "Realmforge",
+     "website": "https://realmforge.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2026",
+     "logoImage": {
+      "size": 442560,
+      "filetype": "image/png",
+      "originalname": "R.png",
+      "id": "6a9812b274e9db6710ba25ea",
+      "path": "/files/s3/20260902121234-f01ca02c728d35e6a348dd9732005415.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aed19259e6ec1f426973238",
+    "key": "priceshape-as-senior-software-developer-8676212",
+    "title": "Senior Software Developer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Aarhus",
+     "address": "Aarhus, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 1704,
+     "total": 1704
+    },
+    "company": {
+     "id": "600fd767759e3670691428b4",
+     "key": "priceshape-as",
+     "name": "PriceShape ApS",
+     "website": "https://priceshape.com/",
+     "numberOfEmployees": "51-100",
+     "video": "https://www.youtube.com/watch?v=3zoPdR5TDVc",
+     "founded": "2019",
+     "logoImage": {
+      "size": 25038,
+      "filetype": "image/png",
+      "originalname": "PriceShape_element.png",
+      "id": "6aba2830cb0291bca30c4f97",
+      "path": "/files/s3/20260928084120-ae613f19a0227e10745b9b0c2499bdaa.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6af6c6fd6d65570c2e704bfb",
+    "key": "no-title-93452",
+    "title": "Senior Backend Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 2430,
+     "total": 2430
+    },
+    "company": {
+     "id": "602b8c8d23978d060b8b82aa",
+     "key": "spirii",
+     "name": "Spirii",
+     "website": "https://spirii.com/en",
+     "numberOfEmployees": "101-200",
+     "founded": "2019",
+     "logoImage": {
+      "size": 38930,
+      "filetype": "image/png",
+      "originalname": "Logo_spirii_dark_purple_square_square (002).png",
+      "id": "627ba51c3d7d522d157fa4f6",
+      "path": "/files/s3/20220511115924-d35e2979a16f0576e9950423973fe3a8.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6aee26b5acffe4ba02240531",
+    "key": "software-engineer-product-backend",
+    "title": "Software Engineer(Product Backend)",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 1896,
+     "total": 2248
+    },
+    "company": {
+     "id": "5f3bd2b14b57fc757fb9fa64",
+     "key": "tetonai",
+     "name": "Teton",
+     "website": "http://teton.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2020",
+     "logoImage": {
+      "size": 98460,
+      "filetype": "image/png",
+      "originalname": "final.png",
+      "id": "668acf8b56df93dccd35ff58",
+      "path": "/files/s3/20240707172531-dafaa1a88dc2365146a23a096ec96893.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6af40dd1de7a1ef007229107",
+    "key": "no-title-16890",
+    "title": "AI Voice Engineer – få Danmarks AI-telefonmedarbejder til at forstå dansk bedre end nogen anden",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": false,
+    "views": {
+     "week": 1253,
+     "total": 1560
+    },
+    "company": {
+     "id": "6ade779afd7594d8ea6608a4",
+     "key": "foodvoice-as",
+     "name": "Foodvoice A/S",
+     "website": "http://foodvoice.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2026",
+     "logoImage": {
+      "size": 738729,
+      "filetype": "image/png",
+      "originalname": "Skærmbillede 2026-10-25 kl. 22.28.04.png",
+      "id": "6ade7471fe5ce0d913b79756",
+      "path": "/files/s3/20261025212817-b46c94182f56036682af44673cbfe122.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6ab5ba1089831d5aad0201d1",
+    "key": "senior-staff-full-stack-engineer",
+    "title": "Senior / Staff Full-stack Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 10643,
+     "total": 53476
+    },
+    "company": {
+     "id": "66191e9ed5192284c3c6ae36",
+     "key": "electricity-maps-1",
+     "name": "Electricity Maps",
+     "website": "https://www.electricitymaps.com/",
+     "numberOfEmployees": "11-50",
+     "founded": "2016",
+     "logoImage": {
+      "size": 10121,
+      "filetype": "image/png",
+      "originalname": "Screenshot 2025-08-28 at 11.54.12.png",
+      "id": "68b0274ad13d66a502828006",
+      "path": "/files/s3/20250828095418-31ba3bd9a4277ce5e8b9667b1d64391e.png"
+     }
+    },
+    "saved": false
+   }
+  ]
+ },
+ "featuredJobs": {
+  "total": 6,
+  "limit": 15,
+  "page": 1,
+  "pages": 1,
+  "docs": [
+   {
+    "id": "6afee92e5d235286de8e5b52",
+    "key": "no-title-34004",
+    "title": "Senior Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 561,
+     "total": 561
+    },
+    "company": {
+     "id": "6924512c1cd59309d1a5ac29",
+     "key": "sumary-aps",
+     "name": "Sumary",
+     "website": "https://sumary.com/",
+     "numberOfEmployees": "11-50",
+     "founded": "2025",
+     "logoImage": {
+      "size": 32594,
+      "filetype": "image/png",
+      "originalname": "social-symbol-dark.png",
+      "id": "6a0d74baa336f5cbefab072e",
+      "path": "/files/s3/20260520084546-77e86eed263b1c5ec39fdf2057e93b32.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6af45051e165207e56b29e3b",
+    "key": "no-title-41298",
+    "title": "Co-CTO",
+    "isRemote": true,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea74"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 2415,
+     "total": 2979
+    },
+    "company": {
+     "id": "6af44b10dd872f681b219fe3",
+     "key": "tono",
+     "name": "Tono",
+     "website": "https://tonohq.com/",
+     "numberOfEmployees": "1-10",
+     "founded": "2023",
+     "logoImage": {
+      "size": 8270,
+      "filetype": "image/png",
+      "originalname": "Tono square logo.png",
+      "id": "6af427283b9bdcefdc03bafb",
+      "path": "/files/s3/20261111082824-994c4f388fc2fbc388badb2f629b5b82.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6adf24b0ceee3bd93cb848af",
+    "key": "no-title-15687",
+    "title": "Fullstack Softwareudvikler (Aarhus) ",
+    "location": {
+     "country": "Denmark",
+     "locality": "Aarhus",
+     "address": "Aarhus, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 1206,
+     "total": 3765
+    },
+    "company": {
+     "id": "60140a12759e3670691ec854",
+     "key": "cyberpilot",
+     "name": "CyberPilot.io",
+     "website": "https://cyberpilot.io/",
+     "numberOfEmployees": "11-50",
+     "video": "",
+     "founded": "2016",
+     "logoImage": {
+      "size": 41005,
+      "filetype": "image/png",
+      "originalname": "cp-500x500-sort (1).png",
+      "id": "601407c9759e3670691e2f71",
+      "path": "/files/s3/20210129130409-28e9a921ccb949de31ecb7a4873ae886.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a981a9d74e9db6710ba978e",
+    "key": "no-title-80670",
+    "title": "Senior Product Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 1567,
+     "total": 34959
+    },
+    "company": {
+     "id": "6a981a972b32ec67725ab3be",
+     "key": "realmforge",
+     "name": "Realmforge",
+     "website": "https://realmforge.ai",
+     "numberOfEmployees": "1-10",
+     "founded": "2026",
+     "logoImage": {
+      "size": 442560,
+      "filetype": "image/png",
+      "originalname": "R.png",
+      "id": "6a9812b274e9db6710ba25ea",
+      "path": "/files/s3/20260902121234-f01ca02c728d35e6a348dd9732005415.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6ab5ba1089831d5aad0201d1",
+    "key": "senior-staff-full-stack-engineer",
+    "title": "Senior / Staff Full-stack Engineer",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 10643,
+     "total": 53476
+    },
+    "company": {
+     "id": "66191e9ed5192284c3c6ae36",
+     "key": "electricity-maps-1",
+     "name": "Electricity Maps",
+     "website": "https://www.electricitymaps.com/",
+     "numberOfEmployees": "11-50",
+     "founded": "2016",
+     "logoImage": {
+      "size": 10121,
+      "filetype": "image/png",
+      "originalname": "Screenshot 2025-08-28 at 11.54.12.png",
+      "id": "68b0274ad13d66a502828006",
+      "path": "/files/s3/20250828095418-31ba3bd9a4277ce5e8b9667b1d64391e.png"
+     }
+    },
+    "saved": false
+   },
+   {
+    "id": "6a886279405f30c73297b5d9",
+    "key": "pandektes-senior-product-engineer-de20f12c-79ab-4d6e-9b35-e033a8322e60",
+    "title": "Senior Product Engineer ",
+    "location": {
+     "country": "Denmark",
+     "locality": "Copenhagen",
+     "address": "Copenhagen, Denmark"
+    },
+    "isRemote": false,
+    "jobPositionTypes": [
+     "5b8e46b3853f039706b6ea70"
+    ],
+    "isFeatured": true,
+    "views": {
+     "week": 810,
+     "total": 16913
+    },
+    "company": {
+     "id": "636516274ff1a41bab0ae974",
+     "key": "pandektes",
+     "name": "Pandektes",
+     "website": "https://pandektes.com",
+     "numberOfEmployees": "11-50",
+     "video": "",
+     "founded": "2023",
+     "logoImage": {
+      "size": 6745,
+      "filetype": "image/png",
+      "originalname": "linkedin-logo-400.png",
+      "id": "6ac3587598a7d0be1e640dc8",
+      "path": "/files/s3/20261005075741-8051840733cd862e52116d758a58a3ae.png"
+     }
+    },
+    "saved": false
+   }
+  ],
+  "randFeaturedIndex": 5
+ }
+}

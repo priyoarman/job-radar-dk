@@ -334,6 +334,7 @@ Job Radar is now a **discovery and alert tool only**: find new Danish job posts 
   - Jobindex done early, 2026-11-21 (one search only): the `JOBINDEX` source turns the search link in `config/companies.json` (`q=react+typescript`, `jobage=7`) into the RSS feed `jobsoegning.rss?q=react+typescript`, which robots.txt allows (it forbids `jobage=`), and keeps jobs from the last 7 days in code. Checked once a day, newest first, 20 jobs per feed (about 15 days back). Same search-source rules as LinkedIn. IT-Jobbank is still open.
   - Commit: `feat(sources): add Jobindex and IT-Jobbank RSS`
 - [ ] **3.3 The Hub** (free): `https://thehub.io/api/v2/jobsandfeatured?countryCode=DK&sorting=newJobs&page=N`, pages 1–2 per run (15 jobs each). No description in the list, so read the job page for new jobs only. Not an official API: keep fixtures, and the health warning catches changes.
+  - Done early, 2026-11-21 (one search only): the `THEHUB` source reads the search link in `config/companies.json` (`search=typescript`, Denmark, newest first) through the same API, all pages (at most 10; 37 jobs in 3 pages on that day). Featured jobs are already in the normal results, so they are ignored. No description or posting date (the list has none). Same search-source rules as LinkedIn.
   - Commit: `feat(sources): add The Hub`
 - [ ] **3.4 Apify client**: run an actor through Apify's API with `APIFY_TOKEN` (GitHub secret), a cap on results per run, a timeout, and the cost of each run in the log.
   - Commit: `feat(pipeline): add Apify client with a cost cap`

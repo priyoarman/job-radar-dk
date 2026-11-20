@@ -10,6 +10,7 @@ import { linkedinAdapter } from "./linkedin";
 import { recruiteeAdapter } from "./recruitee";
 import { successFactorsAdapter } from "./successfactors";
 import { teamtailorAdapter } from "./teamtailor";
+import { theHubAdapter } from "./thehub";
 import { workableAdapter } from "./workable";
 import { workdayAdapter } from "./workday";
 import type { SourceAdapter } from "./types";
@@ -28,6 +29,7 @@ export const adapters: Partial<Record<SourceType, SourceAdapter<unknown>>> = {
   CUSTOM: customAdapter,
   LINKEDIN: linkedinAdapter,
   JOBINDEX: jobindexAdapter,
+  THEHUB: theHubAdapter,
 };
 
 export function getAdapter(source: SourceType): SourceAdapter<unknown> {
