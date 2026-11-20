@@ -17,6 +17,8 @@ const envSchema = z
     TRIGGER_SOURCE: z.string().optional(),
     GITHUB_SHA: z.string().optional(),
     HEALTHCHECK_URL: z.url({ protocol: /^https$/ }).optional(),
+    APIFY_TOKEN: z.string().min(1).optional(),
+    APIFY_MAX_CHARGE_USD: z.coerce.number().positive().default(0.25),
   })
   .superRefine(
     (env, ctx) => {

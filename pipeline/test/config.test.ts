@@ -13,6 +13,7 @@ describe("loadConfig", () => {
       USER_AGENT: "JobRadarDK/1.0 (personal job alert bot)",
       MIN_FETCH_INTERVAL_HOURS: 2.5,
       APP_BASE_URL: "http://localhost:3000",
+      APIFY_MAX_CHARGE_USD: 0.25,
     });
   });
 

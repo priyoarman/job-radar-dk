@@ -1,5 +1,6 @@
 import { createPrismaClient } from "@jobradar/db";
 import { loadConfig } from "./config";
+import { createApifyRunner } from "./lib/apify";
 import { createHttpClient } from "./lib/http";
 import { createResendSender } from "./email/send";
 import { sendHeartbeat } from "./lib/heartbeat";
@@ -19,7 +20,10 @@ async function main(): Promise<void> {
         ? null
         : createResendSender({ apiKey: config.RESEND_API_KEY, from: config.EMAIL_FROM, to: config.EMAIL_TO });
     const record = createRecordNotification(prisma, () => new Date());
-    const processCompany = createProcessCompany(prisma, createHttpClient({ userAgent: config.USER_AGENT }));
+    const runActor = config.APIFY_TOKEN
+      ? createApifyRunner({ token: config.APIFY_TOKEN, maxChargeUsd: config.APIFY_MAX_CHARGE_USD, timeoutSecs: 240 })
+      : null;
+    const processCompany = createProcessCompany(prisma, createHttpClient({ userAgent: config.USER_AGENT }), { runActor });
     const status = await runPipeline({
       prisma,
       trigger: runTriggerFor(config.GITHUB_EVENT_NAME, config.TRIGGER_SOURCE),

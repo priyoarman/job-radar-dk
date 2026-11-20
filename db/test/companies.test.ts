@@ -25,7 +25,7 @@ describe("parseCompanies", () => {
   it.each([
     ["a typo in source", { ...valid, source: "TEAMTAILR" }, "source"],
     ["a new source type without an adapter", { ...valid, source: "TALENTECH" }, 'no adapter for source "TALENTECH"'],
-    ["a source type that does not exist", { ...valid, source: "LINKEDIN" }, "source"],
+    ["a source type that does not exist", { ...valid, source: "MONSTER" }, "source"],
     ["an invalid slug", { ...valid, slug: "Example Co" }, "lowercase"],
     ["a missing name", { ...valid, name: undefined }, "name"],
     ["an unknown field", { ...valid, sorce: "x" }, "sorce"],

@@ -1,0 +1,3 @@
+ALTER TYPE "SourceType" ADD VALUE 'LINKEDIN';
+
+ALTER TABLE "Job" ADD COLUMN "employer" TEXT;

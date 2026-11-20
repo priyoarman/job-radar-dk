@@ -19,6 +19,7 @@ const job = (id: string, company = "Example Co"): NotifyJob => ({
   title: `Backend Engineer ${id}`,
   location: "København, Denmark",
   url: `https://example.com/jobs/${id}`,
+  employer: null,
   company: { name: company, slug: company.toLowerCase().replace(/ /g, "-") },
 });
 

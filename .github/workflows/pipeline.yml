@@ -34,6 +34,7 @@ jobs:
       TRIGGER_SOURCE: ${{ inputs.source }}
       MIN_FETCH_INTERVAL_HOURS: ${{ vars.MIN_FETCH_INTERVAL_HOURS }}
       HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
       PRISMA_HIDE_UPDATE_MESSAGE: "1"
     steps:
       - uses: actions/checkout@v7

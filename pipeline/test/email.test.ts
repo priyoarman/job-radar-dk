@@ -50,7 +50,17 @@ describe("renderJobsEmail", () => {
   });
 
   it("uses singular wording for one job", () => {
-    expect(renderJobsEmail([job("A")]).text.startsWith("1 new job matches your title filter")).toBe(true);
+    expect(renderJobsEmail([job("A")]).text.startsWith("1 new job for you")).toBe(true);
+  });
+});
+
+describe("renderJobsEmail with job-site jobs", () => {
+  it("shows the real employer and where the job was found", () => {
+    const linkedin = { ...job("Fullstack Engineer", "LinkedIn"), employer: "Lunar" };
+    const message = renderJobsEmail([linkedin]);
+    expect(message.text).toContain("Lunar · København, Denmark · via LinkedIn");
+    expect(message.html).toContain("Lunar · København, Denmark · via LinkedIn");
+    expect(message.subject).toBe("Job Radar: 1 new job (Lunar)");
   });
 });
 

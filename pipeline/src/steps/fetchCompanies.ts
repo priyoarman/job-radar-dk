@@ -5,6 +5,7 @@ import { log } from "../lib/logger";
 import { RobotsDisallowedError } from "../lib/robots";
 import { normalizeJobs } from "../sources/normalize";
 import { getAdapter } from "../sources/registry";
+import { type FetchDeps, isSearchSource } from "../sources/types";
 import { saveJobs } from "./saveJobs";
 
 export type FetchableCompany = Pick<
@@ -43,6 +44,12 @@ export type FetchCompaniesOptions = {
 
 const HOUR_MS = 60 * 60 * 1000;
 
+export const SEARCH_INTERVAL_HOURS = 23.5;
+
+export function intervalHoursFor(company: Pick<FetchableCompany, "source">, defaultHours: number): number {
+  return isSearchSource(company.source) ? SEARCH_INTERVAL_HOURS : defaultHours;
+}
+
 export function isFetchDue(lastFetchedAt: Date | null, now: Date, minIntervalHours: number): boolean {
   return lastFetchedAt === null || now.getTime() - lastFetchedAt.getTime() >= minIntervalHours * HOUR_MS;
 }
@@ -60,7 +67,7 @@ export async function fetchCompanies(
     const base = { companyId: company.id, slug: company.slug, httpStatus: null, error: null };
     const startedAt = options.now();
 
-    if (!isFetchDue(company.lastFetchedAt, startedAt, options.minIntervalHours)) {
+    if (!isFetchDue(company.lastFetchedAt, startedAt, intervalHoursFor(company, options.minIntervalHours))) {
       log.info("fetch.skipped", { company: company.slug, lastFetchedAt: company.lastFetchedAt });
       outcomes.push({ ...base, status: "SKIPPED_RECENT", jobsFound: 0, jobsNew: 0, jobsPassed: 0, jobsClosed: 0, durationMs: null });
       continue;
@@ -99,11 +106,11 @@ export async function fetchCompanies(
   return outcomes;
 }
 
-export function createProcessCompany(prisma: PrismaClient, http: HttpClient) {
+export function createProcessCompany(prisma: PrismaClient, http: HttpClient, deps: FetchDeps = { runActor: null }) {
   return async (company: FetchableCompany, now: Date): Promise<ProcessResult> => {
     try {
       const adapter = getAdapter(company.source);
-      const raws = await adapter.fetchJobs(company, http);
+      const raws = await adapter.fetchJobs(company, http, deps);
       const { jobs } = normalizeJobs(adapter, raws, company);
       const saved = await saveJobs(prisma, company, jobs, now);
       await prisma.company.update({

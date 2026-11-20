@@ -1,10 +1,12 @@
 import type { Company, Prisma, PrismaClient } from "@jobradar/db";
 import { log } from "../lib/logger";
-import type { NormalizedJob } from "../sources/types";
+import { type NormalizedJob, isSearchSource } from "../sources/types";
 import { type JobDiff, diffJobs } from "./diffJobs";
 import { filterJob } from "./filter";
 
-export type SaveCompany = Pick<Company, "id" | "slug" | "baselineDoneAt">;
+export type SaveCompany = Pick<Company, "id" | "slug" | "source" | "baselineDoneAt">;
+
+export type RowOptions = { searchSource: boolean };
 
 export type SaveFetchStatus = "OK" | "EMPTY" | "SUSPICIOUS_EMPTY";
 
@@ -22,11 +24,13 @@ export function buildJobRows(
   companyId: string,
   isBaseline: boolean,
   now: Date,
+  options: RowOptions = { searchSource: false },
 ): Prisma.JobCreateManyInput[] {
-  return jobs.map(({ company: _company, ...job }) => {
-    const filter = filterJob(job);
+  return jobs.map(({ company: employer, ...job }) => {
+    const filter = options.searchSource ? ({ pass: true } as const) : filterJob(job);
     return {
       ...job,
+      employer: options.searchSource ? employer : null,
       companyId,
       isBaseline,
       filterStatus: filter.pass ? "PASSED" : "DROPPED",
@@ -56,13 +60,14 @@ export async function saveJobs(
   const diff = diffJobs(existing, incoming);
   const openJobs = existing.filter((job) => job.closedAt === null).length;
   const fetchStatus = fetchStatusFor(openJobs, incoming.length);
-  const isBaseline = company.baselineDoneAt === null;
-  const goneIds = fetchStatus === "SUSPICIOUS_EMPTY" ? [] : diff.goneIds;
+  const searchSource = isSearchSource(company.source);
+  const isBaseline = !searchSource && company.baselineDoneAt === null;
+  const goneIds = searchSource || fetchStatus === "SUSPICIOUS_EMPTY" ? [] : diff.goneIds;
 
   const seen = new Set(diff.seenIds);
   const reopened = existing.filter((job) => job.closedAt !== null && seen.has(job.externalId)).length;
 
-  const rows = buildJobRows(diff.newJobs, company.id, isBaseline, now);
+  const rows = buildJobRows(diff.newJobs, company.id, isBaseline, now, { searchSource });
   for (const row of rows) {
     if (row.filterStatus === "DROPPED") {
       log.info("filter.dropped", { company: company.slug, title: row.title, reason: row.filterReason });

@@ -1,5 +1,6 @@
 import type { Company, SourceType } from "@jobradar/db";
 import { z } from "zod";
+import type { RunActor } from "../lib/apify";
 import type { HttpClient } from "../lib/http";
 
 export const REMOTE_TYPES = ["remote", "hybrid", "onsite"] as const;
@@ -19,8 +20,16 @@ export type NormalizedJob = z.infer<typeof normalizedJobSchema>;
 
 export type AdapterCompany = Pick<Company, "slug" | "name" | "sourceKey">;
 
+export type FetchDeps = { runActor: RunActor | null };
+
+export const SEARCH_SOURCES: readonly SourceType[] = ["LINKEDIN"];
+
+export function isSearchSource(source: SourceType): boolean {
+  return SEARCH_SOURCES.includes(source);
+}
+
 export interface SourceAdapter<Raw> {
   readonly name: SourceType;
-  fetchJobs(company: AdapterCompany, http: HttpClient): Promise<Raw[]>;
+  fetchJobs(company: AdapterCompany, http: HttpClient, deps?: FetchDeps): Promise<Raw[]>;
   normalize(raw: Raw, company: AdapterCompany): NormalizedJob;
 }

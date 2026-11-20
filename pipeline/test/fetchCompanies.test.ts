@@ -6,6 +6,7 @@ import {
   type FetchableCompany,
   type ProcessResult,
   fetchCompanies,
+  intervalHoursFor,
   isFetchDue,
 } from "../src/steps/fetchCompanies";
 
@@ -54,6 +55,20 @@ describe("isFetchDue", () => {
     [hoursAgo(0), false, "fetched just now"],
   ])("%s → %s (%s)", (lastFetchedAt, expected) => {
     expect(isFetchDue(lastFetchedAt, T0, 2.5)).toBe(expected);
+  });
+});
+
+describe("intervalHoursFor", () => {
+  it("checks company boards at the normal interval and LinkedIn searches about once a day", () => {
+    expect(intervalHoursFor({ source: "TEAMTAILOR" }, 2.5)).toBe(2.5);
+    expect(intervalHoursFor({ source: "LINKEDIN" }, 2.5)).toBe(23.5);
+  });
+
+  it("skips a LinkedIn search fetched 12 hours ago but runs one fetched 24 hours ago", async () => {
+    const recent = { ...company("li-recent", hoursAgo(12)), source: "LINKEDIN" as const };
+    const due = { ...company("li-due", hoursAgo(24)), source: "LINKEDIN" as const };
+    const outcomes = await fetchCompanies([recent, due], options());
+    expect(outcomes.map((o) => o.status)).toEqual(["SKIPPED_RECENT", "OK"]);
   });
 });
 

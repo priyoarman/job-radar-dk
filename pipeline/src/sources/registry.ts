@@ -5,6 +5,7 @@ import { emplyAdapter } from "./emply";
 import { greenhouseAdapter } from "./greenhouse";
 import { hrManagerAdapter } from "./hrmanager";
 import { leverAdapter } from "./lever";
+import { linkedinAdapter } from "./linkedin";
 import { recruiteeAdapter } from "./recruitee";
 import { successFactorsAdapter } from "./successfactors";
 import { teamtailorAdapter } from "./teamtailor";
@@ -24,6 +25,7 @@ export const adapters: Partial<Record<SourceType, SourceAdapter<unknown>>> = {
   EMPLY: emplyAdapter,
   HRMANAGER: hrManagerAdapter,
   CUSTOM: customAdapter,
+  LINKEDIN: linkedinAdapter,
 };
 
 export function getAdapter(source: SourceType): SourceAdapter<unknown> {

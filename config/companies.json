@@ -667,5 +667,15 @@
     "tags": ["fintech", "trading"],
     "active": true,
     "notes": "Verified 2026-11-16: Greenhouse board imc, 156 jobs worldwide, 7 in Aarhus (5 pass the filter)."
+  },
+  {
+    "slug": "linkedin-react-typescript",
+    "name": "LinkedIn",
+    "source": "LINKEDIN",
+    "sourceKey": "https://www.linkedin.com/jobs/search?keywords=React%20Typescript&location=Denmark&geoId=104514075&f_TPR=r86400",
+    "careersUrl": "https://www.linkedin.com/jobs/search?keywords=React%20Typescript&location=Denmark&geoId=104514075&f_TPR=r86400",
+    "tags": ["job-site"],
+    "active": true,
+    "notes": "LinkedIn search for React Typescript in Denmark, posted in the last 24 hours. Fetched once a day through Apify (valig/linkedin-jobs-scraper). No title filter."
   }
 ]

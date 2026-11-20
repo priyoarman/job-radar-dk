@@ -26,6 +26,7 @@ describe("buildJobRows", () => {
         description: "We are hiring.",
         url: "https://example.com/jobs/1",
         postedAt: new Date("2026-11-09T20:20:10Z"),
+        employer: null,
         companyId: "company-1",
         isBaseline: false,
         filterStatus: "PASSED",
@@ -55,6 +56,11 @@ describe("buildJobRows", () => {
   it("leaves out the company name, which lives on the Company row", () => {
     const [row] = buildJobRows([job], "company-1", false, now);
     expect(row).not.toHaveProperty("company");
+  });
+
+  it("keeps every job from a search source, with its employer, even when the title filter would drop it", () => {
+    const [row] = buildJobRows([{ ...job, title: "Engineering Manager" }], "linkedin", false, now, { searchSource: true });
+    expect(row).toMatchObject({ employer: "Example Co", filterStatus: "PASSED", filterReason: null, scoreStatus: "PENDING" });
   });
 
   it("returns no rows for no jobs", () => {

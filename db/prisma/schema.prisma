@@ -20,6 +20,7 @@ enum SourceType {
   WORKABLE
   TALENTECH
   CUSTOM
+  LINKEDIN
 }
 
 enum FilterStatus {
@@ -103,6 +104,7 @@ model Job {
   title       String
   location    String?
   remoteType  String? // "remote" | "hybrid" | "onsite" | null when unknown
+  employer    String?
   description String
   url         String
   postedAt    DateTime?

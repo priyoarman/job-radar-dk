@@ -9,6 +9,7 @@ export type NotifyJob = {
   title: string;
   location: string | null;
   url: string;
+  employer: string | null;
   company: { name: string; slug: string };
 };
 
@@ -78,7 +79,7 @@ export async function findNotifyInput(prisma: PrismaClient, now: Date): Promise<
   const [jobs, companies, lastAlert] = await Promise.all([
     prisma.job.findMany({
       where: { notificationId: null, isBaseline: false, filterStatus: "PASSED", closedAt: null },
-      select: { id: true, title: true, location: true, url: true, company: { select: { name: true, slug: true } } },
+      select: { id: true, title: true, location: true, url: true, employer: true, company: { select: { name: true, slug: true } } },
       orderBy: [{ firstSeenAt: "asc" }, { title: "asc" }],
     }),
     prisma.company.findMany({

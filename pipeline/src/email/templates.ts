@@ -4,6 +4,7 @@ export type EmailJob = {
   title: string;
   location: string | null;
   url: string;
+  employer?: string | null;
   company: { name: string };
 };
 
@@ -19,9 +20,17 @@ export function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (char) => HTML_ESCAPES[char] ?? char);
 }
 
+function employerOf(job: EmailJob): string {
+  return job.employer || job.company.name;
+}
+
+function sourceNote(job: EmailJob): string {
+  return job.employer && job.employer !== job.company.name ? ` · via ${job.company.name}` : "";
+}
+
 export function subjectFor(jobs: readonly EmailJob[]): string {
   const count = `${jobs.length} new ${jobs.length === 1 ? "job" : "jobs"}`;
-  const companies = [...new Set(jobs.map((job) => job.company.name))];
+  const companies = [...new Set(jobs.map(employerOf))];
   const shown = companies.slice(0, 2).join(", ");
   const more = companies.length > 2 ? ", …" : "";
   return `Job Radar: ${count} (${shown}${more})`;
@@ -32,14 +41,14 @@ function jobHtml(job: EmailJob): string {
   return [
     '<li style="margin:0 0 16px">',
     `<a href="${escapeHtml(job.url)}" style="font-size:16px;font-weight:600;color:#1a56db">${escapeHtml(job.title)}</a>`,
-    `<div style="color:#555">${escapeHtml(job.company.name)}${location}</div>`,
+    `<div style="color:#555">${escapeHtml(employerOf(job))}${location}${escapeHtml(sourceNote(job))}</div>`,
     "</li>",
   ].join("");
 }
 
 function jobText(job: EmailJob): string {
   const location = job.location ? ` · ${job.location}` : "";
-  return `- ${job.title}\n  ${job.company.name}${location}\n  ${job.url}`;
+  return `- ${job.title}\n  ${employerOf(job)}${location}${sourceNote(job)}\n  ${job.url}`;
 }
 
 export type SourceWarning = {
@@ -87,7 +96,7 @@ function warningsText(warnings: readonly SourceWarning[]): string[] {
 export function renderJobsEmail(jobs: readonly EmailJob[], warnings: readonly SourceWarning[] = []): EmailMessage {
   const heading =
     jobs.length > 0
-      ? `${jobs.length} new ${jobs.length === 1 ? "job matches" : "jobs match"} your title filter`
+      ? `${jobs.length} new ${jobs.length === 1 ? "job" : "jobs"} for you`
       : "No new jobs this time, but some sources need attention";
   const list = jobs.length > 0 ? `<ul style="list-style:none;padding:0">${jobs.map(jobHtml).join("")}</ul>` : "";
   const html = [

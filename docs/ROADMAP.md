@@ -337,6 +337,7 @@ Job Radar is now a **discovery and alert tool only**: find new Danish job posts 
 - [ ] **3.4 Apify client**: run an actor through Apify's API with `APIFY_TOKEN` (GitHub secret), a cap on results per run, a timeout, and the cost of each run in the log.
   - Commit: `feat(pipeline): add Apify client with a cost cap`
 - [ ] **3.5 LinkedIn via Apify** (`valig/linkedin-jobs-scraper`, about $0.40 per 1,000 jobs): first a small paid test run to see the real output and cost, then the adapter: your keywords, Denmark, only recent posts (and maybe "under 10 applicants").
+  - Done early, 2026-11-20 (one search only): the `LINKEDIN` source runs the search link in `config/companies.json` (React Typescript, Denmark, last 24 h) through Apify about once a day (every 23.5 h). Search sources skip the title filter and the quiet baseline, never close jobs, and store the real `employer`; the email shows "Lunar · Copenhagen · via LinkedIn". Test run: 48 jobs for about $0.02. Needs the `APIFY_TOKEN` secret. The rest of 3.1 and 3.4 (keywords file, cost log) is still open.
   - Commit: `feat(sources): add LinkedIn jobs via Apify`
 - [ ] **3.6 Indeed and Jobnet via Apify** (`valig/indeed-jobs-scraper` ~$0.10 per 1,000; `blackfalcondata/jobnet-scraper` ~$2 per 1,000, with a "new only" mode). Jobnet is the search behind Workindenmark. A test run each, then keep or drop.
   - Commit: `feat(sources): add Indeed and Jobnet via Apify`
