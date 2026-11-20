@@ -2,7 +2,7 @@ import type { Company, Prisma, PrismaClient } from "@jobradar/db";
 import { log } from "../lib/logger";
 import { type NormalizedJob, isSearchSource } from "../sources/types";
 import { type JobDiff, diffJobs } from "./diffJobs";
-import { filterJob } from "./filter";
+import { filterJob, filterSearchJob } from "./filter";
 
 export type SaveCompany = Pick<Company, "id" | "slug" | "source" | "baselineDoneAt">;
 
@@ -27,7 +27,7 @@ export function buildJobRows(
   options: RowOptions = { searchSource: false },
 ): Prisma.JobCreateManyInput[] {
   return jobs.map(({ company: employer, ...job }) => {
-    const filter = options.searchSource ? ({ pass: true } as const) : filterJob(job);
+    const filter = options.searchSource ? filterSearchJob(job) : filterJob(job);
     return {
       ...job,
       employer: options.searchSource ? employer : null,

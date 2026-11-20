@@ -23,6 +23,7 @@ enum SourceType {
   LINKEDIN
   JOBINDEX
   THEHUB
+  JOBBANK
 }
 
 enum FilterStatus {

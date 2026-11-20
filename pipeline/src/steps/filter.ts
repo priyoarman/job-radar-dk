@@ -89,6 +89,10 @@ function checkTitle(rawTitle: string): FilterResult {
   return { pass: false, reason: "title:no-dev-keyword" };
 }
 
+export function filterSearchJob(job: FilterInput): FilterResult {
+  return isAbroadOnly(job.location ?? null) ? { pass: false, reason: "location:abroad" } : { pass: true };
+}
+
 export function filterJob(job: FilterInput): FilterResult {
   const title = checkTitle(job.title);
   if (!title.pass) return title;

@@ -697,5 +697,15 @@
     "tags": ["job-site"],
     "active": true,
     "notes": "The Hub search for typescript in Denmark, newest first. Read once a day from the JSON API behind the page (api/v2/jobsandfeatured, all pages, at most 10). No title filter."
+  },
+  {
+    "slug": "jobbank-react-typescript",
+    "name": "Jobbank",
+    "source": "JOBBANK",
+    "sourceKey": "https://jobbank.dk/job/?key=react+typescript&antikey=&virk=&oprettet=",
+    "careersUrl": "https://jobbank.dk/job/?key=react+typescript&antikey=&virk=&oprettet=",
+    "tags": ["job-site"],
+    "active": true,
+    "notes": "Akademikernes Jobbank search for react typescript. Read once a day from the RSS feed the search page links to (/job/rss/), limited to jobs created in the last 7 days (oprettet=) because the feed stops at 100 jobs and is not sorted by date. No title filter; abroad-only jobs are dropped."
   }
 ]

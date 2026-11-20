@@ -63,6 +63,11 @@ describe("buildJobRows", () => {
     expect(row).toMatchObject({ employer: "Example Co", filterStatus: "PASSED", filterReason: null, scoreStatus: "PENDING" });
   });
 
+  it("still drops a search-source job that is only abroad", () => {
+    const [row] = buildJobRows([{ ...job, location: "Udlandet (Norge)" }], "jobbank", false, now, { searchSource: true });
+    expect(row).toMatchObject({ filterStatus: "DROPPED", filterReason: "location:abroad" });
+  });
+
   it("returns no rows for no jobs", () => {
     expect(buildJobRows([], "company-1", true, now)).toEqual([]);
   });

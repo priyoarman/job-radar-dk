@@ -346,6 +346,7 @@ Job Radar is now a **discovery and alert tool only**: find new Danish job posts 
 - [ ] **3.7 No duplicates across sources**: the same job on a company board, Jobindex and LinkedIn becomes **one** email entry ("also on Jobindex, LinkedIn"). Match on a cleaned employer name ("EG A/S" = "EG") plus a cleaned title, within 30 days. Do this right after the second source goes live.
   - Commit: `feat(pipeline): merge the same job from several sources`
 - [ ] **3.8 Jobbank.dk** (parked): `jobbank.dk` answers our bot with HTTP 500 even on `/job/`, which its `robots.txt` allows. Ask Jobbank's support whether a feed or API exists; until then, use Jobbank's own job-agent email.
+  - Unparked 2026-11-21: Jobbank now answers the bot (HTTP 200 with the normal user agent). The `JOBBANK` source reads the RSS feed that the search page links to (`/job/rss/?key=react+typescript`), with `oprettet=<date 7 days ago>`, because the feed stops at 100 jobs and is not sorted by date (25 jobs for 2 days, 46 for 5 days). Employer and places come from the description ("Fuldtidsjob hos <employer>, <places> (Ansøgningsfrist: …)"). Abroad-only jobs ("Udlandet (Norge)") are dropped for all search sources; there is still no title filter.
 
 ---
 

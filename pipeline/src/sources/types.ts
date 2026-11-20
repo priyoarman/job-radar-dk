@@ -22,7 +22,7 @@ export type AdapterCompany = Pick<Company, "slug" | "name" | "sourceKey">;
 
 export type FetchDeps = { runActor: RunActor | null };
 
-export const SEARCH_SOURCES: readonly SourceType[] = ["LINKEDIN", "JOBINDEX", "THEHUB"];
+export const SEARCH_SOURCES: readonly SourceType[] = ["LINKEDIN", "JOBINDEX", "THEHUB", "JOBBANK"];
 
 export function isSearchSource(source: SourceType): boolean {
   return SEARCH_SOURCES.includes(source);

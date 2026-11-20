@@ -15,7 +15,7 @@ const REGION = [
 ];
 
 const ABROAD = [
-  "sweden", "sverige", "norway", "norge", "finland", "iceland", "germany", "deutschland", "netherlands",
+  "udlandet", "sweden", "sverige", "norway", "norge", "finland", "iceland", "germany", "deutschland", "netherlands",
   "holland", "belgium", "france", "spain", "portugal", "italy", "poland", "lithuania", "latvia", "estonia",
   "ireland", "united kingdom", "england", "scotland", "wales", "northern ireland", "united states", "canada",
   "india", "romania", "ukraine", "czech republic", "czechia", "austria", "switzerland", "hungary", "greece",
